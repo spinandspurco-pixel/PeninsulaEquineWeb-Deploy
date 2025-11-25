@@ -15,11 +15,8 @@
         'react-day-picker@8.10.1': 'react-day-picker',
         'lucide-react@0.487.0': 'lucide-react',
         'input-otp@1.4.2': 'input-otp',
-        'figma:asset/e247112ceaa8e526a94aefcd8642987502204256.png': path.resolve(__dirname, './src/assets/e247112ceaa8e526a94aefcd8642987502204256.png'),
         'figma:asset/b9178ba3036a87efeb1339130ac7e759231a49b3.png': path.resolve(__dirname, './src/assets/b9178ba3036a87efeb1339130ac7e759231a49b3.png'),
         'figma:asset/b240d68ef405df3625942c8c59e92356e413a2a6.png': path.resolve(__dirname, './src/assets/b240d68ef405df3625942c8c59e92356e413a2a6.png'),
-        'figma:asset/aa8d1f85f6a1aa7623ff6d804c1f1a3123a4ee14.png': path.resolve(__dirname, './src/assets/aa8d1f85f6a1aa7623ff6d804c1f1a3123a4ee14.png'),
-        'figma:asset/747e92ea4bde31aaee5e5dacce96f61daaba652d.png': path.resolve(__dirname, './src/assets/747e92ea4bde31aaee5e5dacce96f61daaba652d.png'),
         'figma:asset/43b0d27420f20197681aa3cacbf2abda7c055e3d.png': path.resolve(__dirname, './src/assets/43b0d27420f20197681aa3cacbf2abda7c055e3d.png'),
         'figma:asset/3d9c8a295cf5073a32cc71d11d62be98bf8933bc.png': path.resolve(__dirname, './src/assets/3d9c8a295cf5073a32cc71d11d62be98bf8933bc.png'),
         'embla-carousel-react@8.6.0': 'embla-carousel-react',
@@ -57,6 +54,16 @@
     build: {
       target: 'esnext',
       outDir: 'build',
+      assetsInlineLimit: 4096, // Inline assets smaller than 4kb
+      chunkSizeWarningLimit: 1000, // Increase chunk size warning limit
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'react-vendor': ['react', 'react-dom'],
+            'ui-vendor': ['framer-motion', 'lucide-react'],
+          },
+        },
+      },
     },
     server: {
       port: 3000,

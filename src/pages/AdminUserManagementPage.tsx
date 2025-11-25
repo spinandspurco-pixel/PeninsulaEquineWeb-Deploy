@@ -93,29 +93,25 @@ export function AdminUserManagementPage({ onBack }: AdminUserManagementPageProps
   }) => {
     if (!currentUser) return;
 
-    try {
-      await createUserByAdmin({
-        ...userData,
-        createdBy: currentUser.uid,
-      });
+    await createUserByAdmin({
+      ...userData,
+      createdBy: currentUser.uid,
+    });
 
-      toast.success(
-        <div>
-          <p className="font-medium">User created successfully!</p>
-          <p className="text-xs mt-1">Email: {userData.email}</p>
-          <p className="text-xs">Password: {userData.password}</p>
-          <p className="text-xs text-yellow-400 mt-1">⚠️ Save these credentials - they won't be shown again</p>
-        </div>,
-        { duration: 10000 }
-      );
+    toast.success(
+      <div>
+        <p className="font-medium">User created successfully!</p>
+        <p className="text-xs mt-1">Email: {userData.email}</p>
+        <p className="text-xs">Password: {userData.password}</p>
+        <p className="text-xs text-yellow-400 mt-1">⚠️ Save these credentials - they won't be shown again</p>
+      </div>,
+      { duration: 10000 }
+    );
 
-      loadUsers();
-    } catch (error: any) {
-      throw error;
-    }
+    loadUsers();
   };
 
-  const handleResetPassword = async (userId: string, userEmail: string) => {
+  const handleResetPassword = async (userId: string, _userEmail: string) => {
     const tempPassword = `Temp${Math.random().toString(36).slice(-8)}!`;
     
     try {

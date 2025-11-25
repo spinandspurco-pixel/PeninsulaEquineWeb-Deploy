@@ -44,7 +44,7 @@ function AppContent() {
     setShowIntro(false);
   };
 
-  const handleLogin = (email: string, password: string) => {
+  const handleLogin = (_email: string, _password: string) => {
     const user = getCurrentUser();
     setIsAuthenticated(true);
     setCurrentUser(user);
@@ -67,14 +67,10 @@ function AppContent() {
   const handleChangePassword = async (oldPassword: string, newPassword: string) => {
     if (!currentUser) return;
 
-    try {
-      await changePassword(currentUser.uid, oldPassword, newPassword);
-      setShowPasswordChange(false);
-      setCurrentUser(getCurrentUser());
-      toast.success('Password changed successfully!');
-    } catch (error: any) {
-      throw error;
-    }
+    await changePassword(currentUser.uid, oldPassword, newPassword);
+    setShowPasswordChange(false);
+    setCurrentUser(getCurrentUser());
+    toast.success('Password changed successfully!');
   };
 
   if (showIntro) {
