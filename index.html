@@ -1,0 +1,51 @@
+
+  <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Peninsula Equine - Professional equestrian construction services. From Dirt to Dynasty." />
+    <title>Peninsula Equine - From Dirt to Dynasty</title>
+    
+    <!-- Preconnect to improve performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+    
+    <!-- Fonts with display=swap to prevent FOIT (Flash of Invisible Text) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Prevent layout shift for videos and instant loading -->
+    <style>
+      /* Prevent flash of unstyled content */
+      body { background-color: #0F0F0F; margin: 0; padding: 0; }
+      video { background-color: #0F0F0F; }
+      #root { min-height: 100vh; background-color: #0F0F0F; }
+      
+      /* Loading state */
+      #root:empty::before {
+        content: '';
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 50px;
+        height: 50px;
+        margin: -25px 0 0 -25px;
+        border: 3px solid #C9A24E;
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+  

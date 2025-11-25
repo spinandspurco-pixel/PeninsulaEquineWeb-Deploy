@@ -1,0 +1,34 @@
+# Dependencies
+node_modules
+package-lock.json
+
+# Build outputs
+build
+dist
+*.local
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# IDE
+.vscode/*
+!.vscode/settings.json
+.idea
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Vercel
+.vercel
+
+window.location.hash = '#video-preview'
+src/assets/media/videos/
+src/assets/media/converted/
+src/assets/media/enhanced/

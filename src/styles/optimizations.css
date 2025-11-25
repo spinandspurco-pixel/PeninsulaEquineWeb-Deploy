@@ -1,0 +1,475 @@
+/* Global Performance and Visual Optimizations */
+
+/* Smooth scrolling for the entire site */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent layout shifts */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimize images and media */
+img, video, picture {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Video performance optimizations */
+video {
+  /* Prevent layout shift */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Hardware acceleration */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  /* Reduce memory usage */
+  will-change: auto;
+}
+
+video:not([autoplay]) {
+  /* Ensure videos don't jump when starting */
+  background-color: #0F0F0F;
+}
+
+/* Image loading optimization */
+img {
+  /* Reduce CLS (Cumulative Layout Shift) */
+  content-visibility: auto;
+}
+
+img[loading="lazy"] {
+  /* Native lazy loading with better performance */
+  min-height: 1px;
+}
+
+/* Prevent horizontal overflow on mobile */
+body {
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Ensure consistent spacing */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Remove tap highlight on mobile for cleaner interactions */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Faster tap response on mobile */
+a, button, [role="button"], input[type="submit"], input[type="button"] {
+  touch-action: manipulation;
+}
+
+/* Optimize animations for mobile */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Loading skeleton animations to prevent content flash */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.image-skeleton {
+  background: linear-gradient(
+    90deg,
+    #1a1a1a 0px,
+    #2a2a2a 40px,
+    #1a1a1a 80px
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Prevent content layout shift during load */
+img, video {
+  min-height: 1px;
+  background-color: #1a1a1a;
+}
+
+/* Smooth fade-in for loaded images */
+img.loaded, video.loaded {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Performance optimization for animations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* GPU acceleration for smooth animations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Prevent text selection during animations */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Ensure fonts load properly */
+.font-display {
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.font-heading {
+  font-family: 'Cinzel', serif;
+  font-weight: 400;
+}
+
+.font-body {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Mobile-first responsive utilities */
+@media (max-width: 768px) {
+  .mobile-full-width {
+    width: 100vw;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Reduce animation complexity on mobile */
+  .complex-animation {
+    animation: none !important;
+  }
+
+  /* Optimize hero sections for mobile */
+  .hero-section {
+    min-height: 100vh;
+    height: auto;
+  }
+
+  /* Better spacing on mobile */
+  .section-padding {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .section-padding {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+/* Touch-friendly buttons */
+button, a {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+}
+
+/* Prevent iOS zoom on input focus */
+@media screen and (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Loading skeleton for images */
+.image-skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(201, 162, 78, 0.1) 0%,
+    rgba(201, 162, 78, 0.2) 50%,
+    rgba(201, 162, 78, 0.1) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Optimized golden glow effect */
+.golden-glow {
+  box-shadow: 
+    0 0 20px rgba(201, 162, 78, 0.3),
+    0 0 40px rgba(201, 162, 78, 0.2),
+    0 0 60px rgba(201, 162, 78, 0.1);
+}
+
+/* Ensure consistent card styling */
+.card {
+  background: rgba(15, 15, 15, 0.8);
+  border: 1px solid rgba(201, 162, 78, 0.2);
+  border-radius: 0.75rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: rgba(201, 162, 78, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Consistent button styling */
+.btn-primary {
+  background: linear-gradient(135deg, #C9A24E 0%, #A88B63 100%);
+  color: #0F0F0F;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(201, 162, 78, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Responsive typography */
+.text-responsive-xl {
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+.text-responsive-lg {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.text-responsive-md {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+}
+
+/* Optimize background images */
+.bg-image-optimized {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Lazy loading optimization */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* Fix for iOS Safari viewport height */
+.full-height {
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for mobile */
+}
+
+/* Ensure navigation doesn't cause layout shifts */
+nav {
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+/* Optimize particle animations */
+.particle {
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* Mobile menu optimization */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Prevent content jump when modal opens */
+body.modal-open {
+  overflow: hidden;
+  padding-right: var(--scrollbar-width, 0);
+}
+
+/* Accessible focus states */
+*:focus-visible {
+  outline: 2px solid #C9A24E;
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .card {
+    border-width: 2px;
+  }
+  
+  button {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Dark mode optimization (already default, but ensuring) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+/* Smooth transitions for theme changes */
+.theme-transition {
+  transition: 
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* Grid system for consistent layouts */
+.grid-responsive {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+@media (min-width: 640px) {
+  .grid-responsive {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-responsive {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .grid-responsive {
+    gap: 2.5rem;
+  }
+}
+
+/* Ensure consistent spacing between sections */
+.section-spacing {
+  margin-top: clamp(3rem, 8vw, 6rem);
+  margin-bottom: clamp(3rem, 8vw, 6rem);
+}
+
+/* Loading states */
+.loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  border-radius: inherit;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Ensure footer stays at bottom */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+footer {
+  flex-shrink: 0;
+}

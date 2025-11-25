@@ -1,0 +1,8 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Horseshoe shape -->
+  <path d="M20 8C14 8 8 11 8 16C8 21 14 24 20 24C26 24 32 21 32 16C32 11 26 8 20 8Z" fill="#C9A24E" opacity="0.9"/>
+  <path d="M8 20C5 20 2 23 2 26C2 29 5 32 8 32C8 36 14 36 20 36C26 36 32 36 32 32C35 32 38 29 38 26C38 23 35 20 32 20" stroke="#C9A24E" stroke-width="2" fill="none" opacity="0.9"/>
+  
+  <!-- Glow effect -->
+  <circle cx="20" cy="20" r="15" fill="#C9A24E" opacity="0.2"/>
+</svg>
