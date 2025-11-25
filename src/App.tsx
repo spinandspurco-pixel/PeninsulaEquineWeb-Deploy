@@ -88,7 +88,7 @@ function AppContent() {
       {/* {currentPage === 'video-preview' && <VideoPreviewPage onNavigate={handleNavigate} />} */}
       {currentPage === 'portal' && !isAuthenticated && (
         <LoginPage 
-          onLogin={(role, user) => {
+          onLogin={(_role, user) => {
             handleLogin(user.email, '');
           }} 
           onBack={() => handleNavigate('home')} 

@@ -60,7 +60,7 @@
         output: {
           manualChunks: {
             'react-vendor': ['react', 'react-dom'],
-            'ui-vendor': ['framer-motion', 'lucide-react'],
+            'ui-vendor': ['framer-motion', 'lucide-react', 'class-variance-authority', 'clsx', 'cmdk'],
           },
         },
       },
