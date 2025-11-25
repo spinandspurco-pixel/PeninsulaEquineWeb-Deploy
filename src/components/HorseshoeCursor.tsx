@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence, useSpring, useMotionValue } from 'motion/react';
+import { motion, AnimatePresence, useSpring, useMotionValue } from 'framer-motion';
 import cursorImage from 'figma:asset/b240d68ef405df3625942c8c59e92356e413a2a6.png';
 
 export function HorseshoeCursor() {

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { RopeLogo } from './RopeLogo';
 
 // Temporary placeholder videos - will be replaced with real hosted videos

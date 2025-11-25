@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Filter } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { HorseshoeCursor } from '../components/HorseshoeCursor';

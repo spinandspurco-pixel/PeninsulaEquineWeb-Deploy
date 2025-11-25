@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { RopeLogo } from './RopeLogo';
 
 // IMPORTANT: Replace this with your actual video import once uploaded

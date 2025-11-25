@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { ArrowLeft, Shield, Users } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { HorseshoeCursor } from '../components/HorseshoeCursor';

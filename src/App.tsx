@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import { HomePage } from './pages/HomePage';
 import { ConstructionsPage } from './pages/ConstructionsPage';
@@ -101,8 +101,12 @@ function AppContent() {
       {currentPage === 'portal' && isAuthenticated && (
         <PortalPage onNavigate={handleNavigate} />
       )}
-      {currentPage === 'dashboard' && isAuthenticated && (
-        <DashboardPage onNavigate={handleNavigate} />
+      {currentPage === 'dashboard' && isAuthenticated && currentUser && (
+        <DashboardPage 
+          onNavigate={handleNavigate} 
+          userRole={currentUser.role}
+          onLogout={handleLogout}
+        />
       )}
 
       {/* Password Change Dialog (First Login) */}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 
 // Import ALL converted videos
 import vid1 from '../assets/media/converted/IMG_0014.mp4';

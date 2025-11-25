@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 
 // Temporary placeholder videos - will be replaced with real hosted videos
 const video1 = 'https://assets.mixkit.co/videos/preview/mixkit-construction-work-on-building-4282-large.mp4';
