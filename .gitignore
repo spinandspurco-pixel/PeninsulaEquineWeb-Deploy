@@ -31,3 +31,6 @@ Thumbs.db
 window.location.hash = '#video-preview'
 src/assets/media/videos/
 src/assets/media/enhanced/
+
+# Temporary upload directory (use for processing only)
+uploads/
