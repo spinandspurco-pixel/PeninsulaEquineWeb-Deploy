@@ -79,6 +79,12 @@ convert_video() {
     # Get video info
     local duration=$(get_duration "$input")
     
+    # Validate duration to avoid division by zero
+    if [ -z "$duration" ] || [ "$duration" -eq 0 ]; then
+        echo -e "${YELLOW}Warning: Could not determine video duration, using default bitrate${NC}"
+        duration=10  # Default to 10 seconds for bitrate calculation
+    fi
+    
     # Calculate target bitrate to stay under max_size_mb
     # Formula: (max_size_mb * 8192) / duration = target_kbps
     local target_bitrate=$((max_size_mb * 8192 / duration))
@@ -160,9 +166,9 @@ process_uploads() {
     shopt -s nullglob
     for video_file in "$UPLOAD_DIR"/*.mp4 "$UPLOAD_DIR"/*.mov "$UPLOAD_DIR"/*.MP4 "$UPLOAD_DIR"/*.MOV; do
         [ -f "$video_file" ] || continue
-        if [ -f "$video_file" ]; then
-            local basename=$(basename "$video_file")
-            local filename="${basename%.*}"
+        
+        local basename=$(basename "$video_file")
+        local filename="${basename%.*}"
             
             # Check if this matches one of our required videos
             local found=false
@@ -176,9 +182,8 @@ process_uploads() {
                 fi
             done
             
-            if [ "$found" = false ]; then
-                echo -e "${YELLOW}Skipping: $basename (doesn't match required videos)${NC}"
-            fi
+        if [ "$found" = false ]; then
+            echo -e "${YELLOW}Skipping: $basename (doesn't match required videos)${NC}"
         fi
     done
     
@@ -188,11 +193,10 @@ process_uploads() {
     local image_count=0
     for image_file in "$UPLOAD_DIR"/*.jpg "$UPLOAD_DIR"/*.jpeg "$UPLOAD_DIR"/*.png "$UPLOAD_DIR"/*.JPG "$UPLOAD_DIR"/*.JPEG "$UPLOAD_DIR"/*.PNG; do
         [ -f "$image_file" ] || continue
-        if [ -f "$image_file" ]; then
-            local basename=$(basename "$image_file")
-            optimize_image "$image_file" "$ASSETS_DIR/$basename"
-            ((image_count++))
-        fi
+        
+        local basename=$(basename "$image_file")
+        optimize_image "$image_file" "$ASSETS_DIR/$basename"
+        ((image_count++))
     done
     
     echo -e "\n${BLUE}Step 4: Summary${NC}"
