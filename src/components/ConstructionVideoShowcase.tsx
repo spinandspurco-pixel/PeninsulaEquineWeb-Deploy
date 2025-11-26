@@ -17,7 +17,7 @@ export function ConstructionVideoShowcase({
     { src: videoConfig.constructionVideos[1] || '', title: "Construction Process", description: "Expert building with premium materials" },
     { src: videoConfig.constructionVideos[2] || '', title: "Detail Work", description: "Attention to every finishing touch" },
     { src: videoConfig.constructionVideos[3] || '', title: "Project Completion", description: "Delivering excellence every time" },
-  ].filter(video => video.src); // Only include videos with valid sources
+  ].filter(video => video.src !== ''); // Only include videos with valid sources
 
   return (
     <section className="py-24 px-4 bg-gradient-to-b from-[#0F0F0F] to-[#1a1a1a]">

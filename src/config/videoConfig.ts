@@ -32,7 +32,7 @@ export const getVideoUrl = (filename: string): string => {
   
   // Check for individual video URL override
   // Transform filename to environment variable key (e.g., IMG_1351.mp4 -> VITE_VIDEO_IMG_1351_MP4)
-  const videoEnvKey = `VITE_VIDEO_${filename.replace(/[^a-zA-Z0-9]/g, '_').replace(/_+/g, '_').toUpperCase()}`;
+  const videoEnvKey = `VITE_VIDEO_${filename.replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_|_$/g, '').toUpperCase()}`;
   const videoUrl = import.meta.env[videoEnvKey];
   
   if (videoUrl) {
