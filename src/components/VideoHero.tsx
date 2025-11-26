@@ -27,7 +27,7 @@ export function VideoHero({
   // Array of hero videos to rotate through (3 custom slow-motion videos)
   // Only include videos that are actually available (not undefined)
   const heroVideos = [heroVideo1, heroVideo2, heroVideo3].filter(Boolean);
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const heroVideos = [heroVideo1, heroVideo2, heroVideo3].filter((v) => v && typeof v === 'string');
 
   useEffect(() => {
     const video = videoRef.current;
@@ -65,10 +65,12 @@ export function VideoHero({
   }, [currentVideoIndex, autoLoop, onComplete, heroVideos.length]);
 
   return (
+  // Fallback if no videos or videos fail to load
+  const showFallback = heroVideos.length === 0;
     <div className="relative w-full h-screen overflow-hidden bg-[#0F0F0F]">
       {heroVideos.length > 0 ? (
         <>
-          {/* Video Background */}
+      {showFallback ? (
           <motion.video
             key={currentVideoIndex}
             ref={videoRef}

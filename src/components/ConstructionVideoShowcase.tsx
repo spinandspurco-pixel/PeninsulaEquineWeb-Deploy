@@ -104,19 +104,37 @@ videos = [
               </div>
             </motion.div>
           ))}
-        </div>
-
-        {/* Note */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 1 }}
-          viewport={{ once: true }}
-          className="text-center text-[#F5F4F1]/50 text-sm font-body mt-8"
-        >
-          Hover over videos to see them in action
-        </motion.p>
-      </div>
-    </section>
-  );
-}
+                      {videos.length > 0 ? (
+                        <div className="grid md:grid-cols-2 gap-8">
+                          {videos.map((video, index) => (
+                            <motion.div
+                              key={index}
+                              initial={{ opacity: 0, y: 30 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 1, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
+                              viewport={{ once: true }}
+                              className="group relative overflow-hidden rounded-lg bg-[#1a1a1a] border border-[#C9A24E]/20 hover:border-[#C9A24E]/60 transition-all duration-500"
+                            >
+                              {/* Video Container */}
+                              <div className="aspect-video overflow-hidden relative">
+                                <video
+                                  src={video.src}
+                                  className="w-full h-full object-cover"
+                                  autoPlay
+                                  loop
+                                  muted
+                                  playsInline
+                                  preload="metadata"
+                                  onError={e => { e.currentTarget.poster = ''; e.currentTarget.src = ''; }}
+                                />
+                              </div>
+                              <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent">
+                                <h3 className="text-lg font-display text-[#C9A24E] mb-1">{video.title}</h3>
+                                <p className="text-sm text-[#F5F4F1]/80 font-body">{video.description}</p>
+                              </div>
+                            </motion.div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="text-center text-[#C9A24E] text-xl py-12">Video showcase coming soon.</div>
+                      )}
