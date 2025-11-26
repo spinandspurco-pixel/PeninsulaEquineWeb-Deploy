@@ -2,15 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RopeLogo } from './RopeLogo';
 
-// Temporary placeholder videos - will be replaced with real hosted videos
-const heroVideo1 = 'https://assets.mixkit.co/videos/preview/mixkit-horse-running-in-slow-motion-1088-large.mp4';
-const heroVideo2 = 'https://assets.mixkit.co/videos/preview/mixkit-horses-grazing-in-a-field-1089-large.mp4';
-const heroVideo3 = 'https://assets.mixkit.co/videos/preview/mixkit-brown-horse-in-stable-1090-large.mp4';
-const heroVideo4 = heroVideo1;
-const heroVideo5 = heroVideo2;
-const heroVideo6 = heroVideo3;
-const heroVideo7 = heroVideo1;
-const heroVideo8 = heroVideo2;
+// Custom videos - HomePage Hero videos (slow-motion equestrian footage)
+import heroVideo1 from '../assets/media/converted/IMG_1351.mp4';
+import heroVideo2 from '../assets/media/converted/IMG_1354.mp4';
+import heroVideo3 from '../assets/media/converted/IMG_2975.mp4';
 
 interface VideoHeroProps {
   onComplete?: () => void;
@@ -29,8 +24,8 @@ export function VideoHero({
   const [isLoaded, setIsLoaded] = useState(false);
   const [showContent, setShowContent] = useState(false);
 
-  // Array of hero videos to rotate through (8 cinematic slow-motion videos)
-  const heroVideos = [heroVideo1, heroVideo2, heroVideo3, heroVideo4, heroVideo5, heroVideo6, heroVideo7, heroVideo8];
+  // Array of hero videos to rotate through (3 custom slow-motion videos)
+  const heroVideos = [heroVideo1, heroVideo2, heroVideo3];
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
   useEffect(() => {

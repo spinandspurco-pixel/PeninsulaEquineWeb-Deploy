@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-// Temporary placeholder videos - will be replaced with real hosted videos
-const video1 = 'https://assets.mixkit.co/videos/preview/mixkit-construction-work-on-building-4282-large.mp4';
-const video2 = 'https://assets.mixkit.co/videos/preview/mixkit-worker-with-a-drill-4283-large.mp4';
-const video3 = 'https://assets.mixkit.co/videos/preview/mixkit-builders-working-on-construction-site-4284-large.mp4';
-const video4 = video1;
+// Custom construction videos - showing Peninsula Equine's actual work
+import video1 from '../assets/media/converted/IMG_0014.mp4';
+import video2 from '../assets/media/converted/IMG_0015.mp4';
+import video3 from '../assets/media/converted/IMG_1021.mp4';
+import video4 from '../assets/media/converted/IMG_2461.mp4';
 
 interface ConstructionVideoShowcaseProps {
   title?: string;

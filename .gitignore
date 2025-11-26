@@ -30,5 +30,4 @@ Thumbs.db
 
 window.location.hash = '#video-preview'
 src/assets/media/videos/
-src/assets/media/converted/
 src/assets/media/enhanced/
