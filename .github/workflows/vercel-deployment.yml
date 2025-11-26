@@ -30,4 +30,4 @@ jobs:
       - name: Notify Vercel
         uses: vercel/repository-dispatch/actions/status@v1
         with:
-          name: Vercel - peninsula-equine-web-deploy-7xdj: Deployment Checks
+          name: 'Vercel - peninsula-equine-web-deploy-7xdj: Deployment Checks'
