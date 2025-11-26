@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { RopeLogo } from './RopeLogo';
 
 // Custom videos - HomePage Hero videos (slow-motion equestrian footage)
-import heroVideo1 from '../assets/media/converted/IMG_1351.mp4';
-import heroVideo2 from '../assets/media/converted/IMG_1354.mp4';
-import heroVideo3 from '../assets/media/converted/IMG_2975.mp4';
+const heroVideo1 = '/media/IMG_1351.mp4';
+const heroVideo2 = '/media/IMG_1354.mp4';
+const heroVideo3 = '/media/IMG_2975.mp4';
 
 interface VideoHeroProps {
   onComplete?: () => void;
