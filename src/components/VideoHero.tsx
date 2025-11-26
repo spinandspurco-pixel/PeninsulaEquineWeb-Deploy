@@ -2,11 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RopeLogo } from './RopeLogo';
 
-// Placeholder videos - High-quality equestrian footage from CDN
-// TODO: Replace with your custom slow-motion videos once uploaded to src/assets/media/converted/
-const heroVideo1 = 'https://assets.mixkit.co/videos/preview/mixkit-horse-running-in-slow-motion-31907-large.mp4';
-const heroVideo2 = 'https://assets.mixkit.co/videos/preview/mixkit-brown-horse-eating-grass-in-slow-motion-31908-large.mp4';
-const heroVideo3 = 'https://assets.mixkit.co/videos/preview/mixkit-horses-grazing-in-a-field-31910-large.mp4';
+// Custom videos - HomePage Hero videos (slow-motion equestrian footage)
+import heroVideo1 from '../assets/media/converted/IMG_1351.mp4';
+import heroVideo2 from '../assets/media/converted/IMG_1354.mp4';
+import heroVideo3 from '../assets/media/converted/IMG_2975.mp4';
 
 interface VideoHeroProps {
   onComplete?: () => void;
