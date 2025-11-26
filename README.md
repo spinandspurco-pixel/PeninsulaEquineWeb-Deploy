@@ -21,6 +21,29 @@ npm run build
 npm run preview
 ```
 
+## 🎬 Video Setup (IMPORTANT - Do This First!)
+
+**Your website needs 7 videos to work properly.**
+
+### Quick Setup (5 minutes):
+```bash
+./setup-videos.sh
+```
+
+Or see **[QUICK_VIDEO_SETUP.md](./QUICK_VIDEO_SETUP.md)** for the fastest way to get your videos live using Cloudinary CDN (no Git upload needed!).
+
+**Why use CDN instead of Git?**
+- ⚡ 100x faster upload (minutes vs hours)
+- 💚 Free and simple
+- 🚀 Professional performance
+- ✅ No Git LFS hassles
+
+**Other guides:**
+- [VIDEO_HOSTING_GUIDE.md](./VIDEO_HOSTING_GUIDE.md) - Complete guide with all options
+- [VIDEO_UPLOAD_INSTRUCTIONS.md](./VIDEO_UPLOAD_INSTRUCTIONS.md) - Original Git LFS method (slower)
+
+---
+
 ## 📦 Deployment
 
 ### Deploy to Vercel
@@ -118,8 +141,16 @@ After deploying to Vercel:
 
 ## 🔐 Environment Variables
 
-If using Firebase, create a `.env` file:
+Create a `.env` file for configuration:
 
+### Required: Video CDN Configuration
+```env
+# Enable CDN for faster video loading (recommended)
+VITE_VIDEO_CDN_ENABLED=true
+VITE_VIDEO_CDN_URL=https://res.cloudinary.com/YOUR_CLOUD_NAME/video/upload/peninsula-equine
+```
+
+### Optional: Firebase Configuration
 ```env
 VITE_FIREBASE_API_KEY=your_api_key
 VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
@@ -128,6 +159,8 @@ VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
 VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
 VITE_FIREBASE_APP_ID=your_app_id
 ```
+
+See `.env.example` for all available options.
 
 ## 🐛 Troubleshooting
 

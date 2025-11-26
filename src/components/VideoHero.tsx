@@ -1,11 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RopeLogo } from './RopeLogo';
-
-// Custom videos - HomePage Hero videos (slow-motion equestrian footage)
-import heroVideo1 from '../assets/media/converted/IMG_1351.mp4';
-import heroVideo2 from '../assets/media/converted/IMG_1354.mp4';
-import heroVideo3 from '../assets/media/converted/IMG_2975.mp4';
+import { videoConfig } from '../config/videoConfig';
 
 interface VideoHeroProps {
   onComplete?: () => void;
@@ -25,7 +21,7 @@ export function VideoHero({
   const [showContent, setShowContent] = useState(false);
 
   // Array of hero videos to rotate through (3 custom slow-motion videos)
-  const heroVideos = [heroVideo1, heroVideo2, heroVideo3];
+  const heroVideos = videoConfig.heroVideos;
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
   useEffect(() => {
