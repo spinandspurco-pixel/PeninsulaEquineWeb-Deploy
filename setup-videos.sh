@@ -141,7 +141,7 @@ EOF
         echo ""
         
         # Check if git-lfs is installed
-        if ! command -v git-lfs &> /dev/null; then
+        if ! command -v git-lfs > /dev/null 2>&1; then
             echo -e "${RED}❌ Git LFS is not installed${NC}"
             echo ""
             echo "Install it with:"
