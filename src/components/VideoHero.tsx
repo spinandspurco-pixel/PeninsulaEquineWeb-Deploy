@@ -27,6 +27,7 @@ export function VideoHero({
   // Array of hero videos to rotate through (3 custom slow-motion videos)
   // Only include videos that are actually available (not undefined)
   const heroVideos = [heroVideo1, heroVideo2, heroVideo3].filter((v) => v && typeof v === 'string');
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
   useEffect(() => {
     const video = videoRef.current;
