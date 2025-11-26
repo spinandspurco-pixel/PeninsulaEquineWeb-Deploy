@@ -1,11 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-
-// Custom construction videos - showing Peninsula Equine's actual work
-import video1 from '../assets/media/converted/IMG_0014.mp4';
-import video2 from '../assets/media/converted/IMG_0015.mp4';
-import video3 from '../assets/media/converted/IMG_1021.mp4';
-import video4 from '../assets/media/converted/IMG_2461.mp4';
+import { videoConfig } from '../config/videoConfig';
 
 interface ConstructionVideoShowcaseProps {
   title?: string;
@@ -17,12 +12,11 @@ export function ConstructionVideoShowcase({
   subtitle = "From groundwork to completion, watch our craftsmanship in action"
 }: ConstructionVideoShowcaseProps) {
   
-  const 
-videos = [
-    { src: video1, title: "Foundation & Groundwork", description: "Precision preparation for lasting quality" },
-    { src: video2, title: "Construction Process", description: "Expert building with premium materials" },
-    { src: video3, title: "Detail Work", description: "Attention to every finishing touch" },
-    { src: video4, title: "Project Completion", description: "Delivering excellence every time" },
+  const videos = [
+    { src: videoConfig.constructionVideos[0], title: "Foundation & Groundwork", description: "Precision preparation for lasting quality" },
+    { src: videoConfig.constructionVideos[1], title: "Construction Process", description: "Expert building with premium materials" },
+    { src: videoConfig.constructionVideos[2], title: "Detail Work", description: "Attention to every finishing touch" },
+    { src: videoConfig.constructionVideos[3], title: "Project Completion", description: "Delivering excellence every time" },
   ];
 
   return (
