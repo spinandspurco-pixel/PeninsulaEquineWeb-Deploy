@@ -26,7 +26,6 @@ export function VideoHero({
 
   // Array of hero videos to rotate through (3 custom slow-motion videos)
   // Only include videos that are actually available (not undefined)
-  const heroVideos = [heroVideo1, heroVideo2, heroVideo3].filter(Boolean);
   const heroVideos = [heroVideo1, heroVideo2, heroVideo3].filter((v) => v && typeof v === 'string');
 
   useEffect(() => {
@@ -63,42 +62,40 @@ export function VideoHero({
       clearTimeout(logoTimer);
     };
   }, [currentVideoIndex, autoLoop, onComplete, heroVideos.length]);
+    // Fallback if no videos or videos fail to load
+    const showFallback = heroVideos.length === 0;
+    return (
+      <div className="relative w-full h-screen overflow-hidden bg-[#0F0F0F]">
+        {heroVideos.length > 0 ? (
+          <>
+            <motion.video
+              key={currentVideoIndex}
+              ref={videoRef}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ willChange: 'opacity, transform' }}
+              muted
+              playsInline
+              preload="metadata"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isLoaded ? 1 : 0 }}
+              transition={{ duration: 1.5 }}
+            >
+              <source src={heroVideos[currentVideoIndex]} type="video/mp4" />
+            </motion.video>
 
-  return (
-  // Fallback if no videos or videos fail to load
-  const showFallback = heroVideos.length === 0;
-    <div className="relative w-full h-screen overflow-hidden bg-[#0F0F0F]">
-      {heroVideos.length > 0 ? (
-        <>
-      {showFallback ? (
-          <motion.video
-            key={currentVideoIndex}
-            ref={videoRef}
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ willChange: 'opacity, transform' }}
-            muted
-            playsInline
-            preload="metadata"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isLoaded ? 1 : 0 }}
-            transition={{ duration: 1.5 }}
-          >
-            <source src={heroVideos[currentVideoIndex]} type="video/mp4" />
-          </motion.video>
+            {/* Dark Overlay for Text Readability */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0F0F0F]/70 via-[#0F0F0F]/40 to-[#0F0F0F]/80" />
 
-          {/* Dark Overlay for Text Readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0F0F0F]/70 via-[#0F0F0F]/40 to-[#0F0F0F]/80" />
-
-          {/* Logo and Content Overlay */}
-          <AnimatePresence>
-            {showContent && showLogo && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4"
-              >
+            {/* Logo and Content Overlay */}
+            <AnimatePresence>
+              {showContent && showLogo && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4"
+                >
                 {/* Animated Logo */}
                 <motion.div
                   initial={{ y: 30, opacity: 0 }}
