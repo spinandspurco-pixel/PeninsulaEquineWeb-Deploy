@@ -23,6 +23,8 @@ export function VideoHero({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showContent, setShowContent] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+  const [videoError, setVideoError] = useState(false);
 
   // Array of hero videos to rotate through (3 custom slow-motion videos)
   // Only include videos that are actually available (not undefined)
@@ -38,6 +40,11 @@ export function VideoHero({
       setIsLoaded(true);
       video.play().catch(err => console.log('Video autoplay prevented:', err));
     };
+    // Handle video error
+    const handleError = () => {
+      setVideoError(true);
+      setIsLoaded(true); // Ensure fallback renders
+    };
 
     // Handle video ended
     const handleEnded = () => {
@@ -51,23 +58,34 @@ export function VideoHero({
 
     video.addEventListener('canplay', handleCanPlay);
     video.addEventListener('ended', handleEnded);
+    video.addEventListener('error', handleError);
 
     // Show logo after brief delay
     const logoTimer = setTimeout(() => {
       setShowContent(true);
     }, 500);
 
+    // Fallback timer: if video doesn't load in 3 seconds, show fallback
+    const fallbackTimer = setTimeout(() => {
+      if (!isLoaded) {
+        setVideoError(true);
+        setIsLoaded(true); // Ensure fallback renders
+      }
+    }, 3000);
     return () => {
       video.removeEventListener('canplay', handleCanPlay);
       video.removeEventListener('ended', handleEnded);
+      video.removeEventListener('error', handleError);
       clearTimeout(logoTimer);
+      clearTimeout(fallbackTimer);
     };
   }, [currentVideoIndex, autoLoop, onComplete, heroVideos.length]);
     // Fallback if no videos or videos fail to load
-    const showFallback = heroVideos.length === 0;
+    const showFallback = heroVideos.length === 0 || videoError;
     return (
       <div className="relative w-full h-screen overflow-hidden bg-[#0F0F0F]">
-        {heroVideos.length > 0 ? (
+        {/* Always show fallback after 3s if video fails */}
+        {!showFallback && heroVideos.length > 0 ? (
           <>
             <motion.video
               key={currentVideoIndex}
@@ -150,7 +168,7 @@ export function VideoHero({
           </AnimatePresence>
 
           {/* Loading State */}
-          {!isLoaded && (
+          {!isLoaded && !videoError && (
             <div className="absolute inset-0 flex items-center justify-center bg-[#0F0F0F] z-20">
               <motion.div
                 animate={{ rotate: 360 }}
@@ -164,6 +182,8 @@ export function VideoHero({
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0F0F0F] z-20">
           <RopeLogo animate={true} />
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display text-[#C9A24E] text-center mb-4" style={{ textShadow: '0 0 40px rgba(201, 162, 78, 0.6)' }}>
+            Unable to load hero video.<br />
+            Enjoy the site content below!
             FROM DIRT TO DYNASTY
           </h1>
           <p className="text-xl md:text-2xl text-[#F5F4F1]/90 font-heading text-center max-w-3xl mb-8">
