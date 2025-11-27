@@ -155,8 +155,14 @@ export function DashboardPage({ userRole, onLogout, onNavigate }: DashboardPageP
                       {/* ...existing code... */}
                     </div>
                   </div>
-                );
-            </Card>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
 
             {/* Schedule */}
             <Card className={`backdrop-blur-lg p-6 ${theme === 'dark' ? 'bg-[#0F0F0F]/50 border-amber-600/30' : 'bg-white border-[#C9A24E]/30'}`}>
