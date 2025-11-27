@@ -81,35 +81,58 @@ export function DashboardPage({ userRole, onLogout, onNavigate }: DashboardPageP
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          {/* Welcome Section */}
-          <div className="mb-8">
-            <h2 className={`text-3xl font-display mb-2 ${theme === 'dark' ? 'text-white' : 'text-[#0F0F0F]'}`}>
-              Welcome back, {isAdmin ? 'Administrator' : 'Team Member'}
-            </h2>
-            <p className={theme === 'dark' ? 'text-white/60' : 'text-black/60'}>
-              {isAdmin 
-                ? 'Manage your projects, teams, and operations from this dashboard.'
-                : 'Access forms, timesheets, and reference materials.'
-              }
-            </p>
+        return (
+          <div className="min-h-screen bg-gradient-to-b from-[#181818] via-[#232323] to-[#0F0F0F]">
+            <Navigation onNavigate={onNavigate} currentPage="dashboard" />
+            <div className="container mx-auto py-12 px-4">
+              <div className="flex flex-col items-center mb-8">
+                <RopeLogo animate={true} className="w-32 h-32 mb-4" />
+                <h1 className="text-4xl font-display text-[#C9A24E] mb-2">{userRole === 'admin' ? 'Admin Dashboard' : 'Worker Dashboard'}</h1>
+                <button onClick={onLogout} className="mt-2 px-4 py-2 bg-[#C9A24E] text-black rounded shadow hover:bg-[#A88B63] transition">Logout</button>
+              </div>
+              {/* Next-level dashboard widgets */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {/* Project Status Widget */}
+                <div className="bg-gradient-to-br from-[#232323] via-[#181818] to-[#C9A24E]/10 rounded-xl shadow-2xl p-8 flex flex-col items-center animate-fade-in">
+                  <h2 className="text-2xl font-bold text-[#C9A24E] mb-2">Project Status</h2>
+                  <p className="text-white/80 mb-4">All projects on track</p>
+                  <button className="px-4 py-2 bg-[#C9A24E] text-black rounded hover:bg-[#A88B63] transition">View Projects</button>
+                </div>
+                {/* Timesheets Widget */}
+                <div className="bg-gradient-to-br from-[#232323] via-[#181818] to-[#C9A24E]/10 rounded-xl shadow-2xl p-8 flex flex-col items-center animate-fade-in">
+                  <h2 className="text-2xl font-bold text-[#C9A24E] mb-2">Timesheets</h2>
+                  <p className="text-white/80 mb-4">Submit and review timesheets</p>
+                  <button className="px-4 py-2 bg-[#C9A24E] text-black rounded hover:bg-[#A88B63] transition">Go to Timesheets</button>
+                </div>
+                {/* Documentation Widget */}
+                <div className="bg-gradient-to-br from-[#232323] via-[#181818] to-[#C9A24E]/10 rounded-xl shadow-2xl p-8 flex flex-col items-center animate-fade-in">
+                  <h2 className="text-2xl font-bold text-[#C9A24E] mb-2">Documentation</h2>
+                  <p className="text-white/80 mb-4">Access all guidelines and docs</p>
+                  <button className="px-4 py-2 bg-[#C9A24E] text-black rounded hover:bg-[#A88B63] transition">View Docs</button>
+                </div>
+                {/* Team Chat Widget */}
+                <div className="bg-gradient-to-br from-[#232323] via-[#181818] to-[#C9A24E]/10 rounded-xl shadow-2xl p-8 flex flex-col items-center animate-fade-in">
+                  <h2 className="text-2xl font-bold text-[#C9A24E] mb-2">Team Chat</h2>
+                  <p className="text-white/80 mb-4">Collaborate with your team</p>
+                  <button className="px-4 py-2 bg-[#C9A24E] text-black rounded hover:bg-[#A88B63] transition">Open Chat</button>
+                </div>
+                {/* Notifications Widget */}
+                <div className="bg-gradient-to-br from-[#232323] via-[#181818] to-[#C9A24E]/10 rounded-xl shadow-2xl p-8 flex flex-col items-center animate-fade-in">
+                  <h2 className="text-2xl font-bold text-[#C9A24E] mb-2">Notifications</h2>
+                  <p className="text-white/80 mb-4">Stay up to date</p>
+                  <button className="px-4 py-2 bg-[#C9A24E] text-black rounded hover:bg-[#A88B63] transition">View Notifications</button>
+                </div>
+                {/* Quick Links Widget */}
+                <div className="bg-gradient-to-br from-[#232323] via-[#181818] to-[#C9A24E]/10 rounded-xl shadow-2xl p-8 flex flex-col items-center animate-fade-in">
+                  <h2 className="text-2xl font-bold text-[#C9A24E] mb-2">Quick Links</h2>
+                  <p className="text-white/80 mb-4">Access important resources</p>
+                  <button className="px-4 py-2 bg-[#C9A24E] text-black rounded hover:bg-[#A88B63] transition">Go to Links</button>
+                </div>
+              </div>
+            </div>
+            <Footer onNavigate={onNavigate} />
           </div>
-
-          {/* Quick Actions - Worker Only */}
-          {!isAdmin && (
-            <div className="mb-8">
-              <h3 className={`text-xl font-display mb-4 ${theme === 'dark' ? 'text-[#C9A24E]' : 'text-[#A88B63]'}`}>
-                Quick Actions
-              </h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                {quickActions.map((action, index) => (
-                  <motion.button
-                    key={action.label}
-                    initial={{ opacity: 0, y: 20 }}
+        );
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: index * 0.1 }}
                     onClick={() => onNavigate(action.page)}
