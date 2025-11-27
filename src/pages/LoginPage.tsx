@@ -9,7 +9,7 @@ import type { UserRole } from '../types';
 import { toast } from 'sonner';
 import { useTheme } from '../context/ThemeContext';
 import { signInWithEmailPassword } from '../lib/firebase-service';
-import logoImage from 'figma:asset/43b0d27420f20197681aa3cacbf2abda7c055e3d.png';
+import logoImage from '../assets/43b0d27420f20197681aa3cacbf2abda7c055e3d.png';
 
 interface LoginPageProps {
   onLogin: (role: UserRole, user: any) => void;
