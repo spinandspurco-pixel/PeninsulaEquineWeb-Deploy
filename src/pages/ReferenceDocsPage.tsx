@@ -40,13 +40,6 @@ export function ReferenceDocsPage({ onBack }: ReferenceDocsPageProps) {
       description: 'Operating instructions for machinery',
     },
     {
-      title: 'PPE Requirements',
-      category: 'Safety',
-      size: '890 KB',
-      updated: '2025-01-05',
-      description: 'Personal protective equipment standards',
-    },
-    {
       title: 'Stable Building Standards',
       category: 'Technical',
       size: '4.2 MB',
@@ -74,6 +67,48 @@ export function ReferenceDocsPage({ onBack }: ReferenceDocsPageProps) {
       updated: '2025-01-12',
       description: 'QC procedures and checklists',
     },
+      {
+        title: 'Safety Guidelines',
+        category: 'Safety',
+        size: '2.4 MB',
+        updated: '2025-01-15',
+        description: 'Comprehensive safety protocols and PPE requirements.',
+      },
+      {
+        title: 'Timesheet Instructions',
+        category: 'Admin',
+        size: '1.2 MB',
+        updated: '2025-01-12',
+        description: 'How to fill out and submit timesheets.',
+      },
+      {
+        title: 'Toolbox Talk Templates',
+        category: 'Safety',
+        size: '1.7 MB',
+        updated: '2025-01-18',
+        description: 'Templates for daily toolbox talks and incident reporting.',
+      },
+      {
+        title: 'Worker Registration',
+        category: 'Admin',
+        size: '900 KB',
+        updated: '2025-01-20',
+        description: 'Register new workers and manage access.',
+      },
+      {
+        title: 'Project Gallery',
+        category: 'Gallery',
+        size: 'N/A',
+        updated: '2025-01-22',
+        description: 'View completed and ongoing project media.',
+      },
+      {
+        title: 'Quick Reference',
+        category: 'Reference',
+        size: '500 KB',
+        updated: '2025-01-25',
+        description: 'Quick links and reference info for all users.',
+      },
   ];
 
   const filteredDocs = documents.filter(
