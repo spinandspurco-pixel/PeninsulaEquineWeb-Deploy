@@ -28,12 +28,12 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
   };
 
   const navItems = [
-    { label: 'Home', value: 'home', icon: <HorseshoeIcon size={20} className="inline mr-2 align-middle" /> },
-    { label: 'Constructions', value: 'constructions', icon: <EquestrianIcon size={20} className="inline mr-2 align-middle" /> },
-    { label: 'Laser Cutting', value: 'laser', icon: <LaserCutIcon size={20} className="inline mr-2 align-middle" /> },
-    { label: 'Shop', value: 'shop', icon: <LaserCutIcon size={20} className="inline mr-2 align-middle" /> },
-    { label: 'Projects', value: 'projects', icon: <EquestrianIcon size={20} className="inline mr-2 align-middle" /> },
-    { label: 'Contact', value: 'contact', icon: <HorseshoeIcon size={20} className="inline mr-2 align-middle" /> },
+    { label: 'Home', value: 'home', icon: <HorseshoeIcon size={22} className="inline mr-2 align-middle drop-shadow-[0_1px_2px_rgba(201,162,78,0.5)] transition-transform duration-200" /> },
+    { label: 'Constructions', value: 'constructions', icon: <EquestrianIcon size={22} className="inline mr-2 align-middle drop-shadow-[0_1px_2px_rgba(141,85,36,0.4)] transition-transform duration-200" /> },
+    { label: 'Laser Cutting', value: 'laser', icon: <LaserCutIcon size={22} className="inline mr-2 align-middle drop-shadow-[0_1px_2px_rgba(168,139,99,0.4)] transition-transform duration-200" /> },
+    { label: 'Shop', value: 'shop', icon: <LaserCutIcon size={22} className="inline mr-2 align-middle drop-shadow-[0_1px_2px_rgba(168,139,99,0.4)] transition-transform duration-200" /> },
+    { label: 'Projects', value: 'projects', icon: <EquestrianIcon size={22} className="inline mr-2 align-middle drop-shadow-[0_1px_2px_rgba(141,85,36,0.4)] transition-transform duration-200" /> },
+    { label: 'Contact', value: 'contact', icon: <HorseshoeIcon size={22} className="inline mr-2 align-middle drop-shadow-[0_1px_2px_rgba(201,162,78,0.5)] transition-transform duration-200" /> },
   ];
 
   return (
@@ -50,22 +50,27 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
               <button
                 key={item.value}
                 onClick={() => handleNavClick(item.value)}
-                className={`relative py-2 font-heading transition-colors flex items-center gap-1 ${
+                className={`relative py-2 px-3 font-heading transition-colors flex items-center gap-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9A24E]/60 ${
                   currentPage === item.value
-                    ? 'text-[#C9A24E]'
-                    : 'text-[#F5F4F1] hover:text-[#C9A24E]'
+                    ? 'text-[#C9A24E] bg-[#F5F4F1]/5 shadow-md shadow-[#C9A24E]/10'
+                    : 'text-[#F5F4F1] hover:text-[#C9A24E] hover:bg-[#C9A24E]/10'
                 }`}
+                style={{
+                  boxShadow: currentPage === item.value ? '0 2px 8px rgba(201,162,78,0.08)' : undefined,
+                  transition: 'box-shadow 0.2s',
+                }}
               >
-                {item.icon}
-                {item.label}
+                <span className={`transition-transform duration-200 ${currentPage === item.value ? 'scale-110' : 'scale-100'}`}>{item.icon}</span>
+                <span className="tracking-wide">{item.label}</span>
                 {currentPage === item.value && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#C9A24E]" />
+                  <div className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-[#C9A24E] via-[#F5F4F1] to-[#C9A24E] rounded-full animate-pulse" />
                 )}
               </button>
             ))}
             <Button
               onClick={() => handleNavClick('portal')}
-              className="bg-[#C9A24E] hover:bg-[#A88B63] text-[#0F0F0F] font-heading ml-2"
+              className="bg-[#C9A24E] hover:bg-[#A88B63] text-[#0F0F0F] font-heading ml-2 shadow-lg shadow-[#C9A24E]/20 border border-[#C9A24E]/40 px-4 py-2 rounded-lg transition-all duration-200"
+              style={{ fontWeight: 600, letterSpacing: '0.04em' }}
             >
               <Shield className="mr-2" size={18} />
               Portal
@@ -84,25 +89,30 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-[#C9A24E]/20 animate-in slide-in-from-top duration-300">
+          <div className="md:hidden mt-4 pb-4 border-t border-[#C9A24E]/20 animate-in slide-in-from-top duration-300 bg-[#0F0F0F]/95 rounded-xl shadow-lg shadow-[#C9A24E]/10">
             <div className="flex flex-col gap-3 mt-4">
               {navItems.map((item) => (
                 <button
                   key={item.value}
                   onClick={() => handleNavClick(item.value)}
-                  className={`text-left py-2 font-heading transition-colors flex items-center gap-1 ${
+                  className={`text-left py-2 px-3 font-heading transition-colors flex items-center gap-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9A24E]/60 ${
                     currentPage === item.value
-                      ? 'text-[#C9A24E]'
-                      : 'text-[#F5F4F1] hover:text-[#C9A24E]'
+                      ? 'text-[#C9A24E] bg-[#F5F4F1]/5 shadow-md shadow-[#C9A24E]/10'
+                      : 'text-[#F5F4F1] hover:text-[#C9A24E] hover:bg-[#C9A24E]/10'
                   }`}
+                  style={{
+                    boxShadow: currentPage === item.value ? '0 2px 8px rgba(201,162,78,0.08)' : undefined,
+                    transition: 'box-shadow 0.2s',
+                  }}
                 >
-                  {item.icon}
-                  {item.label}
+                  <span className={`transition-transform duration-200 ${currentPage === item.value ? 'scale-110' : 'scale-100'}`}>{item.icon}</span>
+                  <span className="tracking-wide">{item.label}</span>
                 </button>
               ))}
               <Button
                 onClick={() => handleNavClick('portal')}
-                className="bg-[#C9A24E] hover:bg-[#A88B63] text-[#0F0F0F] font-heading w-full"
+                className="bg-[#C9A24E] hover:bg-[#A88B63] text-[#0F0F0F] font-heading w-full shadow-lg shadow-[#C9A24E]/20 border border-[#C9A24E]/40 px-4 py-2 rounded-lg transition-all duration-200"
+                style={{ fontWeight: 600, letterSpacing: '0.04em' }}
               >
                 <Shield className="mr-2" size={18} />
                 Portal

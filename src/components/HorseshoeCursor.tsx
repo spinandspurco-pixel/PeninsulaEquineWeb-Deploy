@@ -57,8 +57,13 @@ export function HorseshoeCursor() {
     <>
       {/* Hide default cursor */}
       <style>{`
-        * {
+        html, body, * {
           cursor: none !important;
+        }
+        @media (pointer: coarse) {
+          html, body, * {
+            cursor: auto !important;
+          }
         }
       `}</style>
 
@@ -71,14 +76,14 @@ export function HorseshoeCursor() {
             y: cursorYSpring,
           }}
         >
-          {/* Outer Glow on Hover */}
+          {/* Outer Gold Glow on Hover */}
           <AnimatePresence>
             {isHovering && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ 
-                  opacity: [0.4, 0.7, 0.4],
-                  scale: [1.5, 2, 1.5],
+                  opacity: [0.5, 0.8, 0.5],
+                  scale: [1.7, 2.2, 1.7],
                 }}
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{
@@ -93,11 +98,12 @@ export function HorseshoeCursor() {
                     ease: "easeInOut",
                   },
                 }}
-                className="absolute inset-0 rounded-full"
+                className="absolute inset-0 rounded-full pointer-events-none"
                 style={{
-                  backgroundImage: 'radial-gradient(circle, rgba(251, 191, 36, 0.4) 0%, rgba(245, 158, 11, 0.2) 50%, transparent 70%)',
-                  filter: 'blur(12px)',
+                  backgroundImage: 'radial-gradient(circle, rgba(201,162,78,0.45) 0%, rgba(251,191,36,0.25) 50%, transparent 70%)',
+                  filter: 'blur(16px)',
                   transform: 'translate(-25%, -25%)',
+                  zIndex: 0,
                 }}
               />
             )}
@@ -161,13 +167,13 @@ export function HorseshoeCursor() {
           <motion.div
             className="relative"
             animate={{
-              scale: isClicking ? 0.85 : isHovering ? 1.15 : 1,
-              rotate: isHovering ? [0, -4, 4, -4, 0] : 0,
+              scale: isClicking ? 0.88 : isHovering ? 1.18 : 1,
+              rotate: isHovering ? [0, -5, 5, -5, 0] : 0,
             }}
             transition={{
-              scale: { duration: 0.15, ease: "easeOut" },
+              scale: { duration: 0.18, ease: "easeOut" },
               rotate: {
-                duration: 0.6,
+                duration: 0.7,
                 repeat: isHovering ? Infinity : 0,
                 ease: "easeInOut",
               },
