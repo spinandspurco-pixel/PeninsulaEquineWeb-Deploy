@@ -8,6 +8,7 @@ interface DashboardPageProps {
   userRole: UserRole;
   onLogout: () => void;
   onNavigate: (page: string) => void;
+}
 
 export function DashboardPage({ userRole, onLogout, onNavigate }: DashboardPageProps) {
   const isAdmin = userRole === 'admin';
