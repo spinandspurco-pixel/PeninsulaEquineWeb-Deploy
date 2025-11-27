@@ -10,7 +10,6 @@ import { PortalPage } from './pages/PortalPage';
 import { LoginPage } from './pages/LoginPage';
 import { DashboardPage } from './pages/DashboardPage';
 // import { VideoPreviewPage } from './pages/VideoPreviewPage'; // Disabled - requires video files
-import { IntroScreen } from './components/IntroScreen';
 import { ChangePasswordDialog } from './components/ChangePasswordDialog';
 import { getCurrentUser, changePassword, signOut } from './lib/firebase-service';
 import { toast } from 'sonner';

@@ -1,13 +1,23 @@
 
 import React, { useState } from 'react';
 
+// Import images from src/assets
+import img3850 from '../assets/media/best/IMG_3850.jpeg';
+import img3853 from '../assets/media/best/IMG_3853.jpeg';
+import img3854 from '../assets/media/best/IMG_3854.jpeg';
+
+// Import videos from src/assets
+import vid1351 from '../assets/media/converted/IMG_1351.mp4';
+import vid1354 from '../assets/media/converted/IMG_1354.mp4';
+import vid2975 from '../assets/media/converted/IMG_2975.mp4';
+
 const media = [
-  { type: 'image', src: '/assets/media/best/IMG_3850.jpeg', category: 'Arena Construction', caption: 'Arena Construction' },
-  { type: 'image', src: '/assets/media/best/IMG_3853.jpeg', category: 'Laser Cutting', caption: 'Laser Cutting' },
-  { type: 'image', src: '/assets/media/best/IMG_3854.jpeg', category: 'Custom Facilities', caption: 'Custom Facilities' },
-  { type: 'video', src: '/media/IMG_1351.mp4', category: 'Arena Construction', caption: 'Arena Construction Video' },
-  { type: 'video', src: '/media/IMG_1354.mp4', category: 'Laser Cutting', caption: 'Laser Cutting Video' },
-  { type: 'video', src: '/media/IMG_2975.mp4', category: 'Custom Facilities', caption: 'Custom Facilities Video' },
+  { type: 'image', src: img3850, category: 'Arena Construction', caption: 'Arena Construction' },
+  { type: 'image', src: img3853, category: 'Laser Cutting', caption: 'Laser Cutting' },
+  { type: 'image', src: img3854, category: 'Custom Facilities', caption: 'Custom Facilities' },
+  { type: 'video', src: vid1351, category: 'Arena Construction', caption: 'Arena Construction Video' },
+  { type: 'video', src: vid1354, category: 'Laser Cutting', caption: 'Laser Cutting Video' },
+  { type: 'video', src: vid2975, category: 'Custom Facilities', caption: 'Custom Facilities Video' },
 ];
 
 const categories = Array.from(new Set(media.map(m => m.category)));
