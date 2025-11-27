@@ -18,7 +18,7 @@ import { useTheme } from './context/ThemeContext';
 
 function AppContent() {
   const [currentPage, setCurrentPage] = useState<string>('home');
-  const [showIntro, setShowIntro] = useState(false); // Temporarily disabled for debugging
+  // Removed intro screen logic
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState(getCurrentUser());
   const [showPasswordChange, setShowPasswordChange] = useState(false);
@@ -40,9 +40,7 @@ function AppContent() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleIntroComplete = () => {
-    setShowIntro(false);
-  };
+  // Removed intro screen handler
 
   const handleLogin = (_email: string, _password: string) => {
     const user = getCurrentUser();
@@ -73,9 +71,7 @@ function AppContent() {
     toast.success('Password changed successfully!');
   };
 
-  if (showIntro) {
-    return <IntroScreen onComplete={handleIntroComplete} />;
-  }
+  // Intro screen bypassed; main app loads immediately
 
   return (
     <div className="min-h-screen bg-[#0F0F0F]">
