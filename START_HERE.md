@@ -85,10 +85,22 @@ Script:  ✅ Ready to use
 - **Files too large?** Use the processing script to compress
 - **Need help?** Read `MEDIA_UPLOAD_GUIDE.md`
 
+## 🌐 Connect to Your Custom Domain
+
+**Yes!** You can attach this website to your already purchased domain.
+
+After deploying to Vercel, see **[CUSTOM_DOMAIN_SETUP.md](./CUSTOM_DOMAIN_SETUP.md)** for complete step-by-step instructions.
+
+Quick overview:
+1. Deploy to Vercel
+2. Add your domain in Vercel Dashboard
+3. Configure DNS at your registrar
+4. SSL is automatic!
+
 ## 🎬 Ready to Go!
 
 Everything is set up and waiting for your videos. Pick a method above and upload! 🚀
 
 ---
 
-**Next:** Upload your 7 videos → Build → Deploy → Done! ✨
+**Next:** Upload your 7 videos → Build → Deploy → Connect Domain → Done! ✨
