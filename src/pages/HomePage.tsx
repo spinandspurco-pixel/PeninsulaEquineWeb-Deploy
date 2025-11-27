@@ -13,7 +13,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
     <div className="min-h-screen bg-[#0F0F0F]">
       <HorseshoeCursor />
       <Navigation onNavigate={onNavigate} currentPage="home" />
-      <VideoHero autoLoop={true} showLogo={true} />
+      <HeroAnimation />
+      <MediaGallery />
       <Footer onNavigate={onNavigate} />
     </div>
   );
