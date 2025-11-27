@@ -8,7 +8,7 @@ import { HorseshoeCursor } from '../components/HorseshoeCursor';
 import { toast } from 'sonner';
 import { useTheme } from '../context/ThemeContext';
 import { registerUser } from '../lib/firebase-service';
-import logoImage from 'figma:asset/43b0d27420f20197681aa3cacbf2abda7c055e3d.png';
+import logoImage from '../assets/43b0d27420f20197681aa3cacbf2abda7c055e3d.png';
 
 interface WorkerRegistrationPageProps {
   onBack: () => void;

@@ -1,8 +1,9 @@
 import React from 'react';
-import { VideoHero } from '../components/VideoHero';
 import { HorseshoeCursor } from '../components/HorseshoeCursor';
 import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';
+import { HeroAnimation } from '../components/HeroAnimation';
+import { MediaGallery } from '../components/MediaGallery';
 
 interface HomePageProps {
   onNavigate: (page: string) => void;
