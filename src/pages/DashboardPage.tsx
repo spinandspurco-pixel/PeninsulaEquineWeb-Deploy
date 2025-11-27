@@ -63,8 +63,8 @@ export function DashboardPage({ userRole, onLogout, onNavigate }: DashboardPageP
 
                     {/* Main Content */}
                     <div className="container mx-auto px-4 py-8">
-                      {/* Next-level dashboard widgets */}
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
                         {/* Project Status Widget */}
                         <div className="bg-gradient-to-br from-[#232323] via-[#181818] to-[#C9A24E]/10 rounded-xl shadow-2xl p-8 flex flex-col items-center animate-fade-in">
                           <h2 className="text-2xl font-bold text-[#C9A24E] mb-2">Project Status</h2>
