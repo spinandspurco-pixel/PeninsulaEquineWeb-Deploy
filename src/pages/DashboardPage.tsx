@@ -34,68 +34,14 @@ export function DashboardPage({ userRole, onLogout, onNavigate }: DashboardPageP
               <img
                 src={logoImage}
                 alt="Peninsula Equine"
-                className="h-10 w-auto"
-                style={{
-                  filter: 'drop-shadow(0 0 12px rgba(201, 162, 78, 0.4))',
-                }}
-              />
-              <div>
-                <h1 className={`text-xl font-display ${theme === 'dark' ? 'text-[#C9A24E]' : 'text-[#0F0F0F]'}`}>
-                  {isAdmin ? 'Admin Dashboard' : 'Worker Dashboard'}
-                </h1>
-                <p className={`text-sm ${theme === 'dark' ? 'text-white/60' : 'text-black/60'}`}>Peninsula Equine Portal</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              {isAdmin && (
                 <Button
-                  onClick={() => onNavigate('admin-timesheets')}
-                  variant="outline"
-                  className={theme === 'dark' ? 'border-amber-600/30 text-[#C9A24E] hover:bg-amber-600/10' : 'border-[#C9A24E]/40 text-[#A88B63] hover:bg-[#C9A24E]/10'}
+                  onClick={toggleTheme}
+                  variant="ghost"
+                  size="icon"
+                  className={theme === 'dark' ? 'text-[#C9A24E] hover:bg-white/5' : 'text-[#A88B63] hover:bg-black/5'}
                 >
-                  <Clock className="mr-2" size={18} />
-                  Review Timesheets
+                  {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
                 </Button>
-              )}
-              <Button
-                onClick={toggleTheme}
-                variant="ghost"
-                size="icon"
-                className={theme === 'dark' ? 'text-[#C9A24E] hover:bg-white/5' : 'text-[#A88B63] hover:bg-black/5'}
-              >
-                return (
-                  <div className={`min-h-screen ${theme === 'dark' ? 'bg-[#111111]' : 'bg-[#F5F4F1]'}`}>
-                    <HorseshoeCursor />
-                    {/* Header */}
-                    <div className={`border-b ${theme === 'dark' ? 'bg-[#0F0F0F] border-[#C9A24E]/20' : 'bg-white border-[#C9A24E]/30'}`}>
-                      <div className="container mx-auto px-4 py-4">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-4">
-                            <img
-                              src={logoImage}
-                              alt="Peninsula Equine"
-                              className="h-10 w-auto"
-                              style={{
-                                filter: 'drop-shadow(0 0 12px rgba(201, 162, 78, 0.4))',
-                              }}
-                            />
-                            <div>
-                              <h1 className={`text-xl font-display ${theme === 'dark' ? 'text-[#C9A24E]' : 'text-[#0F0F0F]'}`}> 
-                                {isAdmin ? 'Admin Dashboard' : 'Worker Dashboard'}
-                              </h1>
-                              <p className={`text-sm ${theme === 'dark' ? 'text-white/60' : 'text-black/60'}`}>Peninsula Equine Portal</p>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            {isAdmin && (
-                              <Button
-                                onClick={() => onNavigate('admin-timesheets')}
-                                variant="outline"
-                                className={theme === 'dark' ? 'border-amber-600/30 text-[#C9A24E] hover:bg-amber-600/10' : 'border-[#C9A24E]/40 text-[#A88B63] hover:bg-[#C9A24E]/10'}
-                              >
-                                <Clock className="mr-2" size={18} />
-                                Review Timesheets
-                              </Button>
                             )}
                             <Button
                               onClick={toggleTheme}
