@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { HorseshoeIcon } from './icons/HorseshoeIcon';
+import { LaserCutIcon } from './icons/LaserCutIcon';
+import { EquestrianIcon } from './icons/EquestrianIcon';
 import { Menu, X, Shield } from 'lucide-react';
 import { Button } from './ui/button';
 
@@ -25,12 +28,12 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
   };
 
   const navItems = [
-    { label: 'Home', value: 'home' },
-    { label: 'Constructions', value: 'constructions' },
-    { label: 'Laser Cutting', value: 'laser' },
-    { label: 'Shop', value: 'shop' },
-    { label: 'Projects', value: 'projects' },
-    { label: 'Contact', value: 'contact' },
+    { label: 'Home', value: 'home', icon: <HorseshoeIcon size={20} className="inline mr-2 align-middle" /> },
+    { label: 'Constructions', value: 'constructions', icon: <EquestrianIcon size={20} className="inline mr-2 align-middle" /> },
+    { label: 'Laser Cutting', value: 'laser', icon: <LaserCutIcon size={20} className="inline mr-2 align-middle" /> },
+    { label: 'Shop', value: 'shop', icon: <LaserCutIcon size={20} className="inline mr-2 align-middle" /> },
+    { label: 'Projects', value: 'projects', icon: <EquestrianIcon size={20} className="inline mr-2 align-middle" /> },
+    { label: 'Contact', value: 'contact', icon: <HorseshoeIcon size={20} className="inline mr-2 align-middle" /> },
   ];
 
   return (
@@ -47,12 +50,13 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
               <button
                 key={item.value}
                 onClick={() => handleNavClick(item.value)}
-                className={`relative py-2 font-heading transition-colors ${
+                className={`relative py-2 font-heading transition-colors flex items-center gap-1 ${
                   currentPage === item.value
                     ? 'text-[#C9A24E]'
                     : 'text-[#F5F4F1] hover:text-[#C9A24E]'
                 }`}
               >
+                {item.icon}
                 {item.label}
                 {currentPage === item.value && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#C9A24E]" />
@@ -86,12 +90,13 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
                 <button
                   key={item.value}
                   onClick={() => handleNavClick(item.value)}
-                  className={`text-left py-2 font-heading transition-colors ${
+                  className={`text-left py-2 font-heading transition-colors flex items-center gap-1 ${
                     currentPage === item.value
                       ? 'text-[#C9A24E]'
                       : 'text-[#F5F4F1] hover:text-[#C9A24E]'
                   }`}
                 >
+                  {item.icon}
                   {item.label}
                 </button>
               ))}
