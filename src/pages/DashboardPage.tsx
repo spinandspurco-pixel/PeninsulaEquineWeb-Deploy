@@ -35,14 +35,11 @@ export function DashboardPage({ userRole, onLogout, onNavigate }: DashboardPageP
               <img
                 src={logoImage}
                 alt="Peninsula Equine"
-                <Button
-                  onClick={toggleTheme}
-                  variant="ghost"
-                  size="icon"
-                  className={theme === 'dark' ? 'text-[#C9A24E] hover:bg-white/5' : 'text-[#A88B63] hover:bg-black/5'}
-                >
-                  {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-                </Button>
+                className="h-10 w-auto"
+                style={{
+                  filter: 'drop-shadow(0 0 12px rgba(201, 162, 78, 0.4))',
+                }}
+              />
                             )}
                             <Button
                               onClick={toggleTheme}
