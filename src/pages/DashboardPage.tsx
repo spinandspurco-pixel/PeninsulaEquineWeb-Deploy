@@ -156,13 +156,6 @@ export function DashboardPage({ userRole, onLogout, onNavigate }: DashboardPageP
                     </div>
                   </div>
                 );
-                      activity.status === 'In Progress' ? 'bg-amber-600/20 text-amber-400' :
-                      'bg-blue-600/20 text-blue-400'
-                    }`}>
-                      {activity.status}
-                    </span>
-                  </div>
-                ))}
               </div>
             </Card>
 
