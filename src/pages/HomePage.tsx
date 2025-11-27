@@ -10,11 +10,15 @@ interface HomePageProps {
 
 export function HomePage({ onNavigate }: HomePageProps) {
   return (
-    <div className="min-h-screen bg-[#0F0F0F]">
+    <div className="min-h-screen bg-gradient-to-b from-[#0F0F0F] via-[#181818] to-[#232323]">
       <HorseshoeCursor />
       <Navigation onNavigate={onNavigate} currentPage="home" />
-      <HeroAnimation />
-      <MediaGallery />
+      <section className="relative z-10">
+        <HeroAnimation />
+      </section>
+      <section className="relative z-20">
+        <MediaGallery />
+      </section>
       <Footer onNavigate={onNavigate} />
     </div>
   );
