@@ -156,7 +156,6 @@ export function DashboardPage({ userRole, onLogout, onNavigate }: DashboardPageP
                     </div>
                   </div>
                 );
-              </div>
             </Card>
 
             {/* Schedule */}
