@@ -1,5 +1,6 @@
 import React from 'react';
-import { VideoHero } from '../components/VideoHero';
+import { HeroAnimation } from '../components/HeroAnimation';
+import { MediaGallery } from '../components/MediaGallery';
 import { HorseshoeCursor } from '../components/HorseshoeCursor';
 import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';

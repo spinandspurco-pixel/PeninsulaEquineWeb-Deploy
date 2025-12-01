@@ -10,8 +10,8 @@ import { PortalPage } from './pages/PortalPage';
 import { LoginPage } from './pages/LoginPage';
 import { DashboardPage } from './pages/DashboardPage';
 // import { VideoPreviewPage } from './pages/VideoPreviewPage'; // Disabled - requires video files
-import { IntroScreen } from './components/IntroScreen';
 import { ChangePasswordDialog } from './components/ChangePasswordDialog';
+import { Toaster } from './components/ui/sonner';
 import { getCurrentUser, changePassword, signOut } from './lib/firebase-service';
 import { toast } from 'sonner';
 import { useTheme } from './context/ThemeContext';
@@ -118,6 +118,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <AppContent />
+      <Toaster />
     </ThemeProvider>
   );
 }
