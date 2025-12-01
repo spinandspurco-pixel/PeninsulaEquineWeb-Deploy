@@ -73,17 +73,21 @@ vercel --prod
 
 See [DEPLOYMENT_INSTRUCTIONS.md](./DEPLOYMENT_INSTRUCTIONS.md) for detailed instructions.
 
-## 🔗 Connecting to Honcho Domain
+## 🔗 Connecting to Your Custom Domain
+
+**Yes, you can attach this website to your already purchased domain!**
 
 After deploying to Vercel:
 
 1. Go to Vercel Dashboard → Your Project → Settings → Domains
-2. Add your custom domain from Honcho
-3. Configure DNS in Honcho:
+2. Add your custom domain
+3. Configure DNS at your registrar:
    - **A Record**: `@` → `76.76.21.21`
    - **CNAME**: `www` → `cname.vercel-dns.com`
 4. Wait for DNS propagation (5-30 minutes)
 5. SSL will be automatically configured
+
+📖 **See [CUSTOM_DOMAIN_SETUP.md](./CUSTOM_DOMAIN_SETUP.md) for complete step-by-step instructions** with guides for specific domain registrars (Honcho, GoDaddy, Namecheap, Cloudflare, and more).
 
 ## 🏗️ Project Structure
 
