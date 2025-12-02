@@ -27,10 +27,6 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
     onNavigate(page);
   };
 
-  const handleNavClick = (page: string) => {
-    onNavigate(page);
-  };
-
   const navItems = [
     { label: 'Home', value: 'home', Icon: HorseshoeIcon },
     { label: 'Constructions', value: 'constructions', Icon: FenceIcon },
