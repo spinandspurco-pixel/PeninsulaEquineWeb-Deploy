@@ -39,6 +39,7 @@ function BrandLogo() {
 export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,9 +49,31 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 1024;
+      setIsMobile(mobile);
+      if (!mobile) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    
+    handleResize(); // Check initial size
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const handleNavClick = (page: string) => {
-    onNavigate(page);
-    setIsMobileMenuOpen(false);
+    console.log('🔄 Navigation clicked:', page, 'Current page:', currentPage);
+    console.log('📍 onNavigate function:', typeof onNavigate);
+    
+    if (typeof onNavigate === 'function') {
+      onNavigate(page);
+      setIsMobileMenuOpen(false);
+      console.log('✅ Navigation completed for:', page);
+    } else {
+      console.error('❌ onNavigate is not a function:', onNavigate);
+    }
   };
 
   const navItems = [
@@ -84,7 +107,7 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
             </motion.button>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-2">
+            <div className="hidden lg:flex items-center gap-4">
               {navItems.map((item) => {
                 const isActive = currentPage === item.value;
               
@@ -92,16 +115,18 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
                   <motion.button
                     key={item.value}
                     onClick={() => handleNavClick(item.value)}
-                    className={`relative py-3 px-5 flex items-center gap-2 rounded-xl transition-all duration-300 group ${
+                    className={`nav-button relative py-3 px-6 flex items-center gap-3 rounded-xl transition-all duration-300 group font-medium ${
                       isActive
-                        ? 'text-[#0F0F0F] bg-[#C9A24E] shadow-lg'
-                        : 'text-[#F5F4F1] hover:text-[#C9A24E] hover:bg-[#C9A24E]/10'
+                        ? 'text-[#0F0F0F] bg-[#C9A24E] shadow-lg shadow-[#C9A24E]/25'
+                        : 'text-[#F5F4F1] hover:text-[#C9A24E] hover:bg-[#C9A24E]/15 hover:shadow-md'
                     }`}
-                    whileHover={{ scale: 1.05 }}
+                    whileHover={{ scale: 1.05, y: -1 }}
                     whileTap={{ scale: 0.95 }}
+                    aria-label={`Navigate to ${item.label} page`}
+                    type="button"
                   >
                     <item.Icon 
-                      size={18} 
+                      size={20} 
                       color={isActive ? '#0F0F0F' : 'currentColor'} 
                     />
                     <span className="text-sm font-medium tracking-wide">
@@ -111,16 +136,17 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
               );
             })}
             
-              
               {/* Portal Button */}
               <motion.button
                 onClick={() => handleNavClick('portal')}
-                className="ml-4 bg-gradient-to-r from-[#C9A24E] to-[#A88B63] hover:from-[#A88B63] hover:to-[#C9A24E] text-[#0F0F0F] font-semibold px-6 py-3 rounded-xl flex items-center gap-2 transition-all duration-300 shadow-lg"
-                whileHover={{ scale: 1.05 }}
+                className="nav-button ml-6 bg-gradient-to-r from-[#C9A24E] to-[#A88B63] hover:from-[#D4B366] hover:to-[#C9A24E] text-[#0F0F0F] font-semibold px-8 py-3.5 rounded-xl flex items-center gap-3 transition-all duration-300 shadow-lg shadow-[#C9A24E]/20 hover:shadow-xl hover:shadow-[#C9A24E]/30"
+                whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
+                aria-label="Access Peninsula Equine Portal"
+                type="button"
               >
-                <Shield size={18} />
-                <span className="text-sm">Portal</span>
+                <Shield size={20} />
+                <span className="text-sm font-bold">Portal</span>
               </motion.button>
             </div>
 
@@ -136,9 +162,9 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay - Only show on mobile when menu is open */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
+        {isMobileMenuOpen && isMobile && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -147,7 +173,7 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
             className="fixed top-20 left-0 right-0 z-40 bg-[#0F0F0F]/98 backdrop-blur-xl lg:hidden"
           >
             <div className="max-w-7xl mx-auto px-6 py-8">
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 mb-10">
                 {navItems.map((item) => {
                   const isActive = currentPage === item.value;
                   
@@ -155,19 +181,21 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
                     <motion.button
                       key={item.value}
                       onClick={() => handleNavClick(item.value)}
-                      className={`p-6 rounded-2xl flex flex-col items-center gap-3 transition-all duration-300 ${
+                      className={`nav-button p-8 rounded-2xl flex flex-col items-center gap-4 transition-all duration-300 ${
                         isActive
-                          ? 'bg-[#C9A24E] text-[#0F0F0F] shadow-xl'
-                          : 'bg-[#1a1a1a] text-[#F5F4F1] hover:bg-[#C9A24E]/10 hover:text-[#C9A24E]'
+                          ? 'bg-[#C9A24E] text-[#0F0F0F] shadow-xl shadow-[#C9A24E]/25'
+                          : 'bg-[#1a1a1a] text-[#F5F4F1] hover:bg-[#C9A24E]/15 hover:text-[#C9A24E] hover:shadow-lg'
                       }`}
-                      whileHover={{ scale: 1.02 }}
+                      whileHover={{ scale: 1.02, y: -2 }}
                       whileTap={{ scale: 0.98 }}
+                      aria-label={`Navigate to ${item.label} page`}
+                      type="button"
                     >
                       <item.Icon 
-                        size={32} 
+                        size={36} 
                         color={isActive ? '#0F0F0F' : 'currentColor'} 
                       />
-                      <span className="text-sm font-medium text-center">
+                      <span className="text-sm font-semibold text-center leading-tight">
                         {item.label}
                       </span>
                     </motion.button>
@@ -178,12 +206,12 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
               {/* Mobile Portal Button */}
               <motion.button
                 onClick={() => handleNavClick('portal')}
-                className="w-full bg-gradient-to-r from-[#C9A24E] to-[#A88B63] text-[#0F0F0F] font-semibold py-4 px-6 rounded-2xl flex items-center justify-center gap-3 shadow-xl"
-                whileHover={{ scale: 1.02 }}
+                className="w-full bg-gradient-to-r from-[#C9A24E] to-[#A88B63] hover:from-[#D4B366] hover:to-[#C9A24E] text-[#0F0F0F] font-bold py-5 px-8 rounded-2xl flex items-center justify-center gap-4 shadow-xl shadow-[#C9A24E]/30 transition-all duration-300"
+                whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <Shield size={20} />
-                <span>Access Portal</span>
+                <Shield size={24} />
+                <span className="text-lg">Access Portal</span>
               </motion.button>
             </div>
           </motion.div>

@@ -40,184 +40,122 @@ export function LoginPage({ onLogin, onBack, onNavigate }: LoginPageProps) {
   };
 
   return (
-    <div className={`min-h-screen relative overflow-hidden ${theme === 'dark' ? 'bg-[#111111]' : 'bg-[#F5F4F1]'}`}>
+    <div className="min-h-screen bg-[#0F0F0F] flex items-center justify-center p-6">
       <HorseshoeCursor />
-      {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div 
-          className={`absolute inset-0 ${theme === 'dark' ? 'opacity-20' : 'opacity-10'}`}
-          style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1719356441574-2093feae362c?q=80&w=2000)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            filter: 'grayscale(100%)',
-          }}
-        />
-        <div className={`absolute inset-0 ${theme === 'dark' ? 'bg-gradient-to-br from-neutral-900 via-neutral-900/95 to-amber-950/50' : 'bg-gradient-to-br from-[#F5F4F1] via-[#F5F4F1]/95 to-amber-100/50'}`} />
-        
+      {/* Simple Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0F0F0F] via-[#1a1a1a] to-[#0F0F0F]"></div>
+      
+      {/* Back Button */}
+      <motion.button
+        onClick={onBack}
+        className="absolute top-8 left-8 z-10 flex items-center gap-2 text-[#C9A24E] hover:text-[#D4B366] transition-colors"
+        whileHover={{ x: -4 }}
+      >
+        <ArrowLeft size={20} />
+        Back to Home
+      </motion.button>
+
+      {/* Login Container */}
+      <div className="relative z-10 w-full max-w-md">
         <motion.div
-          className={`absolute top-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl ${theme === 'dark' ? 'bg-amber-600/20' : 'bg-amber-400/30'}`}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      </div>
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="login-container"
+        >
+          {/* Logo - Smaller Size */}
+          <div className="text-center mb-12">
+            <div className="w-32 h-32 mx-auto mb-6 overflow-hidden rounded-full bg-[#C9A24E]/10 flex items-center justify-center">
+              <img
+                src={logoImage}
+                alt="Peninsula Equine"
+                className="w-20 h-20 object-contain"
+                style={{
+                  filter: 'brightness(0) saturate(100%) sepia(100%) hue-rotate(35deg) brightness(1.5) contrast(1.2)',
+                }}
+              />
+            </div>
+            <h1 className="text-2xl font-bold text-[#C9A24E] mb-3">
+              Peninsula Equine Portal
+            </h1>
+            <p className="text-[#F5F4F1]/70 text-sm">
+              Sign in to access your workspace
+            </p>
+          </div>
 
-      {/* Content */}
-      <div className="relative z-10 min-h-screen flex flex-col">
-        {/* Header */}
-        <div className="container mx-auto px-4 py-6 flex justify-between items-center">
-          <Button
-            onClick={onBack}
-            variant="ghost"
-            className={theme === 'dark' ? 'text-white hover:text-amber-500 hover:bg-white/10' : 'text-[#0F0F0F] hover:text-amber-600 hover:bg-black/5'}
-          >
-            <ArrowLeft className="mr-2" size={20} />
-            Back
-          </Button>
-          
-          {/* Theme Toggle */}
-          <Button
-            onClick={toggleTheme}
-            variant="ghost"
-            size="icon"
-            className={theme === 'dark' ? 'text-amber-500 hover:text-amber-400 hover:bg-white/10' : 'text-amber-600 hover:text-amber-700 hover:bg-black/5'}
-          >
-            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-          </Button>
-        </div>
+          {/* Login Form */}
+          <form onSubmit={handleSubmit} className="space-y-8">
+            {/* Email Field */}
+            <div>
+              <label className="block text-[#F5F4F1] text-sm font-medium mb-3">
+                Email Address
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="login-input"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
 
-        {/* Login Form */}
-        <div className="flex-1 flex items-center justify-center px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-md w-full"
-          >
-            {/* Logo */}
-            <div className="text-center mb-8">
-              <motion.div 
-                className="w-48 mx-auto mb-6 relative"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <img
-                  src={logoImage}
-                  alt="Peninsula Equine"
-                  className="w-full h-auto relative"
-                  style={{
-                    filter: 'drop-shadow(0 0 20px rgba(201, 162, 78, 0.4))',
-                  }}
+            {/* Password Field */}
+            <div className="form-group">
+              <label htmlFor="password" className="form-label">Password</label>
+              <div className="input-container">
+                <Lock className="input-icon" size={20} />
+                <Input
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="login-input"
+                  required
                 />
-              </motion.div>
-              <h1 className={`text-3xl font-display mb-2 ${theme === 'dark' ? 'text-[#C9A24E]' : 'text-[#A88B63]'}`}>
-                Welcome Back
-              </h1>
-              <p className={theme === 'dark' ? 'text-white/70' : 'text-[#0F0F0F]/70'}>
-                Sign in to access your portal
-              </p>
-            </div>
-
-            {/* Login Card */}
-            <div className={`backdrop-blur-lg border rounded-xl p-8 ${theme === 'dark' ? 'bg-neutral-800/50 border-amber-600/30' : 'bg-white/70 border-amber-400/40'}`}>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Email Field */}
-                <div className="space-y-2">
-                  <Label htmlFor="email" className={theme === 'dark' ? 'text-white' : 'text-[#0F0F0F]'}>
-                    Email Address
-                  </Label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-amber-500/50" size={20} />
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="your.email@example.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className={`pl-10 ${theme === 'dark' ? 'bg-neutral-900/50 border-amber-600/30 text-white placeholder:text-white/40' : 'bg-white border-amber-400/40 text-[#0F0F0F] placeholder:text-black/40'} focus:border-amber-500`}
-                      required
-                    />
-                  </div>
-                </div>
-
-                {/* Password Field */}
-                <div className="space-y-2">
-                  <Label htmlFor="password" className={theme === 'dark' ? 'text-white' : 'text-[#0F0F0F]'}>
-                    Password
-                  </Label>
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-amber-500/50" size={20} />
-                    <Input
-                      id="password"
-                      type={showPassword ? 'text' : 'password'}
-                      placeholder="Enter your password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className={`pl-10 pr-10 ${theme === 'dark' ? 'bg-neutral-900/50 border-amber-600/30 text-white placeholder:text-white/40' : 'bg-white border-amber-400/40 text-[#0F0F0F] placeholder:text-black/40'} focus:border-amber-500`}
-                      required
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-amber-500/50 hover:text-amber-500"
-                    >
-                      {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                    </button>
-                  </div>
-                </div>
-
-                {/* Forgot Password */}
-                <div className="flex justify-end">
-                  <button
-                    type="button"
-                    className={`text-sm transition-colors ${theme === 'dark' ? 'text-amber-500 hover:text-amber-400' : 'text-amber-600 hover:text-amber-700'}`}
-                  >
-                    Forgot password?
-                  </button>
-                </div>
-
-                {/* Submit Button */}
-                <Button
-                  type="submit"
-                  disabled={isLoading}
-                  className={`w-full font-display ${theme === 'dark' ? 'bg-amber-600 hover:bg-amber-700 text-white' : 'bg-[#C9A24E] hover:bg-[#A88B63] text-white'}`}
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="password-toggle"
                 >
-                  {isLoading ? 'Signing in...' : 'Sign In'}
-                </Button>
-              </form>
-
-              {/* Demo Credentials */}
-              <div className={`mt-6 p-4 border rounded-lg ${theme === 'dark' ? 'bg-amber-900/20 border-amber-600/20' : 'bg-amber-100/50 border-amber-400/30'}`}>
-                <p className={`text-sm mb-2 ${theme === 'dark' ? 'text-white/70' : 'text-[#0F0F0F]/70'}`}>Demo Credentials:</p>
-                <p className={`text-xs ${theme === 'dark' ? 'text-white/60' : 'text-[#0F0F0F]/60'}`}>Worker: worker@peninsulaequine.com.au</p>
-                <p className={`text-xs ${theme === 'dark' ? 'text-white/60' : 'text-[#0F0F0F]/60'}`}>Admin: admin@peninsulaequine.com.au</p>
-                <p className={`text-xs ${theme === 'dark' ? 'text-white/60' : 'text-[#0F0F0F]/60'}`}>Password: any password</p>
-              </div>
-
-              {/* Registration Link */}
-              <div className="mt-6 text-center">
-                <p className={`text-sm ${theme === 'dark' ? 'text-white/60' : 'text-[#0F0F0F]/60'}`}>
-                  New worker?{' '}
-                  <button
-                    type="button"
-                    onClick={() => onNavigate?.('register')}
-                    className={`transition-colors ${theme === 'dark' ? 'text-amber-500 hover:text-amber-400' : 'text-amber-600 hover:text-amber-700'}`}
-                  >
-                    Request an account
-                  </button>
-                </p>
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
               </div>
             </div>
-          </motion.div>
-        </div>
+
+            {/* Submit Button */}
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="login-button"
+            >
+              {isLoading ? 'Signing in...' : 'Sign In'}
+            </Button>
+          </form>
+
+          {/* Demo Credentials */}
+          <div className="demo-credentials">
+            <h4>Demo Credentials</h4>
+            <p>Worker: worker@peninsulaequine.com.au</p>
+            <p>Admin: admin@peninsulaequine.com.au</p>
+            <p>Password: any password</p>
+          </div>
+
+          {/* Registration Link */}
+          <div className="registration-link">
+            <p>
+              New worker?{' '}
+              <button
+                type="button"
+                onClick={() => onNavigate?.('register')}
+                className="link-button"
+              >
+                Request an account
+              </button>
+            </p>
+          </div>
+        </motion.div>
       </div>
       <Footer onNavigate={onNavigate || (() => {})} />
     </div>

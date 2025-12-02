@@ -37,6 +37,8 @@ function AppContent() {
   const [currentUser, setCurrentUser] = useState(getCurrentUser());
   const [showPasswordChange, setShowPasswordChange] = useState(false);
   const { theme } = useTheme();
+  
+  console.log('App render - currentPage:', currentPage, 'showIntro:', showIntro);
 
   useEffect(() => {
     const user = getCurrentUser();
@@ -50,11 +52,14 @@ function AppContent() {
   }, []);
 
   const handleNavigate = (page: string) => {
+    console.log('App navigate to:', page);
     setCurrentPage(page);
+    setShowIntro(false); // Ensure intro is hidden when navigating
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleIntroComplete = () => {
+    console.log('Intro completed');
     setShowIntro(false);
   };
 
@@ -94,12 +99,36 @@ function AppContent() {
   return (
     <>
       <main className="min-h-screen bg-[#0F0F0F]" role="main" aria-label="Main content">
-        {currentPage === 'home' && <HomePage onNavigate={handleNavigate} />}
-        {currentPage === 'constructions' && <ConstructionsPage onNavigate={handleNavigate} />}
-        {currentPage === 'laser' && <LaserCuttingPage onNavigate={handleNavigate} />}
-        {currentPage === 'shop' && <ShopPage onNavigate={handleNavigate} />}
-        {currentPage === 'projects' && <ProjectsPage onNavigate={handleNavigate} />}
-        {currentPage === 'contact' && <ContactPage onNavigate={handleNavigate} />}
+        {currentPage === 'home' && (
+          <div key="home" className="page-wrapper">
+            <HomePage onNavigate={handleNavigate} />
+          </div>
+        )}
+        {currentPage === 'constructions' && (
+          <div key="constructions" className="page-wrapper">
+            <ConstructionsPage onNavigate={handleNavigate} />
+          </div>
+        )}
+        {currentPage === 'laser' && (
+          <div key="laser" className="page-wrapper">
+            <LaserCuttingPage onNavigate={handleNavigate} />
+          </div>
+        )}
+        {currentPage === 'shop' && (
+          <div key="shop" className="page-wrapper">
+            <ShopPage onNavigate={handleNavigate} />
+          </div>
+        )}
+        {currentPage === 'projects' && (
+          <div key="projects" className="page-wrapper">
+            <ProjectsPage onNavigate={handleNavigate} />
+          </div>
+        )}
+        {currentPage === 'contact' && (
+          <div key="contact" className="page-wrapper">
+            <ContactPage onNavigate={handleNavigate} />
+          </div>
+        )}
         
         {/* Portal Entry */}
         {currentPage === 'portal' && !isAuthenticated && (
