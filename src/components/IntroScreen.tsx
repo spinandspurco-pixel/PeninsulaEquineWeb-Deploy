@@ -1,37 +1,30 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { LogoWithBackgroundRemoval } from './LogoWithBackgroundRemoval';
 
 interface IntroScreenProps {
   onComplete: () => void;
 }
 
-// Professional horse and rider silhouette SVG
-function HorseRiderSilhouette({ className = '' }: { className?: string }) {
+// Professional Peninsula Equine Logo
+function IntroLogo({ className = '' }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 400 300"
+    <div 
       className={className}
       style={{
         width: '100%',
-        maxWidth: '400px',
+        maxWidth: '300px',
         height: 'auto',
-        fill: '#C9A24E',
-        filter: 'drop-shadow(0 0 20px rgba(201,162,78,0.4))',
+        display: 'flex',
+        justifyContent: 'center',
+        filter: 'drop-shadow(0 0 30px rgba(201,162,78,0.6))',
       }}
     >
-      {/* Horse silhouette */}
-      <path d="M50 250 C60 240, 80 230, 100 235 C120 240, 140 245, 160 240 C180 235, 200 230, 220 235 C240 240, 260 245, 280 240 C300 235, 320 240, 340 250 L340 260 C320 255, 300 250, 280 255 C260 260, 240 265, 220 260 C200 255, 180 250, 160 255 C140 260, 120 265, 100 260 C80 255, 60 260, 50 270 Z" />
-      {/* Horse head and neck */}
-      <path d="M340 250 C350 240, 360 220, 365 200 C370 180, 368 160, 360 150 C355 145, 350 142, 345 145 L340 155 C338 165, 336 175, 335 185 C334 195, 333 205, 332 215 L335 225 C337 235, 339 245, 340 250" />
-      {/* Horse legs */}
-      <path d="M80 260 L82 280 L78 280 L76 260 M120 255 L122 275 L118 275 L116 255 M200 255 L202 275 L198 275 L196 255 M280 255 L282 275 L278 275 L276 255" />
-      {/* Rider silhouette */}
-      <path d="M200 235 C205 225, 210 215, 215 210 C220 205, 225 200, 230 205 C235 210, 240 220, 245 230 C250 235, 248 240, 245 245 C240 250, 235 248, 230 245 C225 240, 220 238, 215 240 C210 242, 205 240, 200 235" />
-      {/* Rider head */}
-      <circle cx="225" cy="195" r="8" />
-      {/* Reins */}
-      <path d="M230 205 Q320 180, 350 155" stroke="#C9A24E" strokeWidth="1" fill="none" />
-    </svg>
+      <LogoWithBackgroundRemoval 
+        className="w-full h-auto"
+        filterStyle="brightness(1.2) contrast(1.1)"
+      />
+    </div>
   );
 }
 
@@ -126,23 +119,23 @@ export function IntroScreen({ onComplete }: IntroScreenProps) {
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             style={{ textAlign: 'center' }}
           >
-            {/* Silhouette image with glow */}
+            {/* Peninsula Equine Logo */}
             <motion.div
               style={{ 
                 width: '100%', 
-                maxWidth: '400px', 
+                maxWidth: '300px', 
                 margin: '0 auto 32px auto',
                 position: 'relative',
                 display: 'flex',
                 justifyContent: 'center',
               }}
               animate={{
-                scale: [1, 1.05, 1],
-                opacity: [0.9, 1, 0.9],
+                scale: [1, 1.08, 1],
+                opacity: [0.8, 1, 0.8],
               }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <HorseRiderSilhouette />
+              <IntroLogo />
             </motion.div>
             
             {/* Connection text */}
