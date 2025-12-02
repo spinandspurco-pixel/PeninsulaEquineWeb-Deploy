@@ -1,36 +1,38 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 export function HorseshoeCursor() {
   const [position, setPosition] = useState({ x: -100, y: -100 });
   const [isVisible, setIsVisible] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
-  const [isTouchDevice, setIsTouchDevice] = useState(true); // Default to true to prevent flash
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Check for touch device on mount
+  useEffect(() => {
+    setMounted(true);
+    // More reliable touch detection
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    setIsTouchDevice(isTouch);
+  }, []);
+
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    setPosition({ x: e.clientX, y: e.clientY });
+    setIsVisible(true);
+
+    const target = e.target as HTMLElement;
+    const isInteractive = 
+      target.tagName === 'A' || 
+      target.tagName === 'BUTTON' || 
+      target.closest('a') !== null || 
+      target.closest('button') !== null ||
+      target.getAttribute('role') === 'button' ||
+      window.getComputedStyle(target).cursor === 'pointer';
+    
+    setIsHovering(isInteractive);
+  }, []);
 
   useEffect(() => {
-    // Check if it's a touch device
-    const checkDevice = () => {
-      const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-      setIsTouchDevice(isTouch);
-    };
-    checkDevice();
-
-    // Don't set up listeners for touch devices
-    if (isTouchDevice) return;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
-      if (!isVisible) setIsVisible(true);
-
-      const target = e.target as HTMLElement;
-      const isInteractive = 
-        target.tagName === 'A' || 
-        target.tagName === 'BUTTON' || 
-        target.closest('a') !== null || 
-        target.closest('button') !== null ||
-        target.getAttribute('role') === 'button';
-      
-      setIsHovering(isInteractive);
-    };
+    if (!mounted || isTouchDevice) return;
 
     const handleMouseLeave = () => setIsVisible(false);
     const handleMouseEnter = () => setIsVisible(true);
@@ -44,10 +46,10 @@ export function HorseshoeCursor() {
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, [isVisible, isTouchDevice]);
+  }, [mounted, isTouchDevice, handleMouseMove]);
 
-  // Don't render on touch devices
-  if (isTouchDevice) return null;
+  // Don't render until mounted or on touch devices
+  if (!mounted || isTouchDevice) return null;
 
   return (
     <>
@@ -61,12 +63,15 @@ export function HorseshoeCursor() {
 
       {/* Custom cursor */}
       <div
-        className="fixed pointer-events-none z-[99999] transition-transform duration-100"
         style={{
+          position: 'fixed',
+          pointerEvents: 'none',
+          zIndex: 99999,
           left: position.x - 12,
           top: position.y - 12,
           opacity: isVisible ? 1 : 0,
           transform: `scale(${isHovering ? 1.3 : 1})`,
+          transition: 'transform 0.1s ease',
         }}
       >
         {/* Horseshoe SVG */}
@@ -96,8 +101,10 @@ export function HorseshoeCursor() {
         {/* Glow ring when hovering */}
         {isHovering && (
           <div 
-            className="absolute -inset-2 rounded-full"
             style={{
+              position: 'absolute',
+              inset: '-8px',
+              borderRadius: '50%',
               background: 'radial-gradient(circle, rgba(201,162,78,0.3) 0%, transparent 70%)',
             }}
           />
