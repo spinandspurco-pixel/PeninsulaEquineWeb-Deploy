@@ -78,7 +78,7 @@ export function WorkerRegistrationPage({ onBack, onSuccess }: WorkerRegistration
         <div 
           className={`absolute inset-0 ${theme === 'dark' ? 'opacity-20' : 'opacity-10'}`}
           style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1719356441574-2093feae362c?q=80&w=2000)',
+            backgroundImage: 'linear-gradient(135deg, #0F0F0F 0%, #1a1a1a 50%, #0F0F0F 100%),',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             filter: 'grayscale(100%)',

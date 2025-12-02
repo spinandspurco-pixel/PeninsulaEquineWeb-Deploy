@@ -61,19 +61,19 @@ export function ConstructionsPage({ onNavigate }: ConstructionsPageProps) {
       name: 'Willowbrook Estate',
       type: 'Barn Home & Arena Complex',
       location: 'Mornington Peninsula',
-      image: 'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800',
+      image: '/assets/media/optimized/IMG_3850.webp',
     },
     {
       name: 'Heritage Stables',
       type: 'Luxury 12-Stall Facility',
       location: 'Yarra Valley',
-      image: 'https://images.unsplash.com/photo-1534682988865-f6a2f7d9f31c?w=800',
+      image: '/assets/media/optimized/IMG_3853.webp',
     },
     {
       name: 'Sunset Ridge Ranch',
       type: 'Complete Equestrian Estate',
       location: 'Gippsland',
-      image: 'https://images.unsplash.com/photo-1560114928-40f1f1eb26a0?w=800',
+      image: '/assets/media/optimized/IMG_3854.webp',
     },
   ];
 
@@ -89,7 +89,7 @@ export function ConstructionsPage({ onNavigate }: ConstructionsPageProps) {
           <div 
             className="absolute inset-0 w-full h-full"
             style={{
-              backgroundImage: 'url(https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920)',
+              background: 'linear-gradient(135deg, #0F0F0F 0%, #1a1a1a 50%, #0F0F0F 100%),',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               filter: 'brightness(0.4)',

@@ -2,12 +2,12 @@
 import React, { useState } from 'react';
 
 const media = [
-  { type: 'image', src: '/assets/media/best/IMG_3850.jpeg', category: 'Arena Construction', caption: 'Arena Construction' },
-  { type: 'image', src: '/assets/media/best/IMG_3853.jpeg', category: 'Laser Cutting', caption: 'Laser Cutting' },
-  { type: 'image', src: '/assets/media/best/IMG_3854.jpeg', category: 'Custom Facilities', caption: 'Custom Facilities' },
-  { type: 'video', src: '/media/IMG_1351.mp4', category: 'Arena Construction', caption: 'Arena Construction Video' },
-  { type: 'video', src: '/media/IMG_1354.mp4', category: 'Laser Cutting', caption: 'Laser Cutting Video' },
-  { type: 'video', src: '/media/IMG_2975.mp4', category: 'Custom Facilities', caption: 'Custom Facilities Video' },
+  { type: 'image', src: '/assets/media/optimized/IMG_3850.webp', category: 'Arena Construction', caption: 'Professional Arena Construction - Safety Rails & Fencing' },
+  { type: 'image', src: '/assets/media/optimized/IMG_3853.webp', category: 'Laser Cutting', caption: 'Precision Laser Cut Steel Components for Equine Facilities' },
+  { type: 'image', src: '/assets/media/optimized/IMG_3854.webp', category: 'Custom Facilities', caption: 'Custom Steel Framework for Horse Stables and Arenas' },
+  { type: 'video', src: '/media/IMG_1351.mp4', category: 'Arena Construction', caption: 'Arena Construction Process - Foundation to Completion' },
+  { type: 'video', src: '/media/IMG_1354.mp4', category: 'Laser Cutting', caption: 'High-Precision Steel Cutting for Equine Infrastructure' },
+  { type: 'video', src: '/media/IMG_2975.mp4', category: 'Custom Facilities', caption: 'Complete Facility Build - Peninsula Equine Craftsmanship' },
 ];
 
 const categories = Array.from(new Set(media.map(m => m.category)));

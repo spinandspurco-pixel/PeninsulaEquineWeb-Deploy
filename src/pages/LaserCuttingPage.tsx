@@ -62,7 +62,7 @@ export function LaserCuttingPage({ onNavigate }: LaserCuttingPageProps) {
           <div 
             className="absolute inset-0 w-full h-full"
             style={{
-              backgroundImage: 'url(https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?w=1920)',
+              background: 'linear-gradient(135deg, #0F0F0F 0%, #1a1a1a 50%, #0F0F0F 100%),',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               filter: 'brightness(0.3) saturate(1.2)',

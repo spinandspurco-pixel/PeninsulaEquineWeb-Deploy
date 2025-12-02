@@ -6,16 +6,17 @@ import { HorseshoeCursor } from '../components/HorseshoeCursor';
 import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';
 // Placeholder images - will be replaced with real hosted images
-const img1 = 'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800';
-const img2 = 'https://images.unsplash.com/photo-1534682988865-f6a2f7d9f31c?w=800';
-const img3 = 'https://images.unsplash.com/photo-1560114928-40f1f1eb26a0?w=800';
-const img4 = 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800';
-const img5 = 'https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800';
-const img6 = 'https://images.unsplash.com/photo-1592861956120-e524fc739696?w=800';
-const img7 = 'https://images.unsplash.com/photo-1544690244-b72983293ab3?w=800';
-const img8 = 'https://images.unsplash.com/photo-1580914743203-a487c4c9b5d2?w=800';
-const img9 = 'https://images.unsplash.com/photo-1590159461194-b48b0f4c5520?w=800';
-const horseImg = 'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800';
+// Peninsula Equine Construction Projects
+const img1 = '/assets/media/optimized/IMG_3850.webp'; // Arena Safety Rails
+const img2 = '/assets/media/optimized/IMG_3853.webp'; // Laser Cut Steel
+const img3 = '/assets/media/optimized/IMG_3854.webp'; // Custom Framework
+const img4 = '/assets/media/optimized/IMG_3855.webp'; // Steel Fabrication
+const img5 = '/assets/media/optimized/Image.webp'; // Construction Process
+const img6 = '/assets/media/optimized/IMG_3850.webp'; // Arena Construction
+const img7 = '/assets/media/optimized/IMG_3853.webp'; // Precision Work
+const img8 = '/assets/media/optimized/IMG_3854.webp'; // Quality Build
+const img9 = '/assets/media/optimized/IMG_3855.webp'; // Professional Result
+const horseImg = '/assets/media/optimized/IMG_3850.webp'; // Equine Facilities
 
 interface ProjectsPageProps {
   onNavigate: (page: string) => void;
@@ -38,27 +39,27 @@ export function ProjectsPage({ onNavigate }: ProjectsPageProps) {
   const projects: Project[] = [
     {
       id: 1,
-      name: 'Luxury Barn Home Estate',
-      category: 'Barn Homes',
+      name: 'Premium Arena Safety Rails',
+      category: 'Arenas',
       location: 'Mornington Peninsula',
       image: img1,
-      description: 'Complete barn home with living quarters above a 6-stall stable complex',
+      description: 'Custom fabricated steel safety rails for professional horse arenas - Peninsula Equine quality construction',
     },
     {
       id: 2,
-      name: 'Olympic Dressage Arena',
-      category: 'Arenas',
+      name: 'Precision Laser Cut Components',
+      category: 'Custom Builds',
       location: 'Peninsula Region',
       image: img2,
-      description: 'Competition-grade 60x20m arena with premium sand and fiber footing',
+      description: 'High-precision laser cut steel components for equine facility infrastructure and custom metalwork',
     },
     {
       id: 3,
-      name: 'Western Training Arena',
-      category: 'Arenas',
-      location: 'Gippsland',
+      name: 'Custom Steel Framework',
+      category: 'Stables',
+      location: 'Victoria',
       image: img3,
-      description: 'Custom arena with specialized footing for reining and cutting',
+      description: 'Professional steel framework construction for horse stables and arena buildings',
     },
     {
       id: 4,

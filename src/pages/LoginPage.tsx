@@ -136,10 +136,10 @@ export function LoginPage({ onLogin, onBack, onNavigate }: LoginPageProps) {
 
           {/* Demo Credentials */}
           <div className="demo-credentials">
-            <h4>Demo Credentials</h4>
-            <p>Worker: worker@peninsulaequine.com.au</p>
-            <p>Admin: admin@peninsulaequine.com.au</p>
-            <p>Password: any password</p>
+            <h4>Access Credentials</h4>
+            <p>Admin: ciro@peninsulaequine.com.au</p>
+            <p>Worker: welder1@peninsulaequine.com.au</p>
+            <p>Password: Peninsula2024!</p>
           </div>
 
           {/* Registration Link */}

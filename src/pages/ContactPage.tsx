@@ -190,7 +190,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                 <div 
                   className="w-full h-full"
                   style={{
-                    backgroundImage: 'url(https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800)',
+                    background: 'linear-gradient(135deg, #C9A24E 0%, #8B7355 100%),',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     filter: 'grayscale(100%) brightness(0.3)',
