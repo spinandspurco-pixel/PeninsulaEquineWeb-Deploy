@@ -8,16 +8,19 @@ interface IntroScreenProps {
 // Real horse and rider silhouette image
 function HorseRiderImage({ className = '' }: { className?: string }) {
   return (
-    <div
+    <img
+      src="https://images.unsplash.com/photo-1551782450-17144efb9c50?w=600&h=400&fit=crop&crop=center&auto=format&q=80"
+      alt="Horse and rider silhouette"
       className={className}
       style={{
         width: '100%',
         height: '350px',
-        backgroundImage: 'url("/horse-rider-silhouette.png")',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        filter: 'brightness(0) saturate(100%) sepia(100%) hue-rotate(45deg) brightness(1.2) contrast(1.2)',
+        objectFit: 'contain',
+        filter: 'brightness(0) saturate(100%) sepia(100%) hue-rotate(45deg) brightness(1.5) contrast(1.3)',
+      }}
+      onError={(e) => {
+        console.log('Image failed to load');
+        e.currentTarget.style.display = 'none';
       }}
     />
   );
