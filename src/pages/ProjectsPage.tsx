@@ -136,7 +136,7 @@ export function ProjectsPage({ onNavigate }: ProjectsPageProps) {
           </h1>
           <div className="w-24 h-1 bg-[#C9A24E] mx-auto mb-8" />
           <p className="text-xl text-[#F5F4F1]/70 font-heading">
-            Explore our portfolio of world-class equestrian facilities and custom metalwork
+            Explore our portfolio of world-class equestrian facilities across Victoria
           </p>
         </motion.div>
       </section>

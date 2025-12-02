@@ -39,8 +39,8 @@ export function Footer({ onNavigate }: FooterProps) {
               </div>
             </div>
             <p className="text-[#F5F4F1]/60 mb-6 max-w-md font-body">
-              Building exceptional equestrian facilities and custom metalwork for over 20 years. 
-              We transform visions into reality with precision, passion, and expertise.
+              Building exceptional equestrian facilities across Victoria for over 20 years. 
+              From arenas to stables, we transform visions into reality with precision and expertise.
             </p>
             <div className="flex gap-4">
               <a
@@ -74,48 +74,39 @@ export function Footer({ onNavigate }: FooterProps) {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Contact Info */}
           <div>
-            <h4 className="font-display text-[#C9A24E] mb-4">Quick Links</h4>
+            <h4 className="font-display text-[#C9A24E] mb-4">Contact</h4>
             <ul className="space-y-3 text-[#F5F4F1]/60 font-body">
+              <li>Mornington Peninsula, VIC</li>
               <li>
-                <button onClick={() => onNavigate('home')} className="hover:text-[#C9A24E] transition-colors">
-                  Home
-                </button>
+                <a href="mailto:info@peninsulaequine.com.au" className="hover:text-[#C9A24E] transition-colors">
+                  info@peninsulaequine.com.au
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('constructions')} className="hover:text-[#C9A24E] transition-colors">
-                  Constructions
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('laser')} className="hover:text-[#C9A24E] transition-colors">
-                  Laser Cutting
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('projects')} className="hover:text-[#C9A24E] transition-colors">
-                  Projects
-                </button>
+                <a href="tel:+61400000000" className="hover:text-[#C9A24E] transition-colors">
+                  Call Us
+                </a>
               </li>
               <li>
                 <button onClick={() => onNavigate('contact')} className="hover:text-[#C9A24E] transition-colors">
-                  Contact
+                  Get a Quote →
                 </button>
               </li>
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Our Services */}
           <div>
-            <h4 className="font-display text-[#C9A24E] mb-4">Services</h4>
+            <h4 className="font-display text-[#C9A24E] mb-4">Our Services</h4>
             <ul className="space-y-3 text-[#F5F4F1]/60 font-body">
               <li>Arena Construction</li>
-              <li>Stable Design</li>
-              <li>Barn Lofts</li>
-              <li>Laser Cutting</li>
-              <li>Custom Fabrication</li>
-              <li>Metal Signage</li>
+              <li>Stable & Barn Design</li>
+              <li>Round Yards</li>
+              <li>Day Yards & Shelters</li>
+              <li>Fencing Solutions</li>
+              <li className="text-[#C9A24E]/70 italic">Laser Cutting (2026)</li>
             </ul>
           </div>
         </div>

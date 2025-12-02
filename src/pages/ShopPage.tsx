@@ -31,7 +31,7 @@ export function ShopPage({ onNavigate }: ShopPageProps) {
     {
       icon: ShoppingBag,
       title: 'Ready-Made Items',
-      description: 'Curated collection of artistic metalwork',
+      description: 'Curated collection of artistic laser-cut pieces',
     },
     {
       icon: Sparkles,
@@ -296,7 +296,7 @@ export function ShopPage({ onNavigate }: ShopPageProps) {
             </h2>
             <div className="w-24 h-1 bg-[#C9A24E] mx-auto mb-8" />
             <p className="text-lg text-[#F5F4F1]/70 font-body max-w-3xl mx-auto">
-              Discover exclusive laser-cut creations and custom metalwork pieces
+              Discover exclusive laser-cut creations and custom pieces (coming 2026)
             </p>
           </motion.div>
 

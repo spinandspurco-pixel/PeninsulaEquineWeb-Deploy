@@ -281,7 +281,7 @@ export function LaserCuttingPage({ onNavigate }: LaserCuttingPageProps) {
                   icon: Sparkles,
                   status: 'Future',
                   title: 'Full Service Portfolio',
-                  description: 'Offering comprehensive custom fabrication from architectural elements to artistic metalwork—all with Peninsula Equine quality.',
+                  description: 'Offering comprehensive custom fabrication from architectural elements to decorative art—all with Peninsula Equine quality.',
                   color: '#C9A24E',
                 },
               ].map((step, index) => (
