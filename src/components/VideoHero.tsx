@@ -52,16 +52,7 @@ export function VideoHero({ onNavigate }: VideoHeroProps) {
     <>
       <section
         ref={sectionRef}
-        style={{
-          position: 'relative',
-          width: '100%',
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: '#0F0F0F',
-          overflow: 'hidden',
-        }}
+        className="relative w-full min-h-screen flex items-center justify-center bg-[#0F0F0F] overflow-hidden pt-20"
       >
         {/* Animated background layers */}
         <motion.div 

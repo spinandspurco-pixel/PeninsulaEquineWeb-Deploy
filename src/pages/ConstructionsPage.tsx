@@ -78,12 +78,12 @@ export function ConstructionsPage({ onNavigate }: ConstructionsPageProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0F0F0F]">
+    <div className="page-container">
       <HorseshoeCursor />
       <Navigation onNavigate={onNavigate} currentPage="constructions" />
       
-      {/* Hero Section - Daylight Construction Video */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Hero Section - Professional Construction Showcase */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Video Background Placeholder */}
         <div className="absolute inset-0">
           <div 

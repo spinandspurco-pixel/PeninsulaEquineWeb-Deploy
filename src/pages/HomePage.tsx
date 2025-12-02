@@ -9,7 +9,7 @@ interface HomePageProps {
 
 export function HomePage({ onNavigate }: HomePageProps) {
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#0F0F0F' }}>
+    <div className="page-container">
       <HorseshoeCursor />
       <Navigation onNavigate={onNavigate} currentPage="home" />
       <VideoHero onNavigate={onNavigate} />

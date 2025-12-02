@@ -50,13 +50,13 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#0F0F0F]">
+    <div className="page-container">
       <HorseshoeCursor />
       <Navigation onNavigate={onNavigate} currentPage="contact" />
 
       {/* Hero Section */}
-      <section className="relative py-20 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a1a] to-[#0F0F0F]" />
+      <section className="section-container-wide relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a1a]/50 to-[#0F0F0F] rounded-3xl" />
         
         <motion.div
           initial={{ opacity: 0, y: 30 }}
