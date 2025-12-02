@@ -1,54 +1,46 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 export function HorseshoeCursor() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: -100, y: -100 });
   const [isVisible, setIsVisible] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
-  const [isClicking, setIsClicking] = useState(false);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
-  const cursorRef = useRef<HTMLDivElement>(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(true); // Default to true to prevent flash
 
   useEffect(() => {
-    // Detect touch device
-    const checkTouchDevice = () => {
-      setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    // Check if it's a touch device
+    const checkDevice = () => {
+      const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      setIsTouchDevice(isTouch);
     };
-    checkTouchDevice();
+    checkDevice();
 
+    // Don't set up listeners for touch devices
     if (isTouchDevice) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
       if (!isVisible) setIsVisible(true);
 
-      // Check if hovering over interactive element
       const target = e.target as HTMLElement;
       const isInteractive = 
         target.tagName === 'A' || 
         target.tagName === 'BUTTON' || 
         target.closest('a') !== null || 
         target.closest('button') !== null ||
-        target.getAttribute('role') === 'button' ||
-        window.getComputedStyle(target).cursor === 'pointer';
+        target.getAttribute('role') === 'button';
       
       setIsHovering(isInteractive);
     };
 
-    const handleMouseDown = () => setIsClicking(true);
-    const handleMouseUp = () => setIsClicking(false);
     const handleMouseLeave = () => setIsVisible(false);
     const handleMouseEnter = () => setIsVisible(true);
 
     document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('mouseup', handleMouseUp);
     document.addEventListener('mouseleave', handleMouseLeave);
     document.addEventListener('mouseenter', handleMouseEnter);
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mousedown', handleMouseDown);
-      document.removeEventListener('mouseup', handleMouseUp);
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
     };
@@ -59,98 +51,58 @@ export function HorseshoeCursor() {
 
   return (
     <>
-      {/* Global cursor hide style */}
+      {/* Hide default cursor on non-touch devices */}
       <style>{`
         @media (pointer: fine) {
-          body, body * { cursor: none !important; }
+          body { cursor: none !important; }
+          a, button, [role="button"] { cursor: none !important; }
         }
       `}</style>
 
       {/* Custom cursor */}
       <div
-        ref={cursorRef}
-        className="fixed pointer-events-none z-[99999]"
+        className="fixed pointer-events-none z-[99999] transition-transform duration-100"
         style={{
-          left: position.x - 16,
-          top: position.y - 16,
+          left: position.x - 12,
+          top: position.y - 12,
           opacity: isVisible ? 1 : 0,
-          transform: `scale(${isClicking ? 0.85 : isHovering ? 1.15 : 1})`,
-          transition: 'transform 0.15s ease-out, opacity 0.2s ease',
+          transform: `scale(${isHovering ? 1.3 : 1})`,
         }}
       >
-        {/* Glow effect when hovering */}
-        {isHovering && (
-          <div 
-            className="absolute -inset-3 rounded-full animate-pulse"
-            style={{
-              background: 'radial-gradient(circle, rgba(201,162,78,0.4) 0%, transparent 70%)',
-            }}
-          />
-        )}
-
         {/* Horseshoe SVG */}
         <svg 
-          width="32" 
-          height="32" 
-          viewBox="0 0 48 48" 
+          width="24" 
+          height="24" 
+          viewBox="0 0 24 24" 
           fill="none"
           style={{
             filter: isHovering 
-              ? 'drop-shadow(0 0 12px rgba(201,162,78,1)) drop-shadow(0 0 20px rgba(201,162,78,0.6))' 
-              : 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))',
-            transition: 'filter 0.2s ease',
+              ? 'drop-shadow(0 0 8px rgba(201,162,78,0.8))' 
+              : 'drop-shadow(0 1px 2px rgba(0,0,0,0.5))',
           }}
         >
-          <defs>
-            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#F5D485" />
-              <stop offset="50%" stopColor="#C9A24E" />
-              <stop offset="100%" stopColor="#A88B63" />
-            </linearGradient>
-          </defs>
-          
-          {/* Main horseshoe shape */}
           <path 
-            d="M8 6C5 6 3 9 3 14C3 20 3 32 12 38C16 41 20 43 24 43C28 43 32 41 36 38C45 32 45 20 45 14C45 9 43 6 40 6C37 6 35 9 35 14C35 20 35 28 30 32C28 34 26 35 24 35C22 35 20 34 18 32C13 28 13 20 13 14C13 9 11 6 8 6Z" 
-            fill="url(#goldGrad)"
+            d="M5 3C3.5 3 2 4.5 2 7C2 10 2 16 7 19C9 20.5 11 21 12 21C13 21 15 20.5 17 19C22 16 22 10 22 7C22 4.5 20.5 3 19 3C17.5 3 16.5 4.5 16.5 7C16.5 10 16.5 14 14 16C13 17 12.5 17 12 17C11.5 17 11 17 10 16C7.5 14 7.5 10 7.5 7C7.5 4.5 6.5 3 5 3Z" 
+            fill="#C9A24E"
             stroke="#8B7355"
-            strokeWidth="1"
+            strokeWidth="0.5"
           />
-          
-          {/* Nail holes */}
-          <circle cx="7" cy="14" r="2" fill="#1a1a1a" />
-          <circle cx="8" cy="24" r="2" fill="#1a1a1a" />
-          <circle cx="41" cy="14" r="2" fill="#1a1a1a" />
-          <circle cx="40" cy="24" r="2" fill="#1a1a1a" />
+          <circle cx="4.5" cy="7" r="1" fill="#1a1a1a" />
+          <circle cx="5" cy="11" r="1" fill="#1a1a1a" />
+          <circle cx="19.5" cy="7" r="1" fill="#1a1a1a" />
+          <circle cx="19" cy="11" r="1" fill="#1a1a1a" />
         </svg>
 
-        {/* Sparkle particles when hovering */}
+        {/* Glow ring when hovering */}
         {isHovering && (
-          <div className="absolute inset-0">
-            {[0, 1, 2, 3, 4, 5].map((i) => (
-              <div
-                key={i}
-                className="absolute w-1 h-1 bg-yellow-300 rounded-full"
-                style={{
-                  left: 16 + Math.cos((i / 6) * Math.PI * 2) * 24,
-                  top: 16 + Math.sin((i / 6) * Math.PI * 2) * 24,
-                  boxShadow: '0 0 6px 2px rgba(253,224,71,0.8)',
-                  animation: `sparkle 0.8s ease-out ${i * 0.1}s infinite`,
-                }}
-              />
-            ))}
-          </div>
+          <div 
+            className="absolute -inset-2 rounded-full"
+            style={{
+              background: 'radial-gradient(circle, rgba(201,162,78,0.3) 0%, transparent 70%)',
+            }}
+          />
         )}
       </div>
-
-      {/* Sparkle animation keyframes */}
-      <style>{`
-        @keyframes sparkle {
-          0% { opacity: 0; transform: scale(0); }
-          50% { opacity: 1; transform: scale(1.5); }
-          100% { opacity: 0; transform: scale(0); }
-        }
-      `}</style>
     </>
   );
 }

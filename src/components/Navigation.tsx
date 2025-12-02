@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import { HorseshoeIcon } from './icons/HorseshoeIcon';
 import { LaserCutIcon } from './icons/LaserCutIcon';
 import { FenceIcon } from './icons/FenceIcon';
@@ -7,7 +6,6 @@ import { ShopIcon } from './icons/ShopIcon';
 import { GalleryIcon } from './icons/GalleryIcon';
 import { ContactIcon } from './icons/ContactIcon';
 import { Menu, X, Shield } from 'lucide-react';
-import { Button } from './ui/button';
 
 interface NavigationProps {
   onNavigate: (page: string) => void;
@@ -17,7 +15,6 @@ interface NavigationProps {
 export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,140 +40,99 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? 'bg-[#0F0F0F]/95 backdrop-blur-md shadow-xl shadow-[#C9A24E]/10' : 'bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+        isScrolled ? 'bg-[#0F0F0F]/95 backdrop-blur-md shadow-lg' : 'bg-[#0F0F0F]/80 backdrop-blur-sm'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="flex items-center justify-between md:justify-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          {/* Logo/Brand - Mobile */}
+          <div className="md:hidden">
+            <span className="text-[#C9A24E] font-display text-lg">PE</span>
+          </div>
+
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-2 lg:gap-4">
+          <div className="hidden md:flex items-center justify-center flex-1 gap-1 lg:gap-2">
             {navItems.map((item) => {
               const isActive = currentPage === item.value;
-              const isHovered = hoveredItem === item.value;
               
               return (
-                <motion.button
+                <button
                   key={item.value}
                   onClick={() => handleNavClick(item.value)}
-                  onMouseEnter={() => setHoveredItem(item.value)}
-                  onMouseLeave={() => setHoveredItem(null)}
-                  className={`relative py-2 px-4 font-heading flex items-center gap-2 rounded-lg focus:outline-none ${
+                  className={`relative py-2 px-3 lg:px-4 flex items-center gap-2 rounded-lg transition-all duration-200 ${
                     isActive
                       ? 'text-[#C9A24E] bg-[#C9A24E]/10'
-                      : 'text-[#F5F4F1] hover:text-[#C9A24E]'
+                      : 'text-[#F5F4F1] hover:text-[#C9A24E] hover:bg-[#C9A24E]/5'
                   }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
                 >
-                  {/* Icon with animation */}
-                  <motion.span
-                    animate={{
-                      scale: isHovered || isActive ? 1.2 : 1,
-                      rotate: isHovered ? [0, -10, 10, -5, 5, 0] : 0,
-                    }}
-                    transition={{
-                      scale: { duration: 0.2 },
-                      rotate: { duration: 0.5 },
-                    }}
+                  <item.Icon 
+                    size={20} 
+                    color={isActive ? '#C9A24E' : '#A88B63'} 
+                  />
+                  <span 
+                    className="text-sm tracking-wide"
+                    style={{ fontFamily: 'Raleway, sans-serif' }}
                   >
-                    <item.Icon 
-                      size={22} 
-                      color={isActive || isHovered ? '#C9A24E' : '#A88B63'} 
-                    />
-                  </motion.span>
+                    {item.label}
+                  </span>
                   
-                  {/* Label */}
-                  <span className="tracking-wide text-sm">{item.label}</span>
-                  
-                  {/* Active indicator */}
                   {isActive && (
-                    <motion.div 
-                      className="absolute -bottom-1 left-2 right-2 h-0.5 bg-gradient-to-r from-transparent via-[#C9A24E] to-transparent"
-                      layoutId="activeTab"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                    />
+                    <div className="absolute -bottom-0.5 left-3 right-3 h-0.5 bg-[#C9A24E] rounded-full" />
                   )}
-                  
-                  {/* Hover glow */}
-                  {isHovered && !isActive && (
-                    <motion.div
-                      className="absolute inset-0 rounded-lg bg-[#C9A24E]/5"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                    />
-                  )}
-                </motion.button>
+                </button>
               );
             })}
             
             {/* Portal Button */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <button
+              onClick={() => handleNavClick('portal')}
+              className="ml-2 lg:ml-4 bg-[#C9A24E] hover:bg-[#A88B63] text-[#0F0F0F] font-medium px-4 py-2 rounded-lg flex items-center gap-2 transition-colors duration-200"
+              style={{ fontFamily: 'Raleway, sans-serif' }}
             >
-              <Button
-                onClick={() => handleNavClick('portal')}
-                className="bg-[#C9A24E] hover:bg-[#A88B63] text-[#0F0F0F] font-heading ml-2 shadow-lg shadow-[#C9A24E]/30 px-4 py-2 rounded-lg"
-              >
-                <Shield className="mr-2" size={18} />
-                Portal
-              </Button>
-            </motion.div>
+              <Shield size={16} />
+              <span className="text-sm">Portal</span>
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
-          <motion.button
+          <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-[#F5F4F1] p-2 hover:bg-[#C9A24E]/10 rounded-lg"
-            whileTap={{ scale: 0.9 }}
+            className="md:hidden text-[#F5F4F1] p-2 hover:bg-[#C9A24E]/10 rounded-lg transition-colors"
+            aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </motion.button>
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <motion.div 
-            className="md:hidden mt-4 pb-4 border-t border-[#C9A24E]/20 bg-[#0F0F0F]/95 rounded-xl"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <div className="flex flex-col gap-2 mt-4">
-              {navItems.map((item, index) => (
-                <motion.button
+          <div className="md:hidden pb-4 border-t border-[#C9A24E]/20">
+            <div className="flex flex-col gap-1 pt-4">
+              {navItems.map((item) => (
+                <button
                   key={item.value}
                   onClick={() => handleNavClick(item.value)}
-                  className={`text-left py-3 px-4 font-heading flex items-center gap-3 rounded-lg ${
+                  className={`text-left py-3 px-4 flex items-center gap-3 rounded-lg transition-colors ${
                     currentPage === item.value
                       ? 'text-[#C9A24E] bg-[#C9A24E]/10'
-                      : 'text-[#F5F4F1]'
+                      : 'text-[#F5F4F1] hover:bg-[#C9A24E]/5'
                   }`}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
                 >
-                  <item.Icon size={24} color={currentPage === item.value ? '#C9A24E' : '#A88B63'} />
-                  <span>{item.label}</span>
-                </motion.button>
+                  <item.Icon size={22} color={currentPage === item.value ? '#C9A24E' : '#A88B63'} />
+                  <span style={{ fontFamily: 'Raleway, sans-serif' }}>{item.label}</span>
+                </button>
               ))}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: navItems.length * 0.05 }}
+              <button
+                onClick={() => handleNavClick('portal')}
+                className="mt-2 bg-[#C9A24E] hover:bg-[#A88B63] text-[#0F0F0F] font-medium w-full py-3 rounded-lg flex items-center justify-center gap-2 transition-colors"
+                style={{ fontFamily: 'Raleway, sans-serif' }}
               >
-                <Button
-                  onClick={() => handleNavClick('portal')}
-                  className="bg-[#C9A24E] hover:bg-[#A88B63] text-[#0F0F0F] font-heading w-full mt-2 py-3"
-                >
-                  <Shield className="mr-2" size={18} />
-                  Portal
-                </Button>
-              </motion.div>
+                <Shield size={18} />
+                <span>Portal</span>
+              </button>
             </div>
-          </motion.div>
+          </div>
         )}
       </div>
     </nav>
