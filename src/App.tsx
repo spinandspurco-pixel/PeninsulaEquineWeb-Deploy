@@ -19,7 +19,7 @@ import { useTheme } from './context/ThemeContext';
 
 function AppContent() {
   const [currentPage, setCurrentPage] = useState<string>('home');
-  const [showIntro, setShowIntro] = useState(false); // Temporarily disabled for debugging
+  const [showIntro, setShowIntro] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState(getCurrentUser());
   const [showPasswordChange, setShowPasswordChange] = useState(false);

@@ -23,10 +23,20 @@ export function VideoHero({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showContent, setShowContent] = useState(false);
+  const [videoError, setVideoError] = useState(false);
 
   // Array of hero videos to rotate through (3 custom slow-motion videos)
   const heroVideos = [heroVideo1, heroVideo2, heroVideo3];
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+
+  // Initialize immediately to prevent blank page
+  useEffect(() => {
+    const initTimer = setTimeout(() => {
+      setShowContent(true);
+    }, 100);
+    
+    return () => clearTimeout(initTimer);
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -48,8 +58,25 @@ export function VideoHero({
       }
     };
 
+    // Fallback timer for placeholder videos that might not trigger canplay
+    const fallbackTimer = setTimeout(() => {
+      if (!isLoaded) {
+        console.log('Video load timeout - showing content anyway');
+        setIsLoaded(true);
+        setShowContent(true);
+      }
+    }, 2000); // Show content after 2 seconds regardless
+
     video.addEventListener('canplay', handleCanPlay);
     video.addEventListener('ended', handleEnded);
+    
+    // Also listen for error events
+    const handleError = (e: Event) => {
+      console.log('Video load error, showing content:', e);
+      setIsLoaded(true);
+      setShowContent(true);
+    };
+    video.addEventListener('error', handleError);
 
     // Show logo after brief delay
     const logoTimer = setTimeout(() => {
@@ -59,24 +86,33 @@ export function VideoHero({
     return () => {
       video.removeEventListener('canplay', handleCanPlay);
       video.removeEventListener('ended', handleEnded);
+      video.removeEventListener('error', handleError);
       clearTimeout(logoTimer);
+      clearTimeout(fallbackTimer);
     };
-  }, [currentVideoIndex, autoLoop, onComplete, heroVideos.length]);
+  }, [currentVideoIndex, autoLoop, onComplete, heroVideos.length, isLoaded]);
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-[#0F0F0F]">
-      {/* Video Background */}
+      {/* Video Background - with fallback for small/placeholder videos */}
       <motion.video
         key={currentVideoIndex}
         ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover"
-        style={{ willChange: 'opacity, transform' }}
+        style={{ willChange: 'opacity, transform', opacity: isLoaded ? 0.3 : 0 }}
         muted
         playsInline
         preload="metadata"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isLoaded ? 1 : 0 }}
-        transition={{ duration: 1.5 }}
+        autoPlay
+        loop
+        onError={() => {
+          console.log('Video failed to load');
+          setIsLoaded(true);
+          setShowContent(true);
+        }}
+        onLoadStart={() => {
+          console.log('Video loading started');
+        }}
       >
         <source src={heroVideos[currentVideoIndex]} type="video/mp4" />
       </motion.video>

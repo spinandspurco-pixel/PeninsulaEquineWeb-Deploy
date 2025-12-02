@@ -1,24 +1,47 @@
-
-  # Peninsula Equine Web
+# 🐴 Peninsula Equine Web
 
 **From Dirt to Dynasty** - Professional Equestrian Construction Company Website
 
-## 🚀 Quick Start
+> Premium equestrian facilities construction website with integrated staff portal.
+> Built with React, TypeScript, and modern web technologies.
 
-### Local Development
+## ⚡ Quick Start
+
+**First time setup?** Run the automated setup script:
 
 ```bash
-# Install dependencies
+./quick-setup.sh
+```
+
+Or manually:
+
+```bash
+# 1. Install Node.js (if not already installed)
+# Visit https://nodejs.org/ or use nvm
+
+# 2. Install dependencies
 npm install
 
-# Run development server
+# 3. Run development server
+npm run dev
+
+# 4. Open browser to http://localhost:3000
+```
+
+### Development Commands
+
+```bash
+# Start dev server (with hot reload)
 npm run dev
 
 # Build for production
 npm run build
 
-# Preview production build
+# Preview production build locally
 npm run preview
+
+# Run linter
+npm run lint
 ```
 
 ## 📦 Deployment
@@ -129,24 +152,92 @@ VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
 VITE_FIREBASE_APP_ID=your_app_id
 ```
 
+## 🎥 Video Assets
+
+The project includes video assets for the hero section and construction showcase. Current videos are 14KB placeholder files.
+
+**To use your production videos:**
+
+1. Convert videos to MP4 (H.264 codec, 1080p, under 10MB each)
+2. Place in `src/assets/media/converted/` with these names:
+   - `IMG_1351.mp4`, `IMG_1354.mp4`, `IMG_2975.mp4` (Hero videos)
+   - `IMG_0014.mp4`, `IMG_0015.mp4`, `IMG_1021.mp4`, `IMG_2461.mp4` (Construction)
+3. Rebuild the project
+
+See `VIDEO_UPLOAD_INSTRUCTIONS.md` for detailed instructions.
+
+## 🔐 Firebase Setup (Required for Portal)
+
+The staff portal requires Firebase configuration:
+
+1. Create a Firebase project at console.firebase.google.com
+2. Enable Authentication (Email/Password)
+3. Create Firestore database
+4. Update `src/lib/firebase-config.ts` with your credentials
+5. Add your first admin user in Firebase Console
+
+See `COMPREHENSIVE_FIX_REPORT.md` → Phase 4 for step-by-step instructions.
+
 ## 🐛 Troubleshooting
+
+### "npm: command not found"
+**Solution:** Install Node.js first
+```bash
+# Using nvm (recommended)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+source ~/.bashrc  # or ~/.zshrc
+nvm install --lts
+nvm use --lts
+```
 
 ### Build fails
 - Ensure all dependencies are installed: `npm install`
 - Clear cache: `rm -rf node_modules package-lock.json && npm install`
 - Check Node version: `node -v` (should be 18+)
 
+### Videos won't play
+- Check video files exist in `src/assets/media/converted/`
+- Verify format is MP4 (H.264 codec)
+- Check browser console for errors
+- Ensure files aren't too large (< 10MB recommended)
+
+### Portal login fails
+- Verify Firebase credentials in `src/lib/firebase-config.ts`
+- Check Firebase Console for user existence
+- Ensure Authentication is enabled
+- Check browser console for Firebase errors
+
 ### Assets not loading
 - Check file paths are correct
 - Verify assets are in the correct directory
 - Check browser console for errors
+- Run `npm run build` to verify build succeeds
 
-### Figma preview issues
-The code is production-ready. Figma preview limitations don't affect actual deployment.
+For more troubleshooting, see `COMPREHENSIVE_FIX_REPORT.md`.
 
 ## 📄 License
 
 Copyright © 2024 Peninsula Equine. All rights reserved.
+
+## 📚 Documentation
+
+- **COMPREHENSIVE_FIX_REPORT.md** - Complete setup and troubleshooting guide
+- **DEPLOYMENT_COMPLETE.md** - Deployment instructions and checklist
+- **VERCEL_DEPLOY_GUIDE.md** - Vercel-specific deployment guide
+- **VIDEO_UPLOAD_INSTRUCTIONS.md** - Video asset management
+- **USER_MANAGEMENT_GUIDE.md** - Portal user setup and management
+- **FINAL_SUMMARY.md** - Project summary and status
+
+## 🚨 Current Status
+
+✅ **Code:** Production-ready, fully functional
+✅ **Build:** Compiles successfully
+✅ **Assets:** Images optimized and loaded
+⚠️ **Videos:** 14KB placeholders - need production footage
+⚠️ **Firebase:** Credentials need configuration for portal
+✅ **Design:** Professional, upmarket aesthetic
+✅ **Responsive:** Mobile, tablet, desktop optimized
+✅ **Performance:** Optimized with code splitting and lazy loading
 
 ## 🤝 Support
 
@@ -155,4 +246,6 @@ For support, email: info@peninsulaequine.com.au
 ---
 
 Built with ❤️ by Peninsula Equine
+
+**Ready to deploy!** Follow the Quick Start guide above to get started.
   
