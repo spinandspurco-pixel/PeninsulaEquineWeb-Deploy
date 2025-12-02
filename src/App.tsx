@@ -10,6 +10,7 @@ import { PortalPage } from './pages/PortalPage';
 import { LoginPage } from './pages/LoginPage';
 import { DashboardPage } from './pages/DashboardPage';
 // import { VideoPreviewPage } from './pages/VideoPreviewPage'; // Disabled - requires video files
+import { IntroScreen } from './components/IntroScreen';
 import { ChangePasswordDialog } from './components/ChangePasswordDialog';
 import { Toaster } from './components/ui/sonner';
 import { getCurrentUser, changePassword, signOut } from './lib/firebase-service';
@@ -18,7 +19,7 @@ import { useTheme } from './context/ThemeContext';
 
 function AppContent() {
   const [currentPage, setCurrentPage] = useState<string>('home');
-  // Removed intro screen logic
+  const [showIntro, setShowIntro] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState(getCurrentUser());
   const [showPasswordChange, setShowPasswordChange] = useState(false);
@@ -40,7 +41,9 @@ function AppContent() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Removed intro screen handler
+  const handleIntroComplete = () => {
+    setShowIntro(false);
+  };
 
   const handleLogin = (_email: string, _password: string) => {
     const user = getCurrentUser();
@@ -71,46 +74,51 @@ function AppContent() {
     toast.success('Password changed successfully!');
   };
 
-  // Intro screen bypassed; main app loads immediately
+  if (showIntro) {
+    return <IntroScreen onComplete={handleIntroComplete} />;
+  }
 
   return (
-    <div className="min-h-screen bg-[#0F0F0F]">
-      {currentPage === 'home' && <HomePage onNavigate={handleNavigate} />}
-      {currentPage === 'constructions' && <ConstructionsPage onNavigate={handleNavigate} />}
-      {currentPage === 'laser' && <LaserCuttingPage onNavigate={handleNavigate} />}
-      {currentPage === 'shop' && <ShopPage onNavigate={handleNavigate} />}
-      {currentPage === 'projects' && <ProjectsPage onNavigate={handleNavigate} />}
-      {currentPage === 'contact' && <ContactPage onNavigate={handleNavigate} />}
-      {/* {currentPage === 'video-preview' && <VideoPreviewPage onNavigate={handleNavigate} />} */}
-      {currentPage === 'portal' && !isAuthenticated && (
-        <LoginPage 
-          onLogin={(_role, user) => {
-            handleLogin(user.email, '');
-          }} 
-          onBack={() => handleNavigate('home')} 
-        />
-      )}
-      {currentPage === 'portal' && isAuthenticated && (
-        <PortalPage onNavigate={handleNavigate} />
-      )}
-      {currentPage === 'dashboard' && isAuthenticated && currentUser && (
-        <DashboardPage 
-          onNavigate={handleNavigate} 
-          userRole={currentUser.role}
-          onLogout={handleLogout}
-        />
-      )}
+    <>
+      <main className="min-h-screen bg-[#0F0F0F]" role="main" aria-label="Main content">
+        {currentPage === 'home' && <HomePage onNavigate={handleNavigate} />}
+        {currentPage === 'constructions' && <ConstructionsPage onNavigate={handleNavigate} />}
+        {currentPage === 'laser' && <LaserCuttingPage onNavigate={handleNavigate} />}
+        {currentPage === 'shop' && <ShopPage onNavigate={handleNavigate} />}
+        {currentPage === 'projects' && <ProjectsPage onNavigate={handleNavigate} />}
+        {currentPage === 'contact' && <ContactPage onNavigate={handleNavigate} />}
+        {/* {currentPage === 'video-preview' && <VideoPreviewPage onNavigate={handleNavigate} />} */}
+        {currentPage === 'portal' && !isAuthenticated && (
+          <LoginPage 
+            onLogin={(_role, user) => {
+              handleLogin(user.email, '');
+            }} 
+            onBack={() => handleNavigate('home')} 
+          />
+        )}
+        {currentPage === 'portal' && isAuthenticated && (
+          <PortalPage onNavigate={handleNavigate} />
+        )}
+        {currentPage === 'dashboard' && isAuthenticated && currentUser && (
+          <DashboardPage 
+            onNavigate={handleNavigate} 
+            userRole={currentUser.role}
+            onLogout={handleLogout}
+          />
+        )}
 
-      {/* Password Change Dialog (First Login) */}
-      {showPasswordChange && currentUser && (
-        <ChangePasswordDialog
-          onChangePassword={handleChangePassword}
-          isFirstLogin={currentUser.mustChangePassword}
-          theme={theme}
-          userEmail={currentUser.email}
-        />
-      )}
-    </div>
+        {/* Password Change Dialog (First Login) */}
+        {showPasswordChange && currentUser && (
+          <ChangePasswordDialog
+            onChangePassword={handleChangePassword}
+            isFirstLogin={currentUser.mustChangePassword}
+            theme={theme}
+            userEmail={currentUser.email}
+          />
+        )}
+      </main>
+      <Toaster />
+    </>
   );
 }
 
@@ -118,7 +126,6 @@ export default function App() {
   return (
     <ThemeProvider>
       <AppContent />
-      <Toaster />
     </ThemeProvider>
   );
 }

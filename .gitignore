@@ -28,7 +28,7 @@ Thumbs.db
 # Vercel
 .vercel
 
-window.location.hash = '#video-preview'
+# Ignore large video source files (but keep converted/)
 src/assets/media/videos/
 src/assets/media/enhanced/
 
