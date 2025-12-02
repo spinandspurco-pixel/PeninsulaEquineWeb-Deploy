@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { HorseshoeIcon } from './icons/HorseshoeIcon';
 import { LaserCutIcon } from './icons/LaserCutIcon';
-import { EquestrianIcon } from './icons/EquestrianIcon';
+import { FenceIcon } from './icons/FenceIcon';
+import { ShopIcon } from './icons/ShopIcon';
+import { GalleryIcon } from './icons/GalleryIcon';
+import { ContactIcon } from './icons/ContactIcon';
 import { Menu, X, Shield } from 'lucide-react';
 import { Button } from './ui/button';
 
@@ -28,12 +31,12 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
   };
 
   const navItems = [
-    { label: 'Home', value: 'home', icon: <HorseshoeIcon size={22} className="inline mr-2 align-middle drop-shadow-[0_1px_2px_rgba(201,162,78,0.5)] transition-transform duration-200" /> },
-    { label: 'Constructions', value: 'constructions', icon: <EquestrianIcon size={22} className="inline mr-2 align-middle drop-shadow-[0_1px_2px_rgba(141,85,36,0.4)] transition-transform duration-200" /> },
-    { label: 'Laser Cutting', value: 'laser', icon: <LaserCutIcon size={22} className="inline mr-2 align-middle drop-shadow-[0_1px_2px_rgba(168,139,99,0.4)] transition-transform duration-200" /> },
-    { label: 'Shop', value: 'shop', icon: <LaserCutIcon size={22} className="inline mr-2 align-middle drop-shadow-[0_1px_2px_rgba(168,139,99,0.4)] transition-transform duration-200" /> },
-    { label: 'Projects', value: 'projects', icon: <EquestrianIcon size={22} className="inline mr-2 align-middle drop-shadow-[0_1px_2px_rgba(141,85,36,0.4)] transition-transform duration-200" /> },
-    { label: 'Contact', value: 'contact', icon: <HorseshoeIcon size={22} className="inline mr-2 align-middle drop-shadow-[0_1px_2px_rgba(201,162,78,0.5)] transition-transform duration-200" /> },
+    { label: 'Home', value: 'home', icon: <HorseshoeIcon size={24} color="#C9A24E" className="transition-transform duration-200" /> },
+    { label: 'Constructions', value: 'constructions', icon: <FenceIcon size={24} color="#A88B63" className="transition-transform duration-200" /> },
+    { label: 'Laser Cutting', value: 'laser', icon: <LaserCutIcon size={24} color="#C9A24E" className="transition-transform duration-200" /> },
+    { label: 'Shop', value: 'shop', icon: <ShopIcon size={24} color="#A88B63" className="transition-transform duration-200" /> },
+    { label: 'Projects', value: 'projects', icon: <GalleryIcon size={24} color="#A88B63" className="transition-transform duration-200" /> },
+    { label: 'Contact', value: 'contact', icon: <ContactIcon size={24} color="#C9A24E" className="transition-transform duration-200" /> },
   ];
 
   return (
