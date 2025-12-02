@@ -67,7 +67,7 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled 
-            ? 'bg-[#0F0F0F]/98 backdrop-blur-xl shadow-2xl border-b border-[#C9A24E]/10' 
+            ? 'bg-[#0F0F0F]/98 backdrop-blur-xl shadow-2xl' 
             : 'bg-[#0F0F0F]/90 backdrop-blur-sm'
         }`}
       >
@@ -144,7 +144,7 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed top-20 left-0 right-0 z-40 bg-[#0F0F0F]/98 backdrop-blur-xl border-b border-[#C9A24E]/20 lg:hidden"
+            className="fixed top-20 left-0 right-0 z-40 bg-[#0F0F0F]/98 backdrop-blur-xl lg:hidden"
           >
             <div className="max-w-7xl mx-auto px-6 py-8">
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">

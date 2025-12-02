@@ -825,62 +825,7 @@ export function VideoHero({ onNavigate }: VideoHeroProps) {
         </motion.div>
       </section>
 
-      {/* CTA Section */}
-      <section
-        style={{
-          background: 'linear-gradient(135deg, rgba(201,162,78,0.1) 0%, #0F0F0F 50%, rgba(201,162,78,0.05) 100%)',
-          padding: '120px 24px',
-          position: 'relative',
-          textAlign: 'center',
-        }}
-      >
-        <motion.div
-          style={{ maxWidth: '800px', margin: '0 auto' }}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <h2 style={{
-            fontFamily: 'Cinzel, serif',
-            fontSize: 'clamp(2rem, 5vw, 3rem)',
-            color: '#F5F4F1',
-            marginBottom: '20px',
-          }}>
-            Ready to Build Your <span style={{ color: '#C9A24E' }}>Equine Dream</span>?
-          </h2>
-          <p style={{
-            fontFamily: 'Raleway, sans-serif',
-            fontSize: '1.2rem',
-            color: 'rgba(245,244,241,0.7)',
-            marginBottom: '40px',
-            lineHeight: 1.7,
-          }}>
-            Barn homes, luxury stables, creative builds — whatever you envision, we make it reality.
-          </p>
-          <motion.button
-            onClick={() => onNavigate?.('contact')}
-            style={{
-              background: 'linear-gradient(135deg, #C9A24E 0%, #A88B63 100%)',
-              color: '#0F0F0F',
-              fontFamily: 'Raleway, sans-serif',
-              fontWeight: 600,
-              fontSize: '1.1rem',
-              padding: '20px 50px',
-              borderRadius: '50px',
-              border: 'none',
-              cursor: 'pointer',
-            }}
-            whileHover={{ 
-              scale: 1.05,
-              boxShadow: '0 0 40px rgba(201,162,78,0.6)',
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Start Your Project
-          </motion.button>
-        </motion.div>
-      </section>
+
     </>
   );
 }
