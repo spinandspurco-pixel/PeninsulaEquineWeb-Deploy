@@ -1,92 +1,140 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence, useSpring, useMotionValue } from 'framer-motion';
 
-// Inline SVG horseshoe cursor
-const HorseshoeSVG = ({ size = 32, glow = false }: { size?: number; glow?: boolean }) => (
+// Beautiful golden horseshoe SVG
+const GoldenHorseshoe = ({ size = 32, isHovering = false }: { size?: number; isHovering?: boolean }) => (
   <svg 
     width={size} 
     height={size} 
-    viewBox="0 0 64 64" 
+    viewBox="0 0 48 48" 
     fill="none" 
     xmlns="http://www.w3.org/2000/svg"
     style={{
-      filter: glow 
-        ? 'drop-shadow(0 0 8px rgba(201, 162, 78, 0.8)) drop-shadow(0 0 16px rgba(201, 162, 78, 0.5))' 
-        : 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4))'
+      filter: isHovering 
+        ? 'drop-shadow(0 0 12px rgba(201, 162, 78, 1)) drop-shadow(0 0 24px rgba(201, 162, 78, 0.6))' 
+        : 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 8px rgba(201, 162, 78, 0.3))'
     }}
   >
-    {/* Main horseshoe shape */}
+    {/* Gradient definitions */}
+    <defs>
+      <linearGradient id="horseshoeGold" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#F5D485" />
+        <stop offset="30%" stopColor="#C9A24E" />
+        <stop offset="70%" stopColor="#A88B63" />
+        <stop offset="100%" stopColor="#C9A24E" />
+      </linearGradient>
+      <linearGradient id="horseshoeShine" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stopColor="#FFF8E7" stopOpacity="0.6" />
+        <stop offset="50%" stopColor="#FFF8E7" stopOpacity="0" />
+      </linearGradient>
+    </defs>
+    
+    {/* Main horseshoe U shape */}
     <path 
-      d="M12 8C8 8 4 12 4 20C4 28 4 44 16 52C20 55 26 58 32 58C38 58 44 55 48 52C60 44 60 28 60 20C60 12 56 8 52 8C48 8 46 12 46 18C46 24 46 36 40 42C37 45 34 46 32 46C30 46 27 45 24 42C18 36 18 24 18 18C18 12 16 8 12 8Z" 
-      fill="#C9A24E"
+      d="M8 6C5 6 3 9 3 14C3 20 3 32 12 38C16 41 20 43 24 43C28 43 32 41 36 38C45 32 45 20 45 14C45 9 43 6 40 6C37 6 35 9 35 14C35 20 35 28 30 32C28 34 26 35 24 35C22 35 20 34 18 32C13 28 13 20 13 14C13 9 11 6 8 6Z" 
+      fill="url(#horseshoeGold)"
       stroke="#8B7355"
-      strokeWidth="2"
+      strokeWidth="1"
     />
+    
+    {/* Shine highlight */}
+    <path 
+      d="M8 6C5 6 3 9 3 14C3 16 3 18 4 20C5 18 6 14 8 12C10 10 11 9 13 9C13 8 12 6 8 6Z" 
+      fill="url(#horseshoeShine)"
+    />
+    <path 
+      d="M40 6C43 6 45 9 45 14C45 16 45 18 44 20C43 18 42 14 40 12C38 10 37 9 35 9C35 8 36 6 40 6Z" 
+      fill="url(#horseshoeShine)"
+    />
+    
     {/* Nail holes */}
-    <circle cx="10" cy="20" r="2" fill="#0F0F0F" />
-    <circle cx="12" cy="32" r="2" fill="#0F0F0F" />
-    <circle cx="18" cy="44" r="2" fill="#0F0F0F" />
-    <circle cx="54" cy="20" r="2" fill="#0F0F0F" />
-    <circle cx="52" cy="32" r="2" fill="#0F0F0F" />
-    <circle cx="46" cy="44" r="2" fill="#0F0F0F" />
-    {/* Metallic shine */}
-    <path 
-      d="M14 12C12 14 12 18 14 22"
-      stroke="#F5F4F1"
-      strokeWidth="2"
-      strokeLinecap="round"
-      opacity="0.4"
-    />
-    <path 
-      d="M50 12C52 14 52 18 50 22"
-      stroke="#F5F4F1"
-      strokeWidth="2"
-      strokeLinecap="round"
-      opacity="0.4"
-    />
+    <circle cx="7" cy="14" r="2" fill="#0F0F0F" opacity="0.8" />
+    <circle cx="8" cy="24" r="2" fill="#0F0F0F" opacity="0.8" />
+    <circle cx="13" cy="33" r="2" fill="#0F0F0F" opacity="0.8" />
+    <circle cx="41" cy="14" r="2" fill="#0F0F0F" opacity="0.8" />
+    <circle cx="40" cy="24" r="2" fill="#0F0F0F" opacity="0.8" />
+    <circle cx="35" cy="33" r="2" fill="#0F0F0F" opacity="0.8" />
   </svg>
+);
+
+// Sparkle particle component
+const Sparkle = ({ delay, angle, distance }: { delay: number; angle: number; distance: number }) => (
+  <motion.div
+    className="absolute rounded-full"
+    style={{
+      width: 3,
+      height: 3,
+      background: 'radial-gradient(circle, #FFF8E7 0%, #C9A24E 50%, transparent 100%)',
+      boxShadow: '0 0 6px 2px rgba(201, 162, 78, 0.8)',
+    }}
+    initial={{ opacity: 0, scale: 0, x: 16, y: 16 }}
+    animate={{ 
+      opacity: [0, 1, 1, 0],
+      scale: [0, 1.5, 1, 0],
+      x: 16 + Math.cos(angle) * distance,
+      y: 16 + Math.sin(angle) * distance,
+    }}
+    transition={{
+      duration: 0.8,
+      delay,
+      repeat: Infinity,
+      repeatDelay: 0.4,
+    }}
+  />
 );
 
 export function HorseshoeCursor() {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [sparkles, setSparkles] = useState<Array<{ id: number; angle: number; distance: number; delay: number }>>([]);
 
   const cursorX = useMotionValue(0);
   const cursorY = useMotionValue(0);
   
-  const springConfig = { damping: 25, stiffness: 350, mass: 0.5 };
+  const springConfig = { damping: 20, stiffness: 300, mass: 0.5 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
+  // Generate sparkles on hover
+  useEffect(() => {
+    if (isHovering) {
+      const newSparkles = Array.from({ length: 8 }, (_, i) => ({
+        id: Date.now() + i,
+        angle: (i * Math.PI * 2) / 8 + Math.random() * 0.3,
+        distance: 20 + Math.random() * 15,
+        delay: i * 0.1,
+      }));
+      setSparkles(newSparkles);
+    } else {
+      setSparkles([]);
+    }
+  }, [isHovering]);
+
+  const updateMousePosition = useCallback((e: MouseEvent) => {
+    cursorX.set(e.clientX - 16);
+    cursorY.set(e.clientY - 16);
+    
+    if (!isVisible) setIsVisible(true);
+
+    const target = e.target as HTMLElement;
+    const isInteractive = 
+      target.tagName === 'A' || 
+      target.tagName === 'BUTTON' || 
+      target.closest('a') !== null || 
+      target.closest('button') !== null ||
+      target.getAttribute('role') === 'button' ||
+      target.classList.contains('cursor-pointer') ||
+      target.onclick !== null;
+    
+    setIsHovering(isInteractive);
+  }, [cursorX, cursorY, isVisible]);
+
   useEffect(() => {
     // Check if touch device
-    const checkTouch = () => {
-      setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
-    };
-    checkTouch();
-
-    if (isTouchDevice) return;
-
-    const updateMousePosition = (e: MouseEvent) => {
-      cursorX.set(e.clientX - 16);
-      cursorY.set(e.clientY - 16);
-      
-      if (!isVisible) setIsVisible(true);
-
-      const target = e.target as HTMLElement;
-      const isInteractive = 
-        target.tagName === 'A' || 
-        target.tagName === 'BUTTON' || 
-        target.closest('a') !== null || 
-        target.closest('button') !== null ||
-        target.getAttribute('role') === 'button' ||
-        target.classList.contains('cursor-pointer') ||
-        window.getComputedStyle(target).cursor === 'pointer';
-      
-      setIsHovering(isInteractive);
-    };
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+      return; // Don't show custom cursor on touch devices
+    }
 
     const handleMouseDown = () => setIsClicking(true);
     const handleMouseUp = () => setIsClicking(false);
@@ -106,105 +154,71 @@ export function HorseshoeCursor() {
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, [isVisible, cursorX, cursorY, isTouchDevice]);
+  }, [updateMousePosition]);
 
-  // Don't render on touch devices
-  if (isTouchDevice) return null;
+  // Don't render on touch devices or server
+  if (typeof window === 'undefined') return null;
+  if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return null;
 
   return (
     <>
-      {/* Hide default cursor globally */}
+      {/* Hide default cursor */}
       <style>{`
-        html, body, * {
-          cursor: none !important;
-        }
-        @media (pointer: coarse), (hover: none) {
-          html, body, * {
-            cursor: auto !important;
-          }
-        }
+        * { cursor: none !important; }
+        @media (pointer: coarse) { * { cursor: auto !important; } }
       `}</style>
 
       <AnimatePresence>
         {isVisible && (
           <motion.div
             className="fixed top-0 left-0 pointer-events-none z-[9999]"
-            style={{
-              x: cursorXSpring,
-              y: cursorYSpring,
-            }}
+            style={{ x: cursorXSpring, y: cursorYSpring }}
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.5 }}
           >
-            {/* Outer glow ring on hover */}
+            {/* Glow ring on hover */}
             <AnimatePresence>
               {isHovering && (
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ 
-                    opacity: [0.4, 0.7, 0.4],
-                    scale: [1.5, 2, 1.5],
-                  }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
                   className="absolute rounded-full"
                   style={{
-                    width: 32,
-                    height: 32,
-                    background: 'radial-gradient(circle, rgba(201,162,78,0.5) 0%, transparent 70%)',
-                    filter: 'blur(8px)',
+                    width: 48,
+                    height: 48,
+                    left: -8,
+                    top: -8,
+                    background: 'radial-gradient(circle, rgba(201,162,78,0.4) 0%, rgba(201,162,78,0.1) 50%, transparent 70%)',
                   }}
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ 
+                    opacity: [0.5, 0.8, 0.5],
+                    scale: [1, 1.3, 1],
+                  }}
+                  exit={{ opacity: 0, scale: 0.5 }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
                 />
               )}
             </AnimatePresence>
 
-            {/* Golden sparkle particles on hover */}
-            <AnimatePresence>
-              {isHovering && [...Array(6)].map((_, i) => {
-                const angle = (i * Math.PI * 2) / 6;
-                return (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0, x: 16, y: 16 }}
-                    animate={{ 
-                      opacity: [0, 1, 0],
-                      scale: [0, 1, 0],
-                      x: 16 + Math.cos(angle) * 28,
-                      y: 16 + Math.sin(angle) * 28,
-                    }}
-                    exit={{ opacity: 0, scale: 0 }}
-                    transition={{
-                      duration: 1,
-                      repeat: Infinity,
-                      delay: i * 0.15,
-                    }}
-                    className="absolute rounded-full"
-                    style={{
-                      width: 4,
-                      height: 4,
-                      background: '#C9A24E',
-                      boxShadow: '0 0 6px #C9A24E',
-                    }}
-                  />
-                );
-              })}
-            </AnimatePresence>
+            {/* Sparkles */}
+            {sparkles.map((sparkle) => (
+              <Sparkle key={sparkle.id} {...sparkle} />
+            ))}
 
             {/* Click ripple */}
             <AnimatePresence>
               {isClicking && (
                 <motion.div
+                  className="absolute rounded-full border-2"
+                  style={{ 
+                    width: 32, 
+                    height: 32,
+                    borderColor: '#C9A24E',
+                  }}
                   initial={{ opacity: 0.8, scale: 0.8 }}
-                  animate={{ opacity: 0, scale: 2.5 }}
+                  animate={{ opacity: 0, scale: 2 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="absolute rounded-full border-2 border-[#C9A24E]"
-                  style={{ width: 32, height: 32 }}
+                  transition={{ duration: 0.3 }}
                 />
               )}
             </AnimatePresence>
@@ -212,15 +226,15 @@ export function HorseshoeCursor() {
             {/* Horseshoe cursor */}
             <motion.div
               animate={{
-                scale: isClicking ? 0.85 : isHovering ? 1.15 : 1,
-                rotate: isHovering ? [0, -8, 8, -8, 0] : 0,
+                scale: isClicking ? 0.85 : isHovering ? 1.1 : 1,
+                rotate: isHovering ? [0, -5, 5, -3, 3, 0] : 0,
               }}
               transition={{
                 scale: { duration: 0.15 },
-                rotate: { duration: 0.6, repeat: isHovering ? Infinity : 0 },
+                rotate: { duration: 0.5, repeat: isHovering ? Infinity : 0, repeatDelay: 0.5 },
               }}
             >
-              <HorseshoeSVG size={32} glow={isHovering} />
+              <GoldenHorseshoe size={32} isHovering={isHovering} />
             </motion.div>
           </motion.div>
         )}

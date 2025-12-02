@@ -1,32 +1,30 @@
-import React from 'react';
-
 interface FenceIconProps {
   size?: number;
   color?: string;
   className?: string;
 }
 
-export function FenceIcon({ size = 32, color = '#A88B63', className = '' }: FenceIconProps) {
+export function FenceIcon({ size = 24, color = '#C9A24E', className = '' }: FenceIconProps) {
   return (
     <svg 
       width={size} 
       height={size} 
-      viewBox="0 0 64 64" 
+      viewBox="0 0 24 24" 
       fill="none" 
-      className={className} 
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
     >
       {/* Fence posts */}
-      <rect x="8" y="16" width="6" height="40" rx="1" stroke={color} strokeWidth="2" fill="none" />
-      <rect x="29" y="16" width="6" height="40" rx="1" stroke={color} strokeWidth="2" fill="none" />
-      <rect x="50" y="16" width="6" height="40" rx="1" stroke={color} strokeWidth="2" fill="none" />
-      {/* Post tops (pointed) */}
-      <path d="M8 16L11 8L14 16" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M29 16L32 8L35 16" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M50 16L53 8L56 16" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      {/* Horizontal rails */}
-      <path d="M4 28H60" stroke={color} strokeWidth="3" strokeLinecap="round" />
-      <path d="M4 42H60" stroke={color} strokeWidth="3" strokeLinecap="round" />
+      <path d="M4 6V20" stroke={color} strokeWidth="2" strokeLinecap="round" />
+      <path d="M12 6V20" stroke={color} strokeWidth="2" strokeLinecap="round" />
+      <path d="M20 6V20" stroke={color} strokeWidth="2" strokeLinecap="round" />
+      {/* Post tops */}
+      <path d="M4 6L5 4L6 6" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path d="M12 6L13 4L14 6" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path d="M20 6L21 4L22 6" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      {/* Rails */}
+      <path d="M2 10H22" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M2 15H22" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }

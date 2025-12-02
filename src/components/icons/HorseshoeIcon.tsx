@@ -1,37 +1,31 @@
-import React from 'react';
-
 interface HorseshoeIconProps {
   size?: number;
   color?: string;
   className?: string;
 }
 
-export function HorseshoeIcon({ size = 32, color = '#C9A24E', className = '' }: HorseshoeIconProps) {
+export function HorseshoeIcon({ size = 24, color = '#C9A24E', className = '' }: HorseshoeIconProps) {
   return (
     <svg 
       width={size} 
       height={size} 
-      viewBox="0 0 64 64" 
+      viewBox="0 0 24 24" 
       fill="none" 
-      className={className} 
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Main horseshoe shape - classic U shape */}
       <path 
-        d="M12 8C8 8 4 12 4 20C4 28 4 44 16 52C20 55 26 58 32 58C38 58 44 55 48 52C60 44 60 28 60 20C60 12 56 8 52 8C48 8 46 12 46 18C46 24 46 36 40 42C37 45 34 46 32 46C30 46 27 45 24 42C18 36 18 24 18 18C18 12 16 8 12 8Z" 
-        stroke={color} 
-        strokeWidth="3" 
-        strokeLinecap="round" 
+        d="M5 3C3.5 3 2 4.5 2 7C2 10 2 16 7 19C9 20.5 11 21 12 21C13 21 15 20.5 17 19C22 16 22 10 22 7C22 4.5 20.5 3 19 3C17.5 3 16.5 4.5 16.5 7C16.5 10 16.5 14 14 16C13 17 12.5 17 12 17C11.5 17 11 17 10 16C7.5 14 7.5 10 7.5 7C7.5 4.5 6.5 3 5 3Z" 
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinecap="round"
         strokeLinejoin="round"
         fill="none"
       />
-      {/* Nail holes - 3 on each side */}
-      <circle cx="10" cy="20" r="2.5" fill={color} />
-      <circle cx="12" cy="32" r="2.5" fill={color} />
-      <circle cx="18" cy="44" r="2.5" fill={color} />
-      <circle cx="54" cy="20" r="2.5" fill={color} />
-      <circle cx="52" cy="32" r="2.5" fill={color} />
-      <circle cx="46" cy="44" r="2.5" fill={color} />
+      <circle cx="4.5" cy="7" r="1" fill={color} />
+      <circle cx="5" cy="11" r="1" fill={color} />
+      <circle cx="19.5" cy="7" r="1" fill={color} />
+      <circle cx="19" cy="11" r="1" fill={color} />
     </svg>
   );
 }

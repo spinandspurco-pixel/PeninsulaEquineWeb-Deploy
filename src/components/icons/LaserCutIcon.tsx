@@ -1,63 +1,37 @@
-import React from 'react';
-
 interface LaserCutIconProps {
   size?: number;
   color?: string;
   className?: string;
 }
 
-export function LaserCutIcon({ size = 32, color = '#A88B63', className = '' }: LaserCutIconProps) {
+export function LaserCutIcon({ size = 24, color = '#C9A24E', className = '' }: LaserCutIconProps) {
   return (
     <svg 
       width={size} 
       height={size} 
-      viewBox="0 0 64 64" 
+      viewBox="0 0 24 24" 
       fill="none" 
-      className={className} 
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Laser beam coming down */}
+      {/* Laser beam */}
       <path 
-        d="M32 4L32 28"
+        d="M12 2V8" 
         stroke={color}
         strokeWidth="2"
         strokeLinecap="round"
-        strokeDasharray="4 2"
       />
-      {/* Laser head/nozzle */}
-      <path 
-        d="M26 4L32 12L38 4"
-        stroke={color}
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      {/* Impact point glow */}
-      <circle cx="32" cy="32" r="4" fill={color} opacity="0.6" />
-      <circle cx="32" cy="32" r="2" fill={color} />
-      {/* Cutting sparks */}
-      <path d="M28 28L24 24" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M36 28L40 24" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M28 36L24 40" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M36 36L40 40" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
-      {/* Metal plate being cut */}
-      <rect 
-        x="12" 
-        y="44" 
-        width="40" 
-        height="12" 
-        rx="2"
-        stroke={color}
-        strokeWidth="2"
-        fill="none"
-      />
-      {/* Cut line in plate */}
-      <path 
-        d="M32 44L32 56"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeDasharray="2 2"
-      />
+      {/* Rays */}
+      <path d="M12 8L8 12" stroke={color} strokeWidth="1" strokeLinecap="round" opacity="0.6" />
+      <path d="M12 8L16 12" stroke={color} strokeWidth="1" strokeLinecap="round" opacity="0.6" />
+      <path d="M12 8L10 13" stroke={color} strokeWidth="1" strokeLinecap="round" opacity="0.4" />
+      <path d="M12 8L14 13" stroke={color} strokeWidth="1" strokeLinecap="round" opacity="0.4" />
+      {/* Cut surface */}
+      <rect x="4" y="14" width="16" height="8" rx="1" stroke={color} strokeWidth="1.5" fill="none" />
+      {/* Cut pattern */}
+      <path d="M7 17H9M11 17H13M15 17H17" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+      {/* Impact point */}
+      <circle cx="12" cy="14" r="1.5" fill={color} />
     </svg>
   );
 }
