@@ -571,6 +571,8 @@ export function LaserCuttingPage({ onNavigate }: LaserCuttingPageProps) {
           </Button>
         </motion.div>
       </section>
+
+      <Footer onNavigate={onNavigate} />
     </div>
   );
 }

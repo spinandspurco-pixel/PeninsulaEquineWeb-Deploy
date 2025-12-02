@@ -52,7 +52,7 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center justify-center flex-1 gap-1 lg:gap-2">
+          <div className="hidden md:flex items-center justify-center flex-1 gap-0.5 lg:gap-2">
             {navItems.map((item) => {
               const isActive = currentPage === item.value;
               
@@ -60,7 +60,7 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
                 <button
                   key={item.value}
                   onClick={() => handleNavClick(item.value)}
-                  className={`relative py-2 px-3 lg:px-4 flex items-center gap-2 rounded-lg transition-all duration-200 ${
+                  className={`relative py-2 px-2 lg:px-4 flex items-center gap-1 lg:gap-2 rounded-lg transition-all duration-200 ${
                     isActive
                       ? 'text-[#C9A24E] bg-[#C9A24E]/10'
                       : 'text-[#F5F4F1] hover:text-[#C9A24E] hover:bg-[#C9A24E]/5'
@@ -71,7 +71,7 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
                     color={isActive ? '#C9A24E' : '#A88B63'} 
                   />
                   <span 
-                    className="text-sm tracking-wide"
+                    className="text-xs lg:text-sm tracking-wide hidden lg:inline"
                     style={{ fontFamily: 'Raleway, sans-serif' }}
                   >
                     {item.label}
@@ -87,11 +87,11 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
             {/* Portal Button */}
             <button
               onClick={() => handleNavClick('portal')}
-              className="ml-2 lg:ml-4 bg-[#C9A24E] hover:bg-[#A88B63] text-[#0F0F0F] font-medium px-4 py-2 rounded-lg flex items-center gap-2 transition-colors duration-200"
+              className="ml-1 lg:ml-4 bg-[#C9A24E] hover:bg-[#A88B63] text-[#0F0F0F] font-medium px-3 lg:px-4 py-2 rounded-lg flex items-center gap-1 lg:gap-2 transition-colors duration-200"
               style={{ fontFamily: 'Raleway, sans-serif' }}
             >
               <Shield size={16} />
-              <span className="text-sm">Portal</span>
+              <span className="text-xs lg:text-sm hidden lg:inline">Portal</span>
             </button>
           </div>
 

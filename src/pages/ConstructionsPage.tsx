@@ -295,6 +295,8 @@ export function ConstructionsPage({ onNavigate }: ConstructionsPageProps) {
           </Button>
         </motion.div>
       </section>
+
+      <Footer onNavigate={onNavigate} />
     </div>
   );
 }
