@@ -9,7 +9,20 @@ import { ContactPage } from './pages/ContactPage';
 import { PortalPage } from './pages/PortalPage';
 import { LoginPage } from './pages/LoginPage';
 import { DashboardPage } from './pages/DashboardPage';
-// import { VideoPreviewPage } from './pages/VideoPreviewPage'; // Disabled - requires video files
+// Portal/Worker Pages
+import { SWMSFormPage } from './pages/SWMSFormPage';
+import { ToolboxTalkPage } from './pages/ToolboxTalkPage';
+import { TimesheetPage } from './pages/TimesheetPage';
+import { IncidentReportPage } from './pages/IncidentReportPage';
+import { ReferenceDocsPage } from './pages/ReferenceDocsPage';
+import { WorkerRegistrationPage } from './pages/WorkerRegistrationPage';
+// Admin Pages
+import { AdminDashboardPage } from './pages/AdminDashboardPage';
+import { AdminUserManagementPage } from './pages/AdminUserManagementPage';
+import { AdminTimesheetsPage } from './pages/AdminTimesheetsPage';
+import { AdminAnalyticsPage } from './pages/AdminAnalyticsPage';
+import { AdminAllSubmissionsPage } from './pages/AdminAllSubmissionsPage';
+// Components
 import { IntroScreen } from './components/IntroScreen';
 import { ChangePasswordDialog } from './components/ChangePasswordDialog';
 import { Toaster } from './components/ui/sonner';
@@ -87,24 +100,63 @@ function AppContent() {
         {currentPage === 'shop' && <ShopPage onNavigate={handleNavigate} />}
         {currentPage === 'projects' && <ProjectsPage onNavigate={handleNavigate} />}
         {currentPage === 'contact' && <ContactPage onNavigate={handleNavigate} />}
-        {/* {currentPage === 'video-preview' && <VideoPreviewPage onNavigate={handleNavigate} />} */}
+        
+        {/* Portal Entry */}
         {currentPage === 'portal' && !isAuthenticated && (
           <LoginPage 
             onLogin={(_role, user) => {
               handleLogin(user.email, '');
             }} 
-            onBack={() => handleNavigate('home')} 
+            onBack={() => handleNavigate('home')}
+            onNavigate={handleNavigate}
           />
         )}
         {currentPage === 'portal' && isAuthenticated && (
           <PortalPage onNavigate={handleNavigate} />
         )}
+        
+        {/* Worker Dashboard & Pages */}
         {currentPage === 'dashboard' && isAuthenticated && currentUser && (
           <DashboardPage 
             onNavigate={handleNavigate} 
             userRole={currentUser.role}
             onLogout={handleLogout}
           />
+        )}
+        {currentPage === 'swms' && isAuthenticated && (
+          <SWMSFormPage onBack={() => handleNavigate('dashboard')} />
+        )}
+        {currentPage === 'toolbox' && isAuthenticated && (
+          <ToolboxTalkPage onBack={() => handleNavigate('dashboard')} />
+        )}
+        {currentPage === 'timesheet' && isAuthenticated && (
+          <TimesheetPage onBack={() => handleNavigate('dashboard')} />
+        )}
+        {currentPage === 'incident' && isAuthenticated && (
+          <IncidentReportPage onBack={() => handleNavigate('dashboard')} />
+        )}
+        {currentPage === 'reference' && isAuthenticated && (
+          <ReferenceDocsPage onBack={() => handleNavigate('dashboard')} />
+        )}
+        {currentPage === 'register' && (
+          <WorkerRegistrationPage onBack={() => handleNavigate('portal')} onSuccess={() => handleNavigate('portal')} />
+        )}
+        
+        {/* Admin Pages */}
+        {currentPage === 'admin-dashboard' && isAuthenticated && currentUser?.role === 'admin' && (
+          <AdminDashboardPage onNavigate={handleNavigate} onBack={() => handleNavigate('dashboard')} />
+        )}
+        {currentPage === 'admin-users' && isAuthenticated && currentUser?.role === 'admin' && (
+          <AdminUserManagementPage onBack={() => handleNavigate('admin-dashboard')} />
+        )}
+        {currentPage === 'admin-timesheets' && isAuthenticated && currentUser?.role === 'admin' && (
+          <AdminTimesheetsPage onBack={() => handleNavigate('admin-dashboard')} />
+        )}
+        {currentPage === 'admin-analytics' && isAuthenticated && currentUser?.role === 'admin' && (
+          <AdminAnalyticsPage onBack={() => handleNavigate('admin-dashboard')} />
+        )}
+        {currentPage === 'admin-submissions' && isAuthenticated && currentUser?.role === 'admin' && (
+          <AdminAllSubmissionsPage onBack={() => handleNavigate('admin-dashboard')} />
         )}
 
         {/* Password Change Dialog (First Login) */}

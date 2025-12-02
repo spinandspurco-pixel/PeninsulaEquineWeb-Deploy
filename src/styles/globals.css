@@ -53,10 +53,10 @@
   --gold-glow: rgba(201, 162, 78, 0.3);
   --gold-glow-strong: rgba(201, 162, 78, 0.5);
   
-  /* Typography */
-  --font-display: 'Playfair Display SC', serif;
-  --font-heading: 'Raleway', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  /* Typography - Matching index.css */
+  --font-display: 'Cinzel', serif;
+  --font-heading: 'Cormorant Garamond', serif;
+  --font-body: 'Raleway', sans-serif;
 }
 
 .dark {

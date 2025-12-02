@@ -70,8 +70,8 @@ export function LaserCuttingPage({ onNavigate }: LaserCuttingPageProps) {
           {/* Golden overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#0F0F0F]/70 via-[#C9A24E]/10 to-[#0F0F0F]" />
 
-          {/* Animated laser sparks effect */}
-          {[...Array(20)].map((_, i) => (
+          {/* Animated laser sparks effect - reduced for performance */}
+          {[...Array(8)].map((_, i) => (
             <motion.div
               key={i}
               className="absolute rounded-full"

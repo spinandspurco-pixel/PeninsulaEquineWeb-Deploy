@@ -306,11 +306,17 @@
     background-color: var(--background);
     color: var(--foreground);
     font-family: var(--font-body);
-    cursor: none;
   }
 
-  * {
-    cursor: none !important;
+  /* Custom cursor only on devices with fine pointer (mouse) */
+  @media (pointer: fine) {
+    body {
+      cursor: none;
+    }
+
+    * {
+      cursor: none !important;
+    }
   }
 
   :where(:not(:has([class*=" text-"])):not(:has([class^="text-"]))) h1 {
@@ -433,6 +439,7 @@
   --font-display: "Cinzel", serif;
   --font-heading: "Cormorant Garamond", serif;
   --font-body: "Raleway", sans-serif;
+  --font-elegant: "Cormorant Garamond", serif;
 }
 
 .dark {

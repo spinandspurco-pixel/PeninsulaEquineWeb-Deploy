@@ -6,6 +6,7 @@ import {
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { HorseshoeCursor } from '../components/HorseshoeCursor';
+import { Footer } from '../components/Footer';
 import type { UserRole } from '../types';
 import { useTheme } from '../context/ThemeContext';
 
@@ -207,6 +208,7 @@ export function DashboardPage({ userRole, onLogout, onNavigate }: DashboardPageP
           </div>
         </motion.div>
       </div>
+      <Footer onNavigate={onNavigate} />
     </div>
   );
 }

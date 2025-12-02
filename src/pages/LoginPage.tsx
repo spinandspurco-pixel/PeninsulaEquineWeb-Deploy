@@ -5,6 +5,7 @@ import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { HorseshoeCursor } from '../components/HorseshoeCursor';
+import { Footer } from '../components/Footer';
 import type { UserRole } from '../types';
 import { toast } from 'sonner';
 import { useTheme } from '../context/ThemeContext';
@@ -14,9 +15,10 @@ import logoImage from 'figma:asset/43b0d27420f20197681aa3cacbf2abda7c055e3d.png'
 interface LoginPageProps {
   onLogin: (role: UserRole, user: any) => void;
   onBack: () => void;
+  onNavigate?: (page: string) => void;
 }
 
-export function LoginPage({ onLogin, onBack }: LoginPageProps) {
+export function LoginPage({ onLogin, onBack, onNavigate }: LoginPageProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -206,7 +208,7 @@ export function LoginPage({ onLogin, onBack }: LoginPageProps) {
                   New worker?{' '}
                   <button
                     type="button"
-                    onClick={() => window.location.href = '/#register'}
+                    onClick={() => onNavigate?.('register')}
                     className={`transition-colors ${theme === 'dark' ? 'text-amber-500 hover:text-amber-400' : 'text-amber-600 hover:text-amber-700'}`}
                   >
                     Request an account
@@ -217,6 +219,7 @@ export function LoginPage({ onLogin, onBack }: LoginPageProps) {
           </motion.div>
         </div>
       </div>
+      <Footer onNavigate={onNavigate || (() => {})} />
     </div>
   );
 }

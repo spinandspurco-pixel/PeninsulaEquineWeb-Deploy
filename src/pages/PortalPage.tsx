@@ -4,6 +4,7 @@ import { ArrowLeft, Shield, Users } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { HorseshoeCursor } from '../components/HorseshoeCursor';
 import { RopeLogo } from '../components/RopeLogo';
+import { Footer } from '../components/Footer';
 
 interface PortalPageProps {
   onNavigate: (page: string) => void;
@@ -218,6 +219,7 @@ export function PortalPage({ onNavigate }: PortalPageProps) {
           </motion.div>
         </div>
       </div>
+      <Footer onNavigate={onNavigate} />
     </div>
   );
 }
