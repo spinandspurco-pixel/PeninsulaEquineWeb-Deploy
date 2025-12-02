@@ -9,7 +9,7 @@ interface HomePageProps {
 
 export function HomePage({ onNavigate }: HomePageProps) {
   return (
-    <div className="min-h-screen bg-[#0F0F0F]">
+    <div style={{ minHeight: '100vh', backgroundColor: '#0F0F0F' }}>
       <HorseshoeCursor />
       <Navigation onNavigate={onNavigate} currentPage="home" />
       <VideoHero showLogo={true} />

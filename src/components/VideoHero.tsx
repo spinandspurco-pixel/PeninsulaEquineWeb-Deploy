@@ -9,62 +9,82 @@ interface VideoHeroProps {
 }
 
 export function VideoHero({ showLogo = true }: VideoHeroProps) {
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [showContent, setShowContent] = useState(false);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    // Preload the logo image
-    const img = new Image();
-    img.onload = () => {
-      setImageLoaded(true);
-      setShowContent(true);
-    };
-    img.onerror = () => {
-      // Show content anyway if image fails
-      setShowContent(true);
-    };
-    img.src = logoImage;
-
-    // Fallback - show content after 1 second regardless
-    const timer = setTimeout(() => setShowContent(true), 1000);
+    // Small delay to ensure render
+    const timer = setTimeout(() => setReady(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center bg-[#0F0F0F] overflow-hidden px-4 py-20 sm:py-24 md:py-32">
+    <section
+      style={{
+        position: 'relative',
+        width: '100%',
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#0F0F0F',
+        overflow: 'hidden',
+        padding: '80px 16px 40px',
+      }}
+    >
       {/* Background gradient */}
       <div 
-        className="absolute inset-0 pointer-events-none"
         style={{
+          position: 'absolute',
+          inset: 0,
           background: 'radial-gradient(ellipse at 50% 40%, rgba(201,162,78,0.12) 0%, rgba(15,15,15,1) 70%)',
+          pointerEvents: 'none',
         }}
       />
 
       {/* Content */}
       <div 
-        className={`relative z-10 flex flex-col items-center justify-center text-center max-w-4xl mx-auto transition-opacity duration-1000 ${showContent ? 'opacity-100' : 'opacity-0'}`}
+        style={{
+          position: 'relative',
+          zIndex: 10,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
+          maxWidth: '900px',
+          width: '100%',
+          margin: '0 auto',
+          opacity: ready ? 1 : 0,
+          transition: 'opacity 0.5s ease',
+        }}
       >
         {/* Logo */}
         {showLogo && (
-          <div className="mb-8 md:mb-12">
+          <div style={{ marginBottom: '32px' }}>
             <img
               src={logoImage}
               alt="Peninsula Equine"
-              className={`w-full max-w-[280px] sm:max-w-[350px] md:max-w-[450px] lg:max-w-[500px] h-auto mx-auto transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
               style={{
+                width: '100%',
+                maxWidth: '400px',
+                height: 'auto',
+                margin: '0 auto',
                 filter: 'drop-shadow(0 0 40px rgba(201,162,78,0.5))',
               }}
-              onLoad={() => setImageLoaded(true)}
             />
           </div>
         )}
 
         {/* Tagline */}
         <h1 
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display text-[#C9A24E] mb-4 md:mb-6 leading-tight"
           style={{
-            textShadow: '0 0 40px rgba(201, 162, 78, 0.5)',
+            fontSize: 'clamp(1.75rem, 6vw, 4rem)',
+            color: '#C9A24E',
+            marginBottom: '16px',
+            lineHeight: 1.2,
             fontFamily: 'Cinzel, serif',
+            fontWeight: 600,
+            textShadow: '0 0 40px rgba(201, 162, 78, 0.5)',
           }}
         >
           FROM DIRT TO DYNASTY
@@ -72,9 +92,14 @@ export function VideoHero({ showLogo = true }: VideoHeroProps) {
 
         {/* Subtitle */}
         <p 
-          className="text-lg sm:text-xl md:text-2xl text-[#F5F4F1]/85 max-w-2xl mx-auto leading-relaxed px-4"
           style={{
+            fontSize: 'clamp(1rem, 2.5vw, 1.5rem)',
+            color: 'rgba(245,244,241,0.85)',
+            maxWidth: '600px',
+            margin: '0 auto',
+            lineHeight: 1.6,
             fontFamily: 'Raleway, sans-serif',
+            padding: '0 16px',
           }}
         >
           Building world-class equestrian facilities across Victoria
@@ -82,18 +107,41 @@ export function VideoHero({ showLogo = true }: VideoHeroProps) {
 
         {/* Decorative separator */}
         <div 
-          className="mt-8 md:mt-12 w-24 md:w-32 h-px mx-auto"
           style={{
+            marginTop: '40px',
+            width: '100px',
+            height: '1px',
             background: 'linear-gradient(90deg, transparent, #C9A24E, transparent)',
           }}
         />
 
         {/* Scroll indicator */}
-        <div className="mt-12 md:mt-16 flex flex-col items-center text-[#C9A24E]/50">
-          <span className="text-xs sm:text-sm tracking-widest mb-3" style={{ fontFamily: 'Raleway, sans-serif' }}>
+        <div 
+          style={{
+            marginTop: '48px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            color: 'rgba(201,162,78,0.5)',
+          }}
+        >
+          <span 
+            style={{ 
+              fontSize: '12px', 
+              letterSpacing: '0.2em', 
+              marginBottom: '12px',
+              fontFamily: 'Raleway, sans-serif',
+            }}
+          >
             SCROLL
           </span>
-          <div className="w-px h-8 md:h-12 bg-gradient-to-b from-[#C9A24E]/50 to-transparent" />
+          <div 
+            style={{
+              width: '1px',
+              height: '40px',
+              background: 'linear-gradient(to bottom, rgba(201,162,78,0.5), transparent)',
+            }}
+          />
         </div>
       </div>
     </section>
