@@ -1,11 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RopeLogo } from './RopeLogo';
-
-// Custom videos - HomePage Hero videos (slow-motion equestrian footage)
-import heroVideo1 from '../assets/media/converted/IMG_1351.mp4';
-import heroVideo2 from '../assets/media/converted/IMG_1354.mp4';
-import heroVideo3 from '../assets/media/converted/IMG_2975.mp4';
 
 interface VideoHeroProps {
   onComplete?: () => void;
@@ -15,110 +10,82 @@ interface VideoHeroProps {
 }
 
 export function VideoHero({ 
-  onComplete, 
-  autoLoop = true, 
   showLogo = true,
-  duration = 20000 
 }: VideoHeroProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [showContent, setShowContent] = useState(false);
-  const [videoError, setVideoError] = useState(false);
 
-  // Array of hero videos to rotate through (3 custom slow-motion videos)
-  const heroVideos = [heroVideo1, heroVideo2, heroVideo3];
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-
-  // Initialize immediately to prevent blank page
+  // Show content immediately
   useEffect(() => {
-    const initTimer = setTimeout(() => {
-      setShowContent(true);
-    }, 100);
-    
-    return () => clearTimeout(initTimer);
+    const timer = setTimeout(() => setShowContent(true), 100);
+    return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    // Handle video loaded
-    const handleCanPlay = () => {
-      setIsLoaded(true);
-      video.play().catch(err => console.log('Video autoplay prevented:', err));
-    };
-
-    // Handle video ended
-    const handleEnded = () => {
-      if (autoLoop) {
-        // Cycle to next video
-        setCurrentVideoIndex((prev) => (prev + 1) % heroVideos.length);
-      } else if (onComplete) {
-        onComplete();
-      }
-    };
-
-    // Fallback timer for placeholder videos that might not trigger canplay
-    const fallbackTimer = setTimeout(() => {
-      if (!isLoaded) {
-        console.log('Video load timeout - showing content anyway');
-        setIsLoaded(true);
-        setShowContent(true);
-      }
-    }, 2000); // Show content after 2 seconds regardless
-
-    video.addEventListener('canplay', handleCanPlay);
-    video.addEventListener('ended', handleEnded);
-    
-    // Also listen for error events
-    const handleError = (e: Event) => {
-      console.log('Video load error, showing content:', e);
-      setIsLoaded(true);
-      setShowContent(true);
-    };
-    video.addEventListener('error', handleError);
-
-    // Show logo after brief delay
-    const logoTimer = setTimeout(() => {
-      setShowContent(true);
-    }, 500);
-
-    return () => {
-      video.removeEventListener('canplay', handleCanPlay);
-      video.removeEventListener('ended', handleEnded);
-      video.removeEventListener('error', handleError);
-      clearTimeout(logoTimer);
-      clearTimeout(fallbackTimer);
-    };
-  }, [currentVideoIndex, autoLoop, onComplete, heroVideos.length, isLoaded]);
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-[#0F0F0F]">
-      {/* Video Background - with fallback for small/placeholder videos */}
-      <motion.video
-        key={currentVideoIndex}
-        ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ willChange: 'opacity, transform', opacity: isLoaded ? 0.3 : 0 }}
-        muted
-        playsInline
-        preload="metadata"
-        autoPlay
-        loop
-        onError={() => {
-          console.log('Video failed to load');
-          setIsLoaded(true);
-          setShowContent(true);
-        }}
-        onLoadStart={() => {
-          console.log('Video loading started');
-        }}
-      >
-        <source src={heroVideos[currentVideoIndex]} type="video/mp4" />
-      </motion.video>
+      {/* Animated Background - elegant dark gradient with particles */}
+      <div className="absolute inset-0">
+        {/* Dark gradient background */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(ellipse at 50% 30%, rgba(201,162,78,0.08) 0%, rgba(15,15,15,1) 60%)',
+          }}
+        />
+        
+        {/* Animated floating particles */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(30)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute rounded-full"
+              style={{
+                width: Math.random() * 4 + 2,
+                height: Math.random() * 4 + 2,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                background: `rgba(201, 162, 78, ${Math.random() * 0.4 + 0.1})`,
+              }}
+              animate={{
+                y: [0, -100, 0],
+                opacity: [0, 0.8, 0],
+                scale: [0.5, 1.2, 0.5],
+              }}
+              transition={{
+                duration: Math.random() * 5 + 5,
+                delay: Math.random() * 3,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            />
+          ))}
+        </div>
 
-      {/* Dark Overlay for Text Readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0F0F0F]/70 via-[#0F0F0F]/40 to-[#0F0F0F]/80" />
+        {/* Subtle animated lines */}
+        <div className="absolute inset-0 overflow-hidden opacity-20">
+          {[...Array(5)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute h-px w-full"
+              style={{
+                top: `${20 + i * 15}%`,
+                background: 'linear-gradient(90deg, transparent, rgba(201,162,78,0.3), transparent)',
+              }}
+              animate={{
+                x: ['-100%', '100%'],
+              }}
+              transition={{
+                duration: 8 + i * 2,
+                delay: i * 0.5,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0F0F0F]/30 via-transparent to-[#0F0F0F]/70" />
 
       {/* Logo and Content Overlay */}
       <AnimatePresence>
@@ -181,17 +148,8 @@ export function VideoHero({
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Loading State */}
-      {!isLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-[#0F0F0F] z-20">
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-            className="w-16 h-16 border-4 border-[#C9A24E]/30 border-t-[#C9A24E] rounded-full"
-          />
-        </div>
-      )}
     </div>
   );
 }
+
+export default VideoHero;
