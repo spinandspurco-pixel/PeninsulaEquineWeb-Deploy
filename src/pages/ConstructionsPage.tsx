@@ -1,11 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Hammer, Award, Shield, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { HorseshoeCursor } from '../components/HorseshoeCursor';
 import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';
 import { ConstructionVideoShowcase } from '../components/ConstructionVideoShowcase';
+import { ArenaIcon, StableIcon, ShelterIcon, FencingIcon, RoundYardIcon, ExcellenceIcon, ProjectsIcon, LaserSignIcon } from '../components/icons/ServiceIcons';
 
 interface ConstructionsPageProps {
   onNavigate: (page: string) => void;
@@ -14,38 +15,63 @@ interface ConstructionsPageProps {
 export function ConstructionsPage({ onNavigate }: ConstructionsPageProps) {
   const expertise = [
     {
-      icon: Hammer,
+      Icon: ArenaIcon,
       title: 'Arenas & Riding Surfaces',
-      description: 'Custom-engineered riding arenas with premium footing systems designed for optimal performance and horse welfare.',
+      description: 'Custom-engineered riding arenas for dressage, jumping, western, and all disciplines with premium footing systems.',
     },
     {
-      icon: Award,
-      title: 'Stable Construction',
-      description: 'Complete stable facilities featuring ventilation, lighting, and drainage systems that prioritize horse health.',
+      Icon: StableIcon,
+      title: 'Barn Homes & Living Quarters',
+      description: 'Luxury barn homes where you live alongside your horses. Complete with loft apartments, tack rooms, and modern amenities.',
     },
     {
-      icon: Shield,
-      title: 'Barn Lofts & Storage',
-      description: 'Efficient storage solutions and loft conversions maximizing space while maintaining structural integrity.',
+      Icon: ExcellenceIcon,
+      title: 'Bespoke Stable Complexes',
+      description: 'From single stalls to multi-horse facilities with wash bays, grooming areas, and climate-controlled environments.',
+    },
+    {
+      Icon: ShelterIcon,
+      title: 'Day Yards & Shelters',
+      description: 'Weather-proof shelters, run-in sheds, and secure day paddocks designed for horse safety and comfort.',
+    },
+    {
+      Icon: FencingIcon,
+      title: 'Premium Fencing Systems',
+      description: 'Post and rail, PVC, electric, and custom fencing solutions that look stunning and keep horses safe.',
+    },
+    {
+      Icon: RoundYardIcon,
+      title: 'Round Yards & Training Pens',
+      description: 'Professional round yards and lunging pens for breaking, training, and rehabilitation.',
+    },
+    {
+      Icon: ProjectsIcon,
+      title: 'Sheds & Storage Buildings',
+      description: 'Feed sheds, hay barns, machinery storage, and workshop buildings built to last.',
+    },
+    {
+      Icon: LaserSignIcon,
+      title: 'Creative Custom Builds',
+      description: 'If you can dream it, we can build it. Unique designs, upmarket finishes, and outside-the-box solutions.',
     },
   ];
 
   const projects = [
     {
-      name: 'Willowbrook Estate Arena',
-      type: 'Olympic-Standard Arena',
+      name: 'Willowbrook Estate',
+      type: 'Barn Home & Arena Complex',
       location: 'Mornington Peninsula',
       image: 'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=800',
     },
     {
       name: 'Heritage Stables',
-      type: 'Premium Stable Complex',
+      type: 'Luxury 12-Stall Facility',
       location: 'Yarra Valley',
       image: 'https://images.unsplash.com/photo-1534682988865-f6a2f7d9f31c?w=800',
     },
     {
-      name: 'Sunset Ridge Facility',
-      type: 'Complete Equestrian Center',
+      name: 'Sunset Ridge Ranch',
+      type: 'Complete Equestrian Estate',
       location: 'Gippsland',
       image: 'https://images.unsplash.com/photo-1560114928-40f1f1eb26a0?w=800',
     },
@@ -96,7 +122,7 @@ export function ConstructionsPage({ onNavigate }: ConstructionsPageProps) {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="text-xl md:text-2xl text-[#F5F4F1]/80 mb-12 font-heading"
           >
-            Building world-class equestrian facilities across Victoria
+            Barn homes, luxury stables, arenas & creative builds — if it's equine, we build it
           </motion.p>
 
           <motion.div
@@ -146,22 +172,22 @@ export function ConstructionsPage({ onNavigate }: ConstructionsPageProps) {
             <div className="w-24 h-1 bg-[#C9A24E] mx-auto" />
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {expertise.map((item, index) => (
               <motion.div
                 key={item.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: index * 0.2, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
                 viewport={{ once: true }}
                 whileHover={{ y: -8 }}
-                className="bg-[#1a1a1a] border border-[#C9A24E]/20 rounded-lg p-8 hover:border-[#C9A24E]/50 transition-all duration-500"
+                className="bg-[#1a1a1a] border border-[#C9A24E]/20 rounded-lg p-6 hover:border-[#C9A24E]/50 transition-all duration-500"
               >
-                <item.icon className="text-[#C9A24E] mb-4" size={48} />
-                <h3 className="text-2xl font-heading text-[#F5F4F1] mb-3">
+                <item.Icon size={48} color="#C9A24E" className="mb-3" />
+                <h3 className="text-lg font-heading text-[#F5F4F1] mb-2">
                   {item.title}
                 </h3>
-                <p className="text-[#F5F4F1]/70 font-body leading-relaxed">
+                <p className="text-sm text-[#F5F4F1]/70 font-body leading-relaxed">
                   {item.description}
                 </p>
               </motion.div>
@@ -262,10 +288,10 @@ export function ConstructionsPage({ onNavigate }: ConstructionsPageProps) {
             <div className="w-24 h-1 bg-[#C9A24E] mx-auto mb-12" />
             
             <p className="text-xl text-[#F5F4F1]/80 leading-relaxed mb-6 font-body">
-              At Peninsula Equine, we believe exceptional equestrian facilities are born from the perfect fusion of craftsmanship, innovation, and understanding of horse welfare.
+              At Peninsula Equine, we don't just build structures — we create bespoke equine environments where horses and their people thrive together. From barn homes where you live alongside your horses, to luxury stables with every amenity imaginable.
             </p>
             <p className="text-lg text-[#F5F4F1]/70 leading-relaxed font-body">
-              Every project begins in the dirt and evolves into a dynasty—a lasting legacy where champions are made and horses thrive.
+              Ciro brings 20+ years of hands-on expertise and an outside-the-box creative approach. If you can dream it, we can build it. No project is too unique, no vision too ambitious.
             </p>
           </motion.div>
         </div>
@@ -281,10 +307,10 @@ export function ConstructionsPage({ onNavigate }: ConstructionsPageProps) {
           className="max-w-4xl mx-auto text-center"
         >
           <h2 className="text-4xl md:text-5xl font-display text-[#C9A24E] mb-6">
-            Ready to Build Your Vision?
+            Ready to Build Something Amazing?
           </h2>
           <p className="text-xl text-[#F5F4F1]/70 mb-10 font-heading">
-            Let's discuss how we can bring your equestrian facility to life
+            Barn homes, stables, arenas, sheds — let's bring your equine vision to life
           </p>
           <Button
             onClick={() => onNavigate('contact')}

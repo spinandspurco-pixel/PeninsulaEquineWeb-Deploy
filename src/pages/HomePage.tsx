@@ -12,7 +12,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
     <div style={{ minHeight: '100vh', backgroundColor: '#0F0F0F' }}>
       <HorseshoeCursor />
       <Navigation onNavigate={onNavigate} currentPage="home" />
-      <VideoHero showLogo={true} />
+      <VideoHero onNavigate={onNavigate} />
       <Footer onNavigate={onNavigate} />
     </div>
   );

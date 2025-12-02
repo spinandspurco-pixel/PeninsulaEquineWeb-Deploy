@@ -69,7 +69,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
           </h1>
           <div className="w-24 h-1 bg-[#C9A24E] mx-auto mb-8" />
           <p className="text-xl text-[#F5F4F1]/70 font-heading">
-            Let's discuss your equestrian facility or custom fabrication project
+            Barn homes, arenas, stables, sheds — let's discuss your equine vision
           </p>
         </motion.div>
       </section>
@@ -146,7 +146,7 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
                     value={formData.projectType}
                     onChange={handleChange}
                     className="bg-[#0F0F0F] border-[#C9A24E]/30 text-[#F5F4F1] focus:border-[#C9A24E] font-body"
-                    placeholder="e.g., Arena, Stable, Laser Cutting"
+                    placeholder="e.g., Barn Home, Arena, Stables, Shed, Custom Build"
                   />
                 </div>
 

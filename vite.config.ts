@@ -19,6 +19,7 @@
         'figma:asset/b240d68ef405df3625942c8c59e92356e413a2a6.png': path.resolve(__dirname, './src/assets/b240d68ef405df3625942c8c59e92356e413a2a6.png'),
         'figma:asset/43b0d27420f20197681aa3cacbf2abda7c055e3d.png': path.resolve(__dirname, './src/assets/43b0d27420f20197681aa3cacbf2abda7c055e3d.png'),
         'figma:asset/3d9c8a295cf5073a32cc71d11d62be98bf8933bc.png': path.resolve(__dirname, './src/assets/3d9c8a295cf5073a32cc71d11d62be98bf8933bc.png'),
+        'horse-rider-silhouette': path.resolve(__dirname, './src/assets/horse-rider-silhouette.png'),
         'embla-carousel-react@8.6.0': 'embla-carousel-react',
         'cmdk@1.1.1': 'cmdk',
         'class-variance-authority@0.7.1': 'class-variance-authority',

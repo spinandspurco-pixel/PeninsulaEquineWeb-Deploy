@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Rocket, Sparkles, ShoppingBag, Palette, ArrowRight, Bell } from 'lucide-react';
+import { Rocket, ArrowRight, Bell } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { HorseshoeCursor } from '../components/HorseshoeCursor';
 import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';
 import { toast } from 'sonner';
+import { LaserSignIcon, ExcellenceIcon, PrecisionIcon } from '../components/icons/ServiceIcons';
 
 interface ShopPageProps {
   onNavigate: (page: string) => void;
@@ -24,17 +25,17 @@ export function ShopPage({ onNavigate }: ShopPageProps) {
 
   const comingSoonFeatures = [
     {
-      icon: Palette,
+      Icon: PrecisionIcon,
       title: 'Custom Designs',
       description: 'Unique laser-cut pieces tailored to your vision',
     },
     {
-      icon: ShoppingBag,
+      Icon: LaserSignIcon,
       title: 'Ready-Made Items',
       description: 'Curated collection of artistic laser-cut pieces',
     },
     {
-      icon: Sparkles,
+      Icon: ExcellenceIcon,
       title: 'Limited Editions',
       description: 'Exclusive pieces from master craftsmen',
     },
@@ -89,7 +90,7 @@ export function ShopPage({ onNavigate }: ShopPageProps) {
           ))}
           
           {/* Additional floating icons */}
-          {[Palette, ShoppingBag, Sparkles].map((Icon, i) => (
+          {[PrecisionIcon, LaserSignIcon, ExcellenceIcon].map((Icon, i) => (
             <motion.div
               key={`icon-${i}`}
               className="absolute"
@@ -111,11 +112,8 @@ export function ShopPage({ onNavigate }: ShopPageProps) {
               }}
             >
               <Icon 
-                className="text-[#C9A24E]" 
                 size={24 + i * 8}
-                style={{
-                  filter: 'drop-shadow(0 0 8px rgba(201, 162, 78, 0.4))',
-                }}
+                color="#C9A24E"
               />
             </motion.div>
           ))}
@@ -325,12 +323,9 @@ export function ShopPage({ onNavigate }: ShopPageProps) {
                   transition={{ duration: 0.5 }}
                   className="mb-4 inline-block"
                 >
-                  <item.icon 
-                    className="text-[#C9A24E]" 
-                    size={48}
-                    style={{
-                      filter: 'drop-shadow(0 0 10px rgba(201, 162, 78, 0.5))',
-                    }}
+                  <item.Icon 
+                    size={56}
+                    color="#C9A24E"
                   />
                 </motion.div>
                 

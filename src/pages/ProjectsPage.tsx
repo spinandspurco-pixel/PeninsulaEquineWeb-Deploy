@@ -21,7 +21,7 @@ interface ProjectsPageProps {
   onNavigate: (page: string) => void;
 }
 
-type ProjectCategory = 'All' | 'Arenas' | 'Barn Lofts' | 'Stables' | 'Laser Designs';
+type ProjectCategory = 'All' | 'Arenas' | 'Barn Homes' | 'Stables' | 'Sheds & Storage' | 'Custom Builds';
 
 interface Project {
   id: number;
@@ -38,63 +38,63 @@ export function ProjectsPage({ onNavigate }: ProjectsPageProps) {
   const projects: Project[] = [
     {
       id: 1,
-      name: 'Premium Arena Construction',
-      category: 'Arenas',
+      name: 'Luxury Barn Home Estate',
+      category: 'Barn Homes',
       location: 'Mornington Peninsula',
       image: img1,
-      description: 'Professional arena construction with premium materials and expert craftsmanship',
+      description: 'Complete barn home with living quarters above a 6-stall stable complex',
     },
     {
       id: 2,
-      name: 'Elite Equestrian Facility',
+      name: 'Olympic Dressage Arena',
       category: 'Arenas',
       location: 'Peninsula Region',
       image: img2,
-      description: 'State-of-the-art training facility with custom design and premium finishes',
+      description: 'Competition-grade 60x20m arena with premium sand and fiber footing',
     },
     {
       id: 3,
-      name: 'Custom Arena Build',
+      name: 'Western Training Arena',
       category: 'Arenas',
-      location: 'Victoria',
+      location: 'Gippsland',
       image: img3,
-      description: 'Purpose-built arena tailored to client specifications',
+      description: 'Custom arena with specialized footing for reining and cutting',
     },
     {
       id: 4,
-      name: 'Heritage Stables Complex',
+      name: '12-Stall Stable Complex',
       category: 'Stables',
       location: 'Macedon Ranges',
       image: img4,
-      description: 'Traditional stable design with modern amenities and horse welfare focus',
+      description: 'Luxury stable with wash bay, tack room, and climate control',
     },
     {
       id: 5,
-      name: 'Championship Arena',
-      category: 'Arenas',
-      location: 'Mornington Peninsula',
+      name: 'Barn Home with Loft Living',
+      category: 'Barn Homes',
+      location: 'Yarra Valley',
       image: img5,
-      description: 'Professional-grade arena designed for competition and training',
+      description: 'Stunning 2-bedroom loft apartment above 4 stalls with indoor connection',
     },
     {
       id: 6,
-      name: 'Premium Stable Facility',
-      category: 'Stables',
+      name: 'Premium Hay Barn & Storage',
+      category: 'Sheds & Storage',
       location: 'Werribee',
       image: img6,
-      description: 'Luxury stable facility with ventilation and lighting systems',
+      description: 'Large-scale hay storage with equipment shed and workshop',
     },
     {
       id: 7,
-      name: 'Elite Training Center',
-      category: 'Arenas',
+      name: 'Creative Round Yard Complex',
+      category: 'Custom Builds',
       location: 'Gippsland',
       image: img7,
-      description: 'Complete training facility with covered arena and premium footing',
+      description: 'Unique design with covered round yard connected to day yards',
     },
     {
       id: 8,
-      name: 'Custom Stable Build',
+      name: 'Heritage Style Stable',
       category: 'Stables',
       location: 'Peninsula',
       image: img8,
@@ -102,15 +102,15 @@ export function ProjectsPage({ onNavigate }: ProjectsPageProps) {
     },
     {
       id: 9,
-      name: 'Championship Horse',
-      category: 'Stables',
+      name: 'Machinery & Feed Shed',
+      category: 'Sheds & Storage',
       location: 'Victoria',
       image: horseImg,
-      description: 'OP Whiz Me Up - Elite performance horse',
+      description: 'Large machinery shed with integrated feed room and storage',
     },
   ];
 
-  const categories: ProjectCategory[] = ['All', 'Arenas', 'Barn Lofts', 'Stables', 'Laser Designs'];
+  const categories: ProjectCategory[] = ['All', 'Arenas', 'Barn Homes', 'Stables', 'Sheds & Storage', 'Custom Builds'];
 
   const filteredProjects = activeFilter === 'All' 
     ? projects 
@@ -136,7 +136,7 @@ export function ProjectsPage({ onNavigate }: ProjectsPageProps) {
           </h1>
           <div className="w-24 h-1 bg-[#C9A24E] mx-auto mb-8" />
           <p className="text-xl text-[#F5F4F1]/70 font-heading">
-            Explore our portfolio of world-class equestrian facilities across Victoria
+            Barn homes, arenas, stables, sheds & creative builds across Victoria
           </p>
         </motion.div>
       </section>

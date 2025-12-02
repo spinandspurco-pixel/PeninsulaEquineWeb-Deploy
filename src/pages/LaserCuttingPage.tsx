@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Zap, Sparkles, Handshake, ArrowRight, Bell, Rocket, Users, Layers } from 'lucide-react';
+import { ArrowRight, Bell, Rocket, Users } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { HorseshoeCursor } from '../components/HorseshoeCursor';
 import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';
 import { toast } from 'sonner';
+import { LaserSignIcon, PrecisionIcon, ExcellenceIcon } from '../components/icons/ServiceIcons';
 
 interface LaserCuttingPageProps {
   onNavigate: (page: string) => void;
@@ -24,17 +25,17 @@ export function LaserCuttingPage({ onNavigate }: LaserCuttingPageProps) {
 
   const upcomingCapabilities = [
     {
-      icon: Zap,
+      Icon: PrecisionIcon,
       title: 'Precision Cutting',
       description: 'State-of-the-art laser technology for intricate designs and complex patterns in premium metals.',
     },
     {
-      icon: Layers,
+      Icon: LaserSignIcon,
       title: 'Custom Fabrication',
       description: 'From architectural elements to decorative panels—bringing creative visions to life.',
     },
     {
-      icon: Sparkles,
+      Icon: ExcellenceIcon,
       title: 'Design Excellence',
       description: 'Collaborative process from concept to completion with expert design consultation.',
     },
@@ -395,12 +396,9 @@ export function LaserCuttingPage({ onNavigate }: LaserCuttingPageProps) {
                   transition={{ duration: 0.5 }}
                   className="mb-4 inline-block"
                 >
-                  <item.icon 
-                    className="text-[#C9A24E]" 
-                    size={48}
-                    style={{
-                      filter: 'drop-shadow(0 0 12px rgba(201, 162, 78, 0.6))',
-                    }}
+                  <item.Icon 
+                    size={56}
+                    color="#C9A24E"
                   />
                 </motion.div>
                 

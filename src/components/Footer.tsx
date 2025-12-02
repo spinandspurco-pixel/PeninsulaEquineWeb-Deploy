@@ -1,6 +1,5 @@
 import React from 'react';
 import { Facebook, Instagram, Linkedin, Mail } from 'lucide-react';
-import logoImage from 'figma:asset/b9178ba3036a87efeb1339130ac7e759231a49b3.png';
 
 interface FooterProps {
   onNavigate: (page: string) => void;
@@ -15,28 +14,9 @@ export function Footer({ onNavigate }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="relative w-12 h-12">
-                <div 
-                  className="absolute inset-0"
-                  style={{
-                    backgroundImage: 'linear-gradient(135deg, #C9A24E 0%, #A88B63 100%)',
-                  }}
-                />
-                <img
-                  src={logoImage}
-                  alt="Peninsula Equine"
-                  className="w-full h-full relative"
-                  style={{
-                    mixBlendMode: 'darken',
-                    filter: 'invert(1) grayscale(1) brightness(2.1) contrast(2)',
-                  }}
-                />
-              </div>
-              <div>
-                <div className="font-display">Peninsula Equine</div>
-                <div className="text-[#C9A24E] text-xs tracking-[0.2em] font-heading">FROM DIRT TO DYNASTY</div>
-              </div>
+            <div className="mb-4">
+              <div className="font-display text-xl text-[#C9A24E]">Peninsula Equine</div>
+              <div className="text-[#F5F4F1]/60 text-xs tracking-[0.2em] font-heading">FROM DIRT TO DYNASTY</div>
             </div>
             <p className="text-[#F5F4F1]/60 mb-6 max-w-md font-body">
               Building exceptional equestrian facilities across Victoria for over 20 years. 
@@ -124,9 +104,6 @@ export function Footer({ onNavigate }: FooterProps) {
               <a href="#" className="hover:text-[#C9A24E] transition-colors">
                 Terms of Service
               </a>
-              <button onClick={() => onNavigate('portal')} className="hover:text-[#C9A24E] transition-colors">
-                Crew Portal
-              </button>
             </div>
           </div>
         </div>

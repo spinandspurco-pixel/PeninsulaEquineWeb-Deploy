@@ -5,7 +5,7 @@ import { FenceIcon } from './icons/FenceIcon';
 import { ShopIcon } from './icons/ShopIcon';
 import { GalleryIcon } from './icons/GalleryIcon';
 import { ContactIcon } from './icons/ContactIcon';
-import { Menu, X, Shield } from 'lucide-react';
+import { Shield } from 'lucide-react';
 
 interface NavigationProps {
   onNavigate: (page: string) => void;
@@ -14,7 +14,6 @@ interface NavigationProps {
 
 export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps) {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,7 +25,10 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
 
   const handleNavClick = (page: string) => {
     onNavigate(page);
-    setIsMobileMenuOpen(false);
+  };
+
+  const handleNavClick = (page: string) => {
+    onNavigate(page);
   };
 
   const navItems = [
@@ -46,13 +48,16 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo/Brand - Mobile */}
-          <div className="md:hidden">
-            <span className="text-[#C9A24E] font-display text-lg">PE</span>
-          </div>
+          {/* Logo/Brand - Phones only (below 640px) */}
+          <button 
+            onClick={() => handleNavClick('home')}
+            className="sm:hidden flex items-center gap-2"
+          >
+            <span className="text-[#C9A24E] font-display text-base">Peninsula Equine</span>
+          </button>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center justify-center flex-1 gap-0.5 lg:gap-2">
+          {/* Navigation - responsive layout */}
+          <div className="flex items-center justify-center flex-1 gap-1 md:gap-2 flex-wrap">
             {navItems.map((item) => {
               const isActive = currentPage === item.value;
               
@@ -71,7 +76,7 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
                     color={isActive ? '#C9A24E' : '#A88B63'} 
                   />
                   <span 
-                    className="text-xs lg:text-sm tracking-wide hidden lg:inline"
+                    className="text-xs sm:text-sm tracking-wide hidden sm:inline"
                     style={{ fontFamily: 'Raleway, sans-serif' }}
                   >
                     {item.label}
@@ -87,53 +92,15 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
             {/* Portal Button */}
             <button
               onClick={() => handleNavClick('portal')}
-              className="ml-1 lg:ml-4 bg-[#C9A24E] hover:bg-[#A88B63] text-[#0F0F0F] font-medium px-3 lg:px-4 py-2 rounded-lg flex items-center gap-1 lg:gap-2 transition-colors duration-200"
+              className="ml-2 bg-[#C9A24E] hover:bg-[#A88B63] text-[#0F0F0F] font-medium px-2 sm:px-4 py-2 rounded-lg flex items-center gap-1 transition-colors duration-200"
               style={{ fontFamily: 'Raleway, sans-serif' }}
             >
               <Shield size={16} />
-              <span className="text-xs lg:text-sm hidden lg:inline">Portal</span>
+              <span className="text-xs sm:text-sm">Portal</span>
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-[#F5F4F1] p-2 hover:bg-[#C9A24E]/10 rounded-lg transition-colors"
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden pb-4 border-t border-[#C9A24E]/20">
-            <div className="flex flex-col gap-1 pt-4">
-              {navItems.map((item) => (
-                <button
-                  key={item.value}
-                  onClick={() => handleNavClick(item.value)}
-                  className={`text-left py-3 px-4 flex items-center gap-3 rounded-lg transition-colors ${
-                    currentPage === item.value
-                      ? 'text-[#C9A24E] bg-[#C9A24E]/10'
-                      : 'text-[#F5F4F1] hover:bg-[#C9A24E]/5'
-                  }`}
-                >
-                  <item.Icon size={22} color={currentPage === item.value ? '#C9A24E' : '#A88B63'} />
-                  <span style={{ fontFamily: 'Raleway, sans-serif' }}>{item.label}</span>
-                </button>
-              ))}
-              <button
-                onClick={() => handleNavClick('portal')}
-                className="mt-2 bg-[#C9A24E] hover:bg-[#A88B63] text-[#0F0F0F] font-medium w-full py-3 rounded-lg flex items-center justify-center gap-2 transition-colors"
-                style={{ fontFamily: 'Raleway, sans-serif' }}
-              >
-                <Shield size={18} />
-                <span>Portal</span>
-              </button>
-            </div>
-          </div>
-        )}
       </div>
     </nav>
   );
