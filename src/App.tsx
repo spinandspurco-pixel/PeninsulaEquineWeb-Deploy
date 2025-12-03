@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import { HomePage } from './pages/HomePage';
-import { ConstructionsPage } from './pages/ConstructionsPage';
-import { LaserCuttingPage } from './pages/LaserCuttingPage';
+import { CleanConstructionsPage } from './components/CleanConstructionsPage';
+import { CleanLaserCuttingPage } from './components/CleanLaserCuttingPage';
 import { ShopPage } from './pages/ShopPage';
 import { ProjectsPage } from './pages/ProjectsPage';
 import { ContactPage } from './pages/ContactPage';
-import { PortalPage } from './pages/PortalPage';
+import { CleanPortalPage } from './components/CleanPortalPage';
 import { LoginPage } from './pages/LoginPage';
 import { DashboardPage } from './pages/DashboardPage';
 // Portal/Worker Pages
@@ -108,12 +108,12 @@ function AppContent() {
         )}
         {currentPage === 'constructions' && (
           <div key="constructions" className="page-wrapper">
-            <ConstructionsPage onNavigate={handleNavigate} />
+            <CleanConstructionsPage onNavigate={handleNavigate} />
           </div>
         )}
-        {currentPage === 'laser' && (
+        {currentPage === 'laser-cutting' && (
           <div key="laser" className="page-wrapper">
-            <LaserCuttingPage onNavigate={handleNavigate} />
+            <CleanLaserCuttingPage onNavigate={handleNavigate} />
           </div>
         )}
         {currentPage === 'shop' && (
@@ -143,7 +143,7 @@ function AppContent() {
           />
         )}
         {currentPage === 'portal' && isAuthenticated && (
-          <PortalPage onNavigate={handleNavigate} />
+          <CleanPortalPage onNavigate={handleNavigate} />
         )}
         
         {/* Worker Dashboard & Pages */}
