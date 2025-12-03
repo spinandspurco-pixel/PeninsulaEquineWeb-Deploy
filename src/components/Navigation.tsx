@@ -13,26 +13,42 @@ interface NavigationProps {
   currentPage?: string;
 }
 
-// Professional brand logo component
+// Premium brand logo component
 function BrandLogo() {
   return (
-    <div className="flex items-center gap-3">
+    <motion.div 
+      className="flex items-center gap-4 cursor-pointer"
+      whileHover={{ scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 300 }}
+    >
       <motion.div
-        className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-[#C9A24E] to-[#8B7355] flex items-center justify-center shadow-lg"
-        whileHover={{ scale: 1.05 }}
-        transition={{ type: "spring", stiffness: 300 }}
+        className="relative w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-gold flex items-center justify-center shadow-gold group"
+        whileHover={{ rotate: [0, -5, 5, 0] }}
+        transition={{ duration: 0.6 }}
       >
-        <HorseshoeIcon className="w-5 h-5 md:w-6 md:h-6 text-white" />
+        <HorseshoeIcon className="w-6 h-6 md:w-7 md:h-7 text-background transition-transform group-hover:scale-110" />
+        
+        {/* Subtle glow effect */}
+        <div className="absolute inset-0 rounded-2xl bg-gradient-gold opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300" />
       </motion.div>
+      
       <div className="hidden sm:block">
-        <h1 className="text-lg md:text-xl font-bold text-[#C9A24E] font-display tracking-tight">
+        <motion.h1 
+          className="text-xl md:text-2xl font-display font-bold text-gradient-gold tracking-tight"
+          initial={{ opacity: 0.8 }}
+          animate={{ opacity: 1 }}
+        >
           Peninsula Equine
-        </h1>
-        <p className="text-xs text-gray-400 font-light tracking-wide">
-          Constructions
-        </p>
+        </motion.h1>
+        <motion.p 
+          className="text-sm text-foreground-muted font-medium tracking-wider"
+          initial={{ opacity: 0.6 }}
+          animate={{ opacity: 0.8 }}
+        >
+          Premium Constructions
+        </motion.p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -87,11 +103,14 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
 
   return (
     <>
-      <nav
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled 
-            ? 'bg-[#0F0F0F]/98 backdrop-blur-xl shadow-2xl' 
-            : 'bg-[#0F0F0F]/90 backdrop-blur-sm'
+            ? 'glass-card-strong shadow-2xl border-b border-border-light' 
+            : 'bg-background/90 backdrop-blur-md'
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -115,12 +134,15 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
                   <motion.button
                     key={item.value}
                     onClick={() => handleNavClick(item.value)}
-                    className={`nav-button relative py-3 px-6 flex items-center gap-3 rounded-xl transition-all duration-300 group font-medium ${
+                    className={`relative py-3 px-6 flex items-center gap-3 rounded-2xl transition-all duration-300 group font-medium overflow-hidden ${
                       isActive
-                        ? 'text-[#0F0F0F] bg-[#C9A24E] shadow-lg shadow-[#C9A24E]/25'
-                        : 'text-[#F5F4F1] hover:text-[#C9A24E] hover:bg-[#C9A24E]/15 hover:shadow-md'
+                        ? 'text-background bg-gradient-gold shadow-gold'
+                        : 'text-foreground hover:text-gold-400 hover:bg-gold-500/10 glass-card'
                     }`}
-                    whileHover={{ scale: 1.05, y: -1 }}
+                    whileHover={{ 
+                      scale: 1.05, 
+                      y: -2,
+                    }}
                     whileTap={{ scale: 0.95 }}
                     aria-label={`Navigate to ${item.label} page`}
                     type="button"
@@ -136,17 +158,20 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
               );
             })}
             
-              {/* Portal Button */}
+              {/* Premium Portal Button */}
               <motion.button
                 onClick={() => handleNavClick('portal')}
-                className="nav-button ml-6 bg-gradient-to-r from-[#C9A24E] to-[#A88B63] hover:from-[#D4B366] hover:to-[#C9A24E] text-[#0F0F0F] font-semibold px-8 py-3.5 rounded-xl flex items-center gap-3 transition-all duration-300 shadow-lg shadow-[#C9A24E]/20 hover:shadow-xl hover:shadow-[#C9A24E]/30"
-                whileHover={{ scale: 1.05, y: -2 }}
+                className="btn-premium ml-8 px-8 py-4 flex items-center gap-3 font-bold cursor-pointer"
+                whileHover={{ 
+                  scale: 1.05, 
+                  y: -2,
+                }}
                 whileTap={{ scale: 0.95 }}
                 aria-label="Access Peninsula Equine Portal"
                 type="button"
               >
                 <Shield size={20} />
-                <span className="text-sm font-bold">Portal</span>
+                <span className="text-sm font-bold tracking-wide">Portal</span>
               </motion.button>
             </div>
 
@@ -160,7 +185,7 @@ export function Navigation({ onNavigate, currentPage = 'home' }: NavigationProps
             </motion.button>
           </div>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Mobile Menu Overlay - Only show on mobile when menu is open */}
       <AnimatePresence>

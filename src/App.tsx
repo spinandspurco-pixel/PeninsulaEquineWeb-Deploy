@@ -25,7 +25,7 @@ import { AdminAllSubmissionsPage } from './pages/AdminAllSubmissionsPage';
 // Components
 import { IntroScreen } from './components/IntroScreen';
 import { ChangePasswordDialog } from './components/ChangePasswordDialog';
-import { HorseshoeCursor } from './components/HorseshoeCursor';
+import { HorseshoeCursor } from './components/EnhancedHorseshoeCursor';
 import { Toaster } from './components/ui/sonner';
 import { getCurrentUser, changePassword, signOut } from './lib/firebase-service';
 import { toast } from 'sonner';
