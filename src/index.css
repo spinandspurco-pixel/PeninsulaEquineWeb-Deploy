@@ -508,16 +508,7 @@
     font-family: var(--font-body);
   }
 
-  /* Custom cursor only on devices with fine pointer (mouse) */
-  @media (pointer: fine) {
-    body {
-      cursor: none;
-    }
-
-    * {
-      cursor: none !important;
-    }
-  }
+  /* Cursor handled by HorseshoeCursor component */
 
   :where(:not(:has([class*=" text-"])):not(:has([class^="text-"]))) h1 {
     font-size: var(--text-2xl);

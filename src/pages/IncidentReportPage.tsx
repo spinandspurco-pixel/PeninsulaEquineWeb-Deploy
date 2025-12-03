@@ -15,7 +15,6 @@ import {
 } from '../components/ui/select';
 import { toast } from 'sonner';
 import { useTheme } from '../context/ThemeContext';
-import { HorseshoeCursor } from '../components/HorseshoeCursor';
 import { getCurrentUser, submitIncidentReport } from '../lib/firebase-service';
 
 interface IncidentReportPageProps {
@@ -86,8 +85,6 @@ export function IncidentReportPage({ onBack }: IncidentReportPageProps) {
 
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-[#111111]' : 'bg-[#F5F4F1]'}`}>
-      <HorseshoeCursor />
-      
       <div className={`border-b ${theme === 'dark' ? 'bg-[#0F0F0F] border-red-500/30' : 'bg-white border-red-500/40'}`}>
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">

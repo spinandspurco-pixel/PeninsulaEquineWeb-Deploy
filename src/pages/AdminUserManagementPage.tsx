@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, UserPlus, CheckCircle, XCircle, Sun, Moon, Shield, User, Lock } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
-import { HorseshoeCursor } from '../components/HorseshoeCursor';
 import { useTheme } from '../context/ThemeContext';
 import {
   getAllUsers,
@@ -131,8 +130,6 @@ export function AdminUserManagementPage({ onBack }: AdminUserManagementPageProps
 
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-[#111111]' : 'bg-[#F5F4F1]'}`}>
-      <HorseshoeCursor />
-      
       {/* Header */}
       <div className={`border-b ${theme === 'dark' ? 'bg-[#0F0F0F] border-[#C9A24E]/20' : 'bg-white border-[#C9A24E]/30'}`}>
         <div className="container mx-auto px-4 py-4">

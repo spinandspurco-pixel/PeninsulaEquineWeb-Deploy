@@ -4,7 +4,6 @@ import { ArrowLeft, Lock, Mail, Eye, EyeOff, Sun, Moon } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
-import { HorseshoeCursor } from '../components/HorseshoeCursor';
 import { Footer } from '../components/Footer';
 import type { UserRole } from '../types';
 import { toast } from 'sonner';
@@ -41,7 +40,6 @@ export function LoginPage({ onLogin, onBack, onNavigate }: LoginPageProps) {
 
   return (
     <div className="min-h-screen bg-[#0F0F0F] flex items-center justify-center p-6">
-      <HorseshoeCursor />
       {/* Simple Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0F0F0F] via-[#1a1a1a] to-[#0F0F0F]"></div>
       

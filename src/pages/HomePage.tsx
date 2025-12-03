@@ -1,4 +1,3 @@
-import { HorseshoeCursor } from '../components/HorseshoeCursor';
 import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';
 import { VideoHero } from '../components/VideoHero';
@@ -10,7 +9,6 @@ interface HomePageProps {
 export function HomePage({ onNavigate }: HomePageProps) {
   return (
     <div className="page-container">
-      <HorseshoeCursor />
       <Navigation onNavigate={onNavigate} currentPage="home" />
       <VideoHero onNavigate={onNavigate} />
       <Footer onNavigate={onNavigate} />

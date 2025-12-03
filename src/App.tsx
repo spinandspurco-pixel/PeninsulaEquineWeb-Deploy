@@ -25,6 +25,7 @@ import { AdminAllSubmissionsPage } from './pages/AdminAllSubmissionsPage';
 // Components
 import { IntroScreen } from './components/IntroScreen';
 import { ChangePasswordDialog } from './components/ChangePasswordDialog';
+import { HorseshoeCursor } from './components/HorseshoeCursor';
 import { Toaster } from './components/ui/sonner';
 import { getCurrentUser, changePassword, signOut } from './lib/firebase-service';
 import { toast } from 'sonner';
@@ -98,6 +99,7 @@ function AppContent() {
 
   return (
     <>
+      <HorseshoeCursor />
       <main className="min-h-screen bg-[#0F0F0F]" role="main" aria-label="Main content">
         {currentPage === 'home' && (
           <div key="home" className="page-wrapper">

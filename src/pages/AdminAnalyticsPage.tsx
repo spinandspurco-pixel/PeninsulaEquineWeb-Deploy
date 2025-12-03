@@ -20,7 +20,6 @@ import {
 } from 'recharts';
 import { toast } from 'sonner';
 import { useTheme } from '../context/ThemeContext';
-import { HorseshoeCursor } from '../components/HorseshoeCursor';
 
 interface AdminAnalyticsPageProps {
   onBack: () => void;
@@ -64,8 +63,6 @@ export function AdminAnalyticsPage({ onBack }: AdminAnalyticsPageProps) {
 
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-[#111111]' : 'bg-[#F5F4F1]'}`}>
-      <HorseshoeCursor />
-      
       {/* Header */}
       <div className={`border-b ${theme === 'dark' ? 'bg-[#0F0F0F] border-[#C9A24E]/20' : 'bg-white border-[#C9A24E]/30'}`}>
         <div className="container mx-auto px-4 py-4">

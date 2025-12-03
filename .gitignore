@@ -34,3 +34,4 @@ src/assets/media/enhanced/
 
 # Temporary upload directory (use for processing only)
 uploads/
+.env*.local

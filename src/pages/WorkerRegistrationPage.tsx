@@ -4,7 +4,6 @@ import { ArrowLeft, UserPlus, Mail, Lock, User, Eye, EyeOff, Sun, Moon } from 'l
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
-import { HorseshoeCursor } from '../components/HorseshoeCursor';
 import { toast } from 'sonner';
 import { useTheme } from '../context/ThemeContext';
 import { registerUser } from '../lib/firebase-service';
@@ -70,11 +69,10 @@ export function WorkerRegistrationPage({ onBack, onSuccess }: WorkerRegistration
   };
 
   return (
-    <div className={`min-h-screen relative overflow-hidden ${theme === 'dark' ? 'bg-[#111111]' : 'bg-[#F5F4F1]'}`}>
-      <HorseshoeCursor />
-      
-      {/* Background Effects */}
-      <div className="absolute inset-0">
+    <>
+      <div className={`min-h-screen relative overflow-hidden ${theme === 'dark' ? 'bg-[#111111]' : 'bg-[#F5F4F1]'}`}>
+        {/* Background Effects */}
+        <div className="absolute inset-0">
         <div 
           className={`absolute inset-0 ${theme === 'dark' ? 'opacity-20' : 'opacity-10'}`}
           style={{
@@ -100,7 +98,6 @@ export function WorkerRegistrationPage({ onBack, onSuccess }: WorkerRegistration
         />
       </div>
 
-      {/* Content */}
       <div className="relative z-10 min-h-screen flex flex-col">
         {/* Header */}
         <div className="container mx-auto px-4 py-6 flex justify-between items-center">
@@ -287,5 +284,6 @@ export function WorkerRegistrationPage({ onBack, onSuccess }: WorkerRegistration
         </div>
       </div>
     </div>
+    </>
   );
 }

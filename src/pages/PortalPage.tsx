@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Shield, Users } from 'lucide-react';
 import { Button } from '../components/ui/button';
-import { HorseshoeCursor } from '../components/HorseshoeCursor';
 import { RopeLogo } from '../components/RopeLogo';
 import { Footer } from '../components/Footer';
 
@@ -12,10 +11,10 @@ interface PortalPageProps {
 
 export function PortalPage({ onNavigate }: PortalPageProps) {
   return (
-    <div className="min-h-screen bg-neutral-900 relative overflow-hidden">
-      <HorseshoeCursor />
-      {/* Background Effects */}
-      <div className="absolute inset-0">
+    <>
+      <div className="min-h-screen bg-neutral-900 relative overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0">
         <motion.div
           className="absolute top-0 left-0 w-96 h-96 bg-amber-600/20 rounded-full blur-3xl"
           animate={{
@@ -44,7 +43,6 @@ export function PortalPage({ onNavigate }: PortalPageProps) {
         />
       </div>
 
-      {/* Content */}
       <div className="relative z-10 min-h-screen flex flex-col">
         {/* Header */}
         <div className="container mx-auto px-4 py-6">
@@ -221,5 +219,6 @@ export function PortalPage({ onNavigate }: PortalPageProps) {
       </div>
       <Footer onNavigate={onNavigate} />
     </div>
+    </>
   );
 }

@@ -6,7 +6,6 @@ import { Input } from '../components/ui/input';
 import { Card } from '../components/ui/card';
 import { toast } from 'sonner';
 import { useTheme } from '../context/ThemeContext';
-import { HorseshoeCursor } from '../components/HorseshoeCursor';
 import { getAllTimesheets, approveTimesheet, rejectTimesheet, getCurrentUser, type Timesheet } from '../lib/firebase-service';
 
 interface AdminTimesheetsPageProps {
@@ -81,8 +80,6 @@ export function AdminTimesheetsPage({ onBack }: AdminTimesheetsPageProps) {
 
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-[#111111]' : 'bg-[#F5F4F1]'}`}>
-      <HorseshoeCursor />
-      
       {/* Header */}
       <div className={`border-b ${theme === 'dark' ? 'bg-[#0F0F0F] border-[#C9A24E]/20' : 'bg-white border-[#C9A24E]/30'}`}>
         <div className="container mx-auto px-4 py-4">

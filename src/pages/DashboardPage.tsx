@@ -5,7 +5,6 @@ import {
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
-import { HorseshoeCursor } from '../components/HorseshoeCursor';
 import { Footer } from '../components/Footer';
 import type { UserRole } from '../types';
 import { useTheme } from '../context/ThemeContext';
@@ -30,8 +29,6 @@ export function DashboardPage({ userRole, onLogout, onNavigate }: DashboardPageP
 
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-[#111111]' : 'bg-[#F5F4F1]'}`}>
-      <HorseshoeCursor />
-      
       {/* Header */}
       <div className={`border-b ${theme === 'dark' ? 'bg-[#0F0F0F] border-[#C9A24E]/20' : 'bg-white border-[#C9A24E]/30'}`}>
         <div className="container mx-auto px-4 py-4">

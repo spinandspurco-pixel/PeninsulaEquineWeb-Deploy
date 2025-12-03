@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Filter } from 'lucide-react';
 import { Button } from '../components/ui/button';
-import { HorseshoeCursor } from '../components/HorseshoeCursor';
 import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';
 // Placeholder images - will be replaced with real hosted images
@@ -119,7 +118,6 @@ export function ProjectsPage({ onNavigate }: ProjectsPageProps) {
 
   return (
     <div className="min-h-screen bg-[#0F0F0F]">
-      <HorseshoeCursor />
       <Navigation onNavigate={onNavigate} currentPage="projects" />
       
       {/* Hero Section */}

@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Rocket, ArrowRight, Bell } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
-import { HorseshoeCursor } from '../components/HorseshoeCursor';
 import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';
 import { toast } from 'sonner';
@@ -43,7 +42,6 @@ export function ShopPage({ onNavigate }: ShopPageProps) {
 
   return (
     <div className="min-h-screen bg-[#0F0F0F]">
-      <HorseshoeCursor />
       <Navigation onNavigate={onNavigate} currentPage="shop" />
       
       {/* Hero Section - Coming Soon */}

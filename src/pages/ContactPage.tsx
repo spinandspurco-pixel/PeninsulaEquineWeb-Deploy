@@ -5,7 +5,6 @@ import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Textarea } from '../components/ui/textarea';
-import { HorseshoeCursor } from '../components/HorseshoeCursor';
 import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';
 import { toast } from 'sonner';
@@ -51,7 +50,6 @@ export function ContactPage({ onNavigate }: ContactPageProps) {
 
   return (
     <div className="page-container">
-      <HorseshoeCursor />
       <Navigation onNavigate={onNavigate} currentPage="contact" />
 
       {/* Hero Section */}

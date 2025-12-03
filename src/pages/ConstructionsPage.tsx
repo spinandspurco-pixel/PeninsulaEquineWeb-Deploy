@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '../components/ui/button';
-import { HorseshoeCursor } from '../components/HorseshoeCursor';
 import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';
 import { ConstructionVideoShowcase } from '../components/ConstructionVideoShowcase';
@@ -79,7 +78,6 @@ export function ConstructionsPage({ onNavigate }: ConstructionsPageProps) {
 
   return (
     <div className="page-container">
-      <HorseshoeCursor />
       <Navigation onNavigate={onNavigate} currentPage="constructions" />
       
       {/* Hero Section - Professional Construction Showcase */}

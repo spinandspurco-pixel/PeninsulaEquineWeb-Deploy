@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Bell, Rocket, Users } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
-import { HorseshoeCursor } from '../components/HorseshoeCursor';
 import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';
 import { toast } from 'sonner';
@@ -52,7 +51,6 @@ export function LaserCuttingPage({ onNavigate }: LaserCuttingPageProps) {
 
   return (
     <div className="min-h-screen bg-[#0F0F0F]">
-      <HorseshoeCursor />
       <Navigation onNavigate={onNavigate} currentPage="laser" />
       
       {/* Hero Section - Exciting Collaboration Coming */}
