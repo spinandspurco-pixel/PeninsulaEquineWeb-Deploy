@@ -6,7 +6,7 @@ interface PortalPageProps {
   onNavigate: (page: string) => void;
 }
 
-export function PortalPage({ onNavigate }: PortalPageProps) {
+export function CleanPortalPage({ onNavigate }: PortalPageProps) {
   return (
     <div className="min-h-screen bg-background">
       {/* Simple Header */}
